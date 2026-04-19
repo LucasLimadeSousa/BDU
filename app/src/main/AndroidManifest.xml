@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
         <activity
+            android:name=".AlterarSenhaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MeuPerfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".CadastroActivity"
             android:exported="false" />
         <activity

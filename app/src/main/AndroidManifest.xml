@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
         <activity
+            android:name=".PrivacidadeActivity"
+            android:exported="false" />
+        <activity
             android:name=".AlterarSenhaActivity"
             android:exported="false" />
         <activity

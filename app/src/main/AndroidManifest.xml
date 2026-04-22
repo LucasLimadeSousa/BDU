@@ -12,6 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
         <activity
+            android:name=".AutenticacaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BuscaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TermosCondicoesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelecionarMetodoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartaoDebActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartaoCredActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PrivacidadeActivity"
+            android:exported="false" />
+        <activity
             android:name=".AlterarSenhaActivity"
             android:exported="false" />
         <activity

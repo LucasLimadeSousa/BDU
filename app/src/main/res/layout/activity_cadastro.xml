@@ -16,6 +16,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
             tools:srcCompat="@tools:sample/avatars" />
 
         <EditText
@@ -100,11 +101,13 @@
             android:hint="Número de telefone (00)00000-0000"
             android:inputType="phone" />
 
-        <Spinner
-            android:id="@+id/spinnerCurso"
+        <EditText
+            android:id="@+id/editTextText9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:hint="Curso"
+            android:inputType="textPassword" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,18 +115,24 @@
             android:layout_marginBottom="12dp"
             android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spinnerCidade"
+            <EditText
+                android:id="@+id/editTextText10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1" />
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="1"
+                android:hint="Cidade"
+                android:inputType="textPassword" />
 
-            <Spinner
-                android:id="@+id/spinnerEstado"
+            <EditText
+                android:id="@+id/editTextText11"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_marginBottom="12dp"
+                android:layout_weight="1"
+                android:hint="Estado"
+                android:inputType="textPassword" />
 
         </LinearLayout>
 
@@ -140,26 +149,13 @@
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spinnerDia"
-                android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextData2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/spinnerMes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/spinnerAno"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
+                android:layout_weight="1"
+                android:hint="dd/mm/aaaa"
+                android:inputType="none" />
         </LinearLayout>
 
         <CheckBox

@@ -121,7 +121,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_cancel"
-                android:imageTintList="@android:color/darker_gray" />
+                app:tint="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -141,7 +141,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_cancel"
-                android:imageTintList="@android:color/darker_gray" />
+                app:tint="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -161,7 +161,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_cancel"
-                android:imageTintList="@android:color/darker_gray" />
+                app:tint="@android:color/darker_gray" />
         </LinearLayout>
 
         <Button

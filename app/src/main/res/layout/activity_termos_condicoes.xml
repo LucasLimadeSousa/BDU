@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginEnd="16dp"
@@ -9,49 +11,78 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:textStyle="bold"
-        android:text="Termos e Condições" />
+        android:layout_marginBottom="15dp"
+        android:text="TERMOS E CONDIÇÕES"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView5"
+    <View
+        android:id="@+id/divider9"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="TERMOS E CONDIÇÕES - BIBLIOTECA UNIVERSITÁRIA
- 1. ACESSO E USO O aplicativo da Biblioteca Universitária é destinado exclusivamente a alunos, professores e funcionários da instituição. O acesso requer autenticação com credenciais institucionais válidas.
- 2. EMPRÉSTIMO DE LIVROS - Limite máximo de 5 livros por usuário - Prazo de empréstimo: 14 dias corridos - Renovação permitida por até 2 vezes, se não houver reserva - Multa por atraso: R$ 2,00 por dia - Livros de referência não podem ser emprestados
- 3. RESPONSABILIDADE DO USUÁRIO O usuário é responsável por: - Manter a integridade física do material emprestado - Devolver os livros no prazo estabelecido - Informar danos ou perdas imediatamente - Pagar multas por atraso ou dano ao material
- 4. CANCELAMENTO E SUSPENSÃO A biblioteca pode cancelar o acesso do usuário em caso de: - Devolução em atraso por mais de 30 dias - Acúmulo de multas não pagas - Dano intencional a materiais - Uso inadequado do aplicativo
- 5. DADOS PESSOAIS Os dados fornecidos serão utilizados apenas para: - Gerenciar empréstimos e devoluções - Contato sobre prazos e reservas - Melhorar os serviços da biblioteca
- 6. ISENÇÃO DE RESPONSABILIDADE A biblioteca não se responsabiliza por: - Indisponibilidade temporária do aplicativo - Perda de dados pessoais por força maior - Danos causados por uso inadequado
- 7. MODIFICAÇÕES A biblioteca se reserva o direito de modificar estes termos a qualquer momento, com notificação prévia aos usuários." />
+        android:layout_height="1dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="15dp"
+        android:background="?android:attr/listDivider" />
 
-    <CheckBox
-        android:id="@+id/checkbox_terms"
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/border_edittext"
+        android:padding="8dp"
+        app:srcCompat="@drawable/ic_arrow_back" />
+
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TERMOS E CONDIÇÕES - BIBLIOTECA UNIVERSITÁRIA\n\n1. ACESSO E USO\nO aplicativo da Biblioteca Universitária é destinado exclusivamente a alunos, professores e funcionários da instituição. O acesso requer autenticação com credenciais institucionais válidas.\n\n2. EMPRÉSTIMO DE LIVROS\n- Limite máximo de 5 livros por usuário\n- Prazo de empréstimo: 14 dias corridos\n- Renovação permitida por até 2 vezes, se não houver reserva\n- Multa por atraso: R$ 2,00 por dia\n- Livros de referência não podem ser emprestados\n\n3. RESPONSABILIDADE DO USUÁRIO\nO usuário é responsável por:\n- Manter a integridade física do material emprestado\n- Devolver os livros no prazo estabelecido\n- Informar danos ou perdas imediatamente\n- Pagar multas por atraso ou dano ao material\n\n4. CANCELAMENTO E SUSPENSÃO\nA biblioteca pode cancelar o acesso do usuário em caso de:\n- Devolução em atraso por mais de 30 dias\n- Acúmulo de multas não pagas\n- Dano intencional a materiais\n- Uso inadequado do aplicativo\n\n5. DADOS PESSOAIS\nOs dados fornecidos serão utilizados apenas para:\n- Gerenciar empréstimos e devoluções\n- Contato sobre prazos e reservas\n- Melhorar os serviços da biblioteca\n\n6. ISENÇÃO DE RESPONSABILIDADE\nA biblioteca não se responsabiliza por:\n- Indisponibilidade temporária do aplicativo\n- Perda de dados pessoais por força maior\n- Danos causados por uso inadequado\n\n7. MODIFICAÇÕES\nA biblioteca se reserva o direito de modificar estes termos a qualquer momento, com notificação prévia aos usuários." />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:marginBottom="16dp"
-        android:text="Concordo com os Termos e Condições"
-        android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkbox_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewNaoRecebi2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="Li e aceito os termos e condições"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btn_finalize"
+        android:id="@+id/btnFinalizar2"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/darker_gray"
-        android:cornerRadius="8dp"
-        android:text="Finalizar Cadastro"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:shadowColor="#7A2B2B"
+        android:text="Aceitar termos e condições"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#BC4A4A"
+        android:textColorLink="#C73232"
+        app:rippleColor="#2A1919"
+        app:strokeColor="#541616" />
 
 </LinearLayout>

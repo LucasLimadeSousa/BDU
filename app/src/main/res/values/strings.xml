@@ -67,4 +67,11 @@
     <string name="biblioteca_digital_unifor">Biblioteca Digital UNIFOR</string>
     <string name="time_placeholder">12:34 PM</string>
     <string name="notificacao_devolucao_amanha">Seu livro (nome) deve ser devolvido até amanhã na biblioteca Unifor.</string>
+    <string name="biblioteca_digital">Biblioteca Digital</string>
+    <string name="buscar">Buscar</string>
+    <string name="lista_de_desejos_home">Lista de Desejos</string>
+    <string name="livros_populares_curso">Livros populares com base em seu curso</string>
+    <string name="livros_populares">Livros populares</string>
+    <string name="orgulho_e_preconceito">Orgulho e Preconceito</string>
+    <string name="jane_austen">Jane Austen</string>
 </resources>

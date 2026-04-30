@@ -74,22 +74,4 @@
     <string name="livros_populares">Livros populares</string>
     <string name="orgulho_e_preconceito">Orgulho e Preconceito</string>
     <string name="jane_austen">Jane Austen</string>
-    <string name="inserir_nova_senha">Inserir uma nova senha</string>
-    <string name="nova_senha_hint">Nova senha</string>
-    <string name="confirmar_nova_senha_hint">Confirmar nova senha</string>
-    <string name="confirmar_senha">Confirmar senha</string>
-    <string name="report_problem_title">Reportar Problema</string>
-    <string name="report_problem_question_detailed">Qual tipo de problema você teve com o livro (Nome do livro) ?</string>
-    <string name="problem_damage_detailed">Dano/Rasura no livro</string>
-    <string name="problem_content_detailed">Conteúdo indesejado presente no livro</string>
-    <string name="problem_info_detailed">Livro com informação errada</string>
-    <string name="problem_other_detailed">Outro</string>
-    <string name="reportar_problema_pergunta">Qual o problema com o livro?</string>
-    <string name="problema_danificado">Danificado</string>
-    <string name="problema_conteudo">Conteúdo inadequado</string>
-    <string name="problema_informacao">Informação errada</string>
-    <string name="problema_outro">Outro</string>
-    <string name="descreva_problema_hint">Descreva o problema aqui...</string>
-    <string name="inserir_imagens">Inserir imagens do problema</string>
-    <string name="enviar_relatorio">Enviar Relatório</string>
 </resources>

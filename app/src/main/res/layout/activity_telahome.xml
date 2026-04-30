@@ -9,6 +9,7 @@
     tools:context="com.example.bdu.TelahomeActivity">
 
     <!-- Header Bar -->
+
     <View
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
@@ -248,73 +249,79 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintBottom_toTopOf="@id/bottom_nav" />
+        tools:layout_editor_absoluteY="670dp" />
 
     <LinearLayout
-        android:id="@+id/bottom_nav"
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FFFFFF"
-        android:gravity="center_vertical"
+        android:layout_height="64dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/card_border"
         android:orientation="horizontal"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="8dp">
 
         <ImageButton
+            android:id="@+id/imageButton5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
+            android:background="@drawable/card_border"
             android:contentDescription="@string/fila"
             android:padding="12dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_nav_queue" />
 
         <ImageButton
+            android:id="@+id/imageButton6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
+            android:background="@drawable/card_border"
             android:contentDescription="@string/livro_usuario"
             android:padding="12dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_nav_book_user" />
 
         <ImageButton
+            android:id="@+id/imageButton7"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
+            android:background="@drawable/card_border"
             android:contentDescription="@string/home"
             android:padding="12dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_nav_home" />
 
         <ImageButton
+            android:id="@+id/imageButton8"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
+            android:background="@drawable/card_border"
             android:contentDescription="@string/favoritos"
             android:padding="12dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_nav_heart" />
 
         <ImageButton
+            android:id="@+id/imageButton9"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
+            android:background="@drawable/card_border"
             android:contentDescription="@string/perfil"
             android:padding="12dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_person" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -121,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEEEEE" />
+                android:background="#800000" />
 
             <!-- Campo: E-mail -->
             <TextView
@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEEEEE" />
+                android:background="#200000" />
 
             <!-- Campo: Senha -->
             <TextView
@@ -167,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEEEEE" />
+                android:background="#800000" />
 
             <!-- Campo: CPF -->
             <TextView
@@ -190,7 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEEEEE" />
+                android:background="#800000" />
 
             <!-- Campo: Telefone -->
             <TextView
@@ -213,7 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEEEEE" />
+                android:background="#800000" />
 
             <!-- Campo: Estado -->
             <TextView
@@ -236,7 +236,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEEEEE" />
+                android:background="#800000" />
 
             <!-- Campo: Idade -->
             <TextView
@@ -259,7 +259,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEEEEE" />
+                android:background="#800000" />
 
             <!-- Campo: Curso (Dropdown style) -->
             <TextView

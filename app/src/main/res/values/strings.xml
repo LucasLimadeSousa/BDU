@@ -126,6 +126,16 @@
     <string name="label_mensagens">Mensagens</string>
     <string name="label_historico_livros">Histórico de livros</string>
     <string name="label_privacidade">Privacidade</string>
+    <string name="label_preferencias_marketing">Preferências de Marketing</string>
+    <string name="desc_preferencias_marketing">Autorize o recebimento de recomendações e ofertas personalizadas.</string>
+    <string name="label_ativado">Ativado</string>
+    <string name="label_dados_leitura">Dados de Leitura</string>
+    <string name="desc_dados_leitura">Suas avaliações são usadas apenas para personalizar sua experiência.</string>
+    <string name="label_privar_avaliacoes">Privar suas avaliações</string>
+    <string name="label_gosto_literario">Gosto literário</string>
+    <string name="desc_gosto_literario">Com base nos seus alugueis, será coletado informações e vai se ter o seu gosto por estilo de livro.</string>
+    <string name="label_privar_gosto">Privar gosto para recomendações</string>
+    <string name="btn_limpar_gosto">Limpar gosto literário</string>
     <string name="label_alterar_senha">Alterar Senha</string>
     <string name="label_pagar_juros">Pagar juros e multas</string>
     <string name="label_termos_condicoes">Termos e Condições</string>

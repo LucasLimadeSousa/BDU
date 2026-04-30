@@ -74,4 +74,8 @@
     <string name="livros_populares">Livros populares</string>
     <string name="orgulho_e_preconceito">Orgulho e Preconceito</string>
     <string name="jane_austen">Jane Austen</string>
+    <string name="inserir_nova_senha">Inserir uma nova senha</string>
+    <string name="nova_senha_hint">Nova senha</string>
+    <string name="confirmar_nova_senha_hint">Confirmar nova senha</string>
+    <string name="confirmar_senha">Confirmar senha</string>
 </resources>

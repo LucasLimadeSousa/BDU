@@ -13,7 +13,7 @@
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#0033CC"
+        android:background="@color/unifor_blue"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:text="@string/ver_tudo"
-                    android:textColor="#0033CC"
+                    android:textColor="@color/unifor_blue"
                     android:textSize="12sp" />
             </RelativeLayout>
 
@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:text="@string/ver_tudo"
-                    android:textColor="#0033CC"
+                    android:textColor="@color/unifor_blue"
                     android:textSize="12sp" />
             </RelativeLayout>
 
@@ -196,7 +196,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:text="@string/ver_tudo"
-                    android:textColor="#0033CC"
+                    android:textColor="@color/unifor_blue"
                     android:textSize="12sp" />
             </RelativeLayout>
 

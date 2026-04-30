@@ -19,6 +19,14 @@
             android:exported="false" />
         <activity
             android:name=".TelahomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".paginaDoLivro"
             android:exported="false" />
         <activity
             android:name=".MeusLivrosActivity"
@@ -62,15 +70,9 @@
             android:exported="false" />
         <activity
             android:name=".EmailRecuperacaoActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/app_name"
-            android:theme="@style/Theme.BDU">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.BDU" />
     </application>
 
 </manifest>

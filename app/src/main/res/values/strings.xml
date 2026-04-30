@@ -92,4 +92,19 @@
     <string name="descreva_problema_hint">Descreva o problema aqui...</string>
     <string name="inserir_imagens">Inserir imagens do problema</string>
     <string name="enviar_relatorio">Enviar Relatório</string>
+
+    <string name="informacoes_pessoais">Informações Pessoais</string>
+    <string name="label_nome">Nome</string>
+    <string name="label_email">E-mail</string>
+    <string name="label_senha">Senha</string>
+    <string name="label_cpf">CPF</string>
+    <string name="label_telefone">Numero de telefone</string>
+    <string name="label_estado">Estado</string>
+    <string name="label_idade">Idade</string>
+    <string name="label_curso">Curso</string>
+    <string name="placeholder_curso">Curso Selecionado</string>
+    <string name="password_dots">****</string>
+    <string name="desc_foto_perfil">Foto de perfil</string>
+    <string name="desc_alterar_foto">Alterar foto</string>
+    <string name="desc_ver_mais">Ver mais</string>
 </resources>

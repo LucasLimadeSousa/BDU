@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
         <activity
+            android:name=".informacoes_pessoais"
+            android:exported="false" />
+        <activity
             android:name=".TelahomeActivity"
             android:exported="false" />
         <activity

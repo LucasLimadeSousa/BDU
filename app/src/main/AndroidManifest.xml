@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
         <activity
+            android:name=".MeusLivrosActivity"
+            android:exported="false" />
+        <activity
             android:name=".AutenticacaoActivity"
             android:exported="false" />
         <activity

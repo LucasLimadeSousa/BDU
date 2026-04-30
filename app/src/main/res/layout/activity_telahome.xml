@@ -249,7 +249,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#000000"
-        tools:layout_editor_absoluteY="670dp" />
+        app:layout_constraintBottom_toTopOf="@id/bottomNav" />
 
     <LinearLayout
         android:id="@+id/bottomNav"
@@ -259,8 +259,7 @@
         android:background="@drawable/card_border"
         android:orientation="horizontal"
         android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="8dp">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageButton
             android:id="@+id/imageButton5"

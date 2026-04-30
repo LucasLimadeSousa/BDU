@@ -41,7 +41,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.fragment)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -50,6 +52,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.recyclerview)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)

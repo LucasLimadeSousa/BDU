@@ -12,8 +12,8 @@
     <View
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#0033CC"
+        android:layout_height="60dp"
+        android:background="@color/unifor_blue"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Meus Livros"
+        android:text="@string/biblioteca_digital"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -43,29 +43,41 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Back Button with border (Based on Privacy Image) -->
-            <FrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_button_border">
+            <!-- Subtitle Bar with Back Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
 
                 <ImageButton
                     android:id="@+id/btn_back"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="Voltar"
-                    android:padding="2dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_button_border"
+                    android:contentDescription="@string/voltar"
+                    android:padding="8dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_arrow_back" />
-            </FrameLayout>
+                    android:src="@drawable/ic_chevron_right"
+                    android:rotation="180" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/meus_livros"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
+
+            </LinearLayout>
 
             <!-- Book in Possession Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Livro em posse:"
+                android:text="@string/livro_em_posse"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:layout_marginBottom="8dp" />
@@ -74,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Titulo do livro"
+                android:text="@string/titulo_do_livro"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:layout_marginBottom="8dp" />
@@ -126,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Lista de Desejos"
+                    android:text="@string/lista_de_desejos"
                     android:textColor="#000000"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -136,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Devolver em ATÉ (DD) DIAS\nna biblioteca UNIFOR."
+                android:text="@string/devolver_ate_dias_unifor"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -148,7 +160,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:drawablePadding="6dp"
-                android:text="Reportar Problema"
+                android:text="@string/reportar_problema"
                 android:textColor="#FF0000"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -164,7 +176,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Histórico de reservas:"
+                    android:text="@string/historico_de_reservas"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -172,8 +184,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="Ver tudo"
-                    android:textColor="#0033CC"
+                    android:text="@string/ver_tudo"
+                    android:textColor="@color/unifor_blue"
                     android:textSize="12sp" />
             </RelativeLayout>
 
@@ -195,9 +207,9 @@
                     android:background="#FFFFFF"
                     android:orientation="vertical"
                     android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="#0033CC" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: ATRASADO há (Dias)" android:textColor="#FF0000" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/titulo_do_livro" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_atrasado_dias" android:textColor="#FF0000" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -208,9 +220,9 @@
                     android:background="#FFFFFF"
                     android:orientation="vertical"
                     android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="#0033CC" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: ATRASADO há (Dias)" android:textColor="#FF0000" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nome_do_livro_placeholder" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_atrasado_dias" android:textColor="#FF0000" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
                 </LinearLayout>
 
                 <!-- Row 2 -->
@@ -222,9 +234,9 @@
                     android:background="#FFFFFF"
                     android:orientation="vertical"
                     android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="#0033CC" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nome_do_livro_placeholder" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_devolvido_dias" android:textColor="#008800" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -235,9 +247,9 @@
                     android:background="#FFFFFF"
                     android:orientation="vertical"
                     android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="#0033CC" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nome_do_livro_placeholder" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_devolvido_dias" android:textColor="#008800" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
                 </LinearLayout>
 
                 <!-- Row 3 -->
@@ -249,10 +261,10 @@
                     android:background="#FFFFFF"
                     android:orientation="vertical"
                     android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="#0033CC" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Em posse há (Dias)" android:textColor="#333333" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Devolver em ATÉ (Dias)" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nome_do_livro_placeholder" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_em_posse_dias" android:textColor="#333333" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/devolver_em_ate_dias" android:textSize="10sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -272,7 +284,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="..."
+                        android:text="@string/more_dots"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -313,7 +325,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:background="@drawable/bg_button_border"
-            android:contentDescription="Fila"
+            android:contentDescription="@string/fila"
             android:padding="12dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_nav_queue"
@@ -326,7 +338,7 @@
             android:layout_margin="2dp"
             android:background="@drawable/bg_button_border"
             android:src="@drawable/ic_nav_book_user"
-            android:contentDescription="Livro Usuário"
+            android:contentDescription="@string/livro_usuario"
             android:padding="12dp"
             android:scaleType="centerInside"
             app:tint="#000000"/>
@@ -338,7 +350,7 @@
             android:layout_margin="2dp"
             android:background="@drawable/bg_button_border"
             android:src="@drawable/ic_nav_home"
-            android:contentDescription="Home"
+            android:contentDescription="@string/home"
             android:padding="12dp"
             android:scaleType="centerInside"
             app:tint="#000000"/>
@@ -350,7 +362,7 @@
             android:layout_margin="2dp"
             android:background="@drawable/bg_button_border"
             android:src="@drawable/ic_nav_heart"
-            android:contentDescription="Favoritos"
+            android:contentDescription="@string/favoritos"
             android:padding="12dp"
             android:scaleType="centerInside"
             app:tint="#000000"/>
@@ -361,10 +373,10 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:background="@drawable/bg_button_border"
-            android:contentDescription="Perfil"
+            android:contentDescription="@string/perfil"
             android:padding="12dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_user_in_box"
+            android:src="@drawable/ic_person"
             app:tint="#000000" />
     </LinearLayout>
 
@@ -407,14 +419,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Biblioteca Digital UNIFOR"
+                        android:text="@string/biblioteca_digital_unifor"
                         android:textColor="#000000"
                         android:textSize="14sp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="12:34 PM"
+                        android:text="@string/time_placeholder"
                         android:textSize="12sp"
                         android:textColor="#666666" />
                 </RelativeLayout>
@@ -422,7 +434,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Seu livro (nome) deve ser devolvido até amanhã na biblioteca Unifor."
+                    android:text="@string/notificacao_devolucao_amanha"
                     android:textColor="#000000"
                     android:textSize="12sp" />
             </LinearLayout>

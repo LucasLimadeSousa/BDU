@@ -13,7 +13,7 @@ class adicionarLivroAdmActivity : AppCompatActivity() {
 
         enableEdgeToEdge()
 
-        setContentView(R.layout.activity_adicionar_livro_adm)
+        setContentView(R.layout.adm_adicionar_livro_adm)
 
 
         val mainLayout = findViewById<android.view.View>(R.id.main)

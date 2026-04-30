@@ -8,7 +8,7 @@
     android:background="@color/white"
     tools:context=".informacoes_pessoais">
 
-    <!-- Header Bar Padrão BDU -->
+    <!-- Header Azul Padrão BDU -->
     <View
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/biblioteca_digital"
+        android:text="Informações Pessoais"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -29,9 +29,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/header_bar" />
 
-    <!-- Seção de Título da Página e Botão Voltar -->
+    <!-- Barra de Subtítulo e Voltar -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/subtitle_bar"
+        android:id="@+id/subtitle_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -54,23 +54,23 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- ScrollView para permitir rolagem de todos os dados -->
+    <!-- ScrollView para permitir rolagem -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subtitle_bar">
+        app:layout_constraintTop_toBottomOf="@id/subtitle_layout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="32dp"
-            android:paddingBottom="40dp">
+            android:paddingBottom="48dp">
 
-            <!-- Foto de Perfil -->
+            <!-- Foto de Perfil com ícone de câmera -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,10 +109,18 @@
                 android:textColor="#666666"
                 android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/placeholder_nome"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:background="#EEEEEE" />
 
             <!-- Campo: E-mail -->
@@ -124,13 +132,21 @@
                 android:textColor="#666666"
                 android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/placeholder_email"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:background="#EEEEEE" />
 
-            <!-- Campo: Senha (com valor ****) -->
+            <!-- Campo: Senha -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -162,10 +178,18 @@
                 android:textColor="#666666"
                 android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/placeholder_cpf"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:background="#EEEEEE" />
 
             <!-- Campo: Telefone -->
@@ -177,10 +201,18 @@
                 android:textColor="#666666"
                 android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/placeholder_telefone"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:background="#EEEEEE" />
 
             <!-- Campo: Estado -->
@@ -192,10 +224,18 @@
                 android:textColor="#666666"
                 android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/placeholder_estado"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:background="#EEEEEE" />
 
             <!-- Campo: Idade -->
@@ -207,13 +247,21 @@
                 android:textColor="#666666"
                 android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/placeholder_idade"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:background="#EEEEEE" />
 
-            <!-- Campo: Curso (com caixa de seleção) -->
+            <!-- Campo: Curso (Dropdown style) -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -229,7 +277,7 @@
                 android:background="@drawable/bg_button_border"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="12dp">
 
                 <TextView
                     android:layout_width="0dp"

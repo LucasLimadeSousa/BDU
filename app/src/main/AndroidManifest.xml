@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
         <activity
+            android:name=".ListadeEspera"
+            android:exported="false" />
+        <activity
             android:name=".informacoes_pessoais"
             android:exported="false" />
         <activity

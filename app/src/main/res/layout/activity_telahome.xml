@@ -12,8 +12,8 @@
     <View
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#0033CC"
+        android:layout_height="60dp"
+        android:background="@color/unifor_blue"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

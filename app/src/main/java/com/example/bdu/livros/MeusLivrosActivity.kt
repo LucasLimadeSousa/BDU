@@ -1,4 +1,4 @@
-package com.example.bdu
+package com.example.bdu.livros
 
 import android.os.Bundle
 import android.os.Handler
@@ -6,16 +6,17 @@ import android.os.Looper
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.cardview.widget.CardView
+import com.example.bdu.R
 
 class MeusLivrosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.livros_meuslivros)
-        
+
         val mainView = findViewById<View>(R.id.main)
         if (mainView != null) {
             ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
@@ -30,7 +31,7 @@ class MeusLivrosActivity : AppCompatActivity() {
             // Mostrar o popup após 1 segundo
             Handler(Looper.getMainLooper()).postDelayed({
                 popup.visibility = View.VISIBLE
-                
+
                 // Esconder o popup após 5 segundos
                 Handler(Looper.getMainLooper()).postDelayed({
                     popup.visibility = View.GONE

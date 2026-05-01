@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     app:barrierMargin="10dp"
-    tools:context="com.example.bdu.EsqueciSenhaActivity">
+    tools:context="com.example.bdu.login.EsqueciSenhaActivity">
 
     <!-- Header Bar -->
     <View

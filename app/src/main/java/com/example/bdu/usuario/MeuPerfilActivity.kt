@@ -1,4 +1,4 @@
-package com.example.bdu
+package com.example.bdu.usuario
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

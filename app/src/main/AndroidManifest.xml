@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
         <activity
-            android:name=".ListadeEspera"
+            android:name=".livros.ListadeEsperaActivity"
             android:exported="false" />
         <activity
-            android:name=".informacoes_pessoais"
+            android:name=".usuario.InformacoesPessoaisActivity"
             android:exported="false" />
         <activity
-            android:name=".TelahomeActivity"
+            android:name=".livros.TelahomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,50 +26,50 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".paginaDoLivro"
+            android:name=".livros.PaginaDoLivroActivity"
             android:exported="false" />
         <activity
-            android:name=".MeusLivrosActivity"
+            android:name=".livros.MeusLivrosActivity"
             android:exported="false" />
         <activity
-            android:name=".AutenticacaoActivity"
+            android:name=".login.AutenticacaoActivity"
             android:exported="false" />
         <activity
-            android:name=".BuscaActivity"
+            android:name=".livros.BuscaActivity"
             android:exported="false" />
         <activity
-            android:name=".TermosCondicoesActivity"
+            android:name=".suporte.TermosCondicoesActivity"
             android:exported="false" />
         <activity
-            android:name=".SelecionarMetodoActivity"
+            android:name=".pagamentos.SelecionarMetodoActivity"
             android:exported="false" />
         <activity
-            android:name=".CartaoDebActivity"
+            android:name=".pagamentos.CartaoDebActivity"
             android:exported="false" />
         <activity
-            android:name=".CartaoCredActivity"
+            android:name=".pagamentos.CartaoCredActivity"
             android:exported="false" />
         <activity
-            android:name=".PrivacidadeActivity"
+            android:name=".usuario.PrivacidadeActivity"
             android:exported="false" />
         <activity
-            android:name=".AlterarSenhaActivity"
+            android:name=".usuario.AlterarSenhaActivity"
             android:exported="false" />
         <activity
             android:name=".MeuPerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".CadastroActivity"
+            android:name=".login.CadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.BDU" />
         <activity
-            android:name=".EsqueciSenhaActivity"
+            android:name=".login.EsqueciSenhaActivity"
             android:exported="false" />
         <activity
-            android:name=".EmailRecuperacaoActivity"
+            android:name=".login.EmailRecuperacaoActivity"
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.BDU" />

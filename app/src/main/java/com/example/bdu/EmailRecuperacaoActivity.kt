@@ -9,6 +9,6 @@ class EmailRecuperacaoActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        setContentView(R.layout.activity_email_recuperacao)
+        setContentView(R.layout.login_email_recuperacao)
     }
 }

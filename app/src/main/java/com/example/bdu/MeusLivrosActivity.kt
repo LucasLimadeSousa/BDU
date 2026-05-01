@@ -14,7 +14,7 @@ class MeusLivrosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_meuslivros)
+        setContentView(R.layout.livros_meuslivros)
         
         val mainView = findViewById<View>(R.id.main)
         if (mainView != null) {

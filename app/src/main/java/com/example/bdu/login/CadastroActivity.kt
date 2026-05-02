@@ -2,6 +2,8 @@ package com.example.bdu.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,8 +22,12 @@ class CadastroActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<MaterialButton>(R.id.btnFinalizar).setOnClickListener {
+        findViewById<TextView>(R.id.btnFinalizar).setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_back).setOnClickListener {
+            finish()
         }
     }
 }

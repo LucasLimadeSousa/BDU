@@ -26,7 +26,7 @@
             android:layout_height="48dp"
             android:background="@drawable/bg_avatar_circle"
             android:contentDescription="Avatar"
-            android:src="@drawable/ic_book"
+            android:src="@drawable/ic_nav_book_user"
             android:padding="10dp"
             android:tint="#FFFFFF" />
 

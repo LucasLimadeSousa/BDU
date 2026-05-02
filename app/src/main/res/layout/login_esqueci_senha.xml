@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     app:barrierMargin="10dp"
-    tools:context="com.example.bdu.login.EsqueciSenhaActivity">
+    tools:context=".login.EsqueciSenhaActivity">
 
     <!-- Header Bar -->
     <View
@@ -90,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_nova_senha" />
 
     <Button
-        android:id="@+id/btn_confirmar"
+        android:id="@+id/btnConfirmar"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="32dp"
@@ -105,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_confirmar_senha" />
 
     <Button
-        android:id="@+id/btn_voltar"
+        android:id="@+id/btnVoltar"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="32dp"
@@ -120,6 +120,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_confirmar" />
+        app:layout_constraintTop_toBottomOf="@id/btnConfirmar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

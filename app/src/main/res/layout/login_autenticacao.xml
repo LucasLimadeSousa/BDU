@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".AutenticacaoActivity">
+    tools:context=".login.AutenticacaoActivity">
 
     <!-- Header Azul -->
     <LinearLayout
@@ -45,17 +45,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
-
-            <!-- Botão Voltar -->
-            <ImageButton
-                android:id="@+id/btnVoltarHeader"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/back"
-                android:src="@drawable/ic_arrow_back"
-                app:tint="@color/black" />
 
             <!-- Card de Instruções -->
             <LinearLayout
@@ -128,25 +117,23 @@
                 android:layout_height="56dp"
                 android:layout_marginLeft="57sp"
                 android:layout_marginBottom="12dp"
-                android:backgroundTint="@color/blue_background"
+                android:background="@drawable/bnt_arrendondado_azul"
                 android:text="Confirmar"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                app:cornerRadius="28dp" />
+                android:textSize="16sp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnVoltar"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="247dp"
+                android:layout_width="246dp"
                 android:layout_height="56dp"
-                android:layout_marginLeft="57sp"
+                android:layout_marginLeft="57dp"
                 android:layout_marginBottom="32dp"
+                android:background="@drawable/bnt_arrendondado_azul"
                 android:text="Voltar"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
-                app:cornerRadius="28dp"
-                app:strokeColor="@color/gray_border" />
+                android:textColor="@color/white"
+                android:textSize="16dp"/>
 
         </LinearLayout>
     </ScrollView>

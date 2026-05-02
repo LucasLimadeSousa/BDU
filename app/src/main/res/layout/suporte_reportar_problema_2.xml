@@ -25,7 +25,7 @@
         android:layout_height="32dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/card_border"
-        android:contentDescription="@string/back_button_desc"
+        android:contentDescription="@string/desc_back"
         android:padding="4dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_arrow_back"
@@ -37,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="@string/report_problem_question"
+        android:text="@string/reportar_problema_pergunta"
         android:textColor="#333333"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/problem_damage"
+            android:text="@string/problema_danificado"
             android:textColor="#333333"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -106,7 +106,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/problem_content"
+            android:text="@string/problema_conteudo"
             android:textColor="#333333"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -146,7 +146,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/problem_info"
+            android:text="@string/problema_informacao"
             android:textColor="#333333"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -186,7 +186,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/problem_other"
+            android:text="@string/problema_outro"
             android:textColor="#333333"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -2,6 +2,7 @@ package com.example.bdu.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, CadastroActivity::class.java))
         }
 
-        findViewById<MaterialButton>(R.id.textViewEsqueciSenha).setOnClickListener {
+        findViewById<TextView>(R.id.textViewEsqueciSenha).setOnClickListener {
             startActivity(Intent(this, EmailRecuperacaoActivity::class.java))
         }
 

@@ -18,13 +18,11 @@
             android:name=".usuario.InformacoesPessoaisActivity"
             android:exported="false" />
         <activity
+            android:name=".usuario.MensagensActivity"
+            android:exported="false" />
+        <activity
             android:name=".livros.TelahomeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".livros.PaginaDoLivroActivity"
             android:exported="false" />
@@ -56,8 +54,13 @@
             android:name=".usuario.AlterarSenhaActivity"
             android:exported="false" />
         <activity
-            android:name=".MeuPerfilActivity"
-            android:exported="false" />
+            android:name=".usuario.MeuPerfilActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".login.CadastroActivity"
             android:exported="false" />

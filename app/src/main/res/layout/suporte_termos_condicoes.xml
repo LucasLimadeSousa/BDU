@@ -1,115 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".suporte.TermosCondicoesActivity">
+    android:background="@color/white">
+
+    <!-- Header Azul Padrão BDU -->
+    <View
+        android:id="@+id/header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/unifor_blue"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Termos e Condições"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/header_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/header_bar" />
 
     <LinearLayout
-        android:id="@+id/headerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_background"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Termos e Condições"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout" />
-
-    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider">
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/header_bar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TERMOS E CONDIÇÕES - BIBLIOTECA UNIVERSITÁRIA\n\n1. ACESSO E USO\nO aplicativo da Biblioteca Universitária é destinado exclusivamente a alunos, professores e funcionários da instituição. O acesso requer autenticação com credenciais institucionais válidas.\n\n2. EMPRÉSTIMO DE LIVROS\n- Limite máximo de 5 livros por usuário\n- Prazo de empréstimo: 14 dias corridos\n- Renovação permitida por até 2 vezes, se não houver reserva\n- Multa por atraso: R$ 2,00 por dia\n- Livros de referência não podem ser emprestados\n\n3. RESPONSABILIDADE DO USUÁRIO\nO usuário é responsável por:\n- Manter a integridade física do material emprestado\n- Devolver os livros no prazo estabelecido\n- Informar danos ou perdas imediatamente\n- Pagar multas por atraso ou dano ao material\n\n4. CANCELAMENTO E SUSPENSÃO\nA biblioteca pode cancelar o acesso do usuário em caso de:\n- Devolução em atraso por mais de 30 dias\n- Acúmulo de multas não pagas\n- Dano intencional a materiais\n- Uso inadequado do aplicativo\n\n5. DADOS PESSOAIS\nOs dados fornecidos serão utilizados apenas para:\n- Gerenciar empréstimos e devoluções\n- Contato sobre prazos e reservas\n- Melhorar os serviços da biblioteca\n\n6. ISENÇÃO DE RESPONSABILIDADE\nA biblioteca não se responsabiliza por:\n- Indisponibilidade temporária do aplicativo\n- Perda de dados pessoais por força maior\n- Danos causados por uso inadequado\n\n7. MODIFICAÇÕES\nA biblioteca se reserva o direito de modificar estes termos a qualquer momento, com notificação prévia aos usuários." />
+        </ScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFinalizar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginBottom="15dp"
+            android:text="Aceitar termos e condições"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/unifor_blue"
+            app:cornerRadius="24dp"/>
 
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/desc_back"
-                android:src="@drawable/ic_arrow_back"
-                app:tint="@color/black" />
-
-            <!-- Card dos Termos -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_border"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TERMOS E CONDIÇÕES - BIBLIOTECA UNIVERSITÁRIA\n\n1. ACESSO E USO\nO aplicativo da Biblioteca Universitária é destinado exclusivamente a alunos, professores e funcionários da instituição. O acesso requer autenticação com credenciais institucionais válidas.\n\n2. EMPRÉSTIMO DE LIVROS\n- Limite máximo de 5 livros por usuário\n- Prazo de empréstimo: 14 dias corridos\n- Renovação permitida por até 2 vezes, se não houver reserva\n- Multa por atraso: R$ 2,00 por dia\n- Livros de referência não podem ser emprestados\n\n3. RESPONSABILIDADE DO USUÁRIO\nO usuário é responsável por:\n- Manter a integridade física do material emprestado\n- Devolver os livros no prazo estabelecido\n- Informar danos ou perdas imediatamente\n- Pagar multas por atraso ou dano ao material\n\n4. CANCELAMENTO E SUSPENSÃO\nA biblioteca pode cancelar o acesso do usuário em caso de:\n- Devolução em atraso por mais de 30 dias\n- Acúmulo de multas não pagas\n- Dano intencional a materiais\n- Uso inadequado do aplicativo\n\n5. DADOS PESSOAIS\nOs dados fornecidos serão utilizados apenas para:\n- Gerenciar empréstimos e devoluções\n- Contato sobre prazos e reservas\n- Melhorar os serviços da biblioteca\n\n6. ISENÇÃO DE RESPONSABILIDADE\nA biblioteca não se responsabiliza por:\n- Indisponibilidade temporária do aplicativo\n- Perda de dados pessoais por força maior\n- Danos causados por uso inadequado\n- Modificações: A biblioteca se reserva o direito de modificar estes termos a qualquer momento."
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Aceite dos Termos -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_border"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <CheckBox
-                    android:id="@+id/checkbox_terms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Li e aceito os termos e condições"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnFinalizar2"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/blue_background"
-                android:text="Aceitar termos e condições"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:cornerRadius="28dp" />
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

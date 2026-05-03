@@ -10,18 +10,16 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.text.font.Typeface
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
-import com.example.bdu.databinding.SuporteTermosCondicoesBinding
 import com.example.bdu.suporte.TermosCondicoesActivity
-import com.google.android.material.button.MaterialButton
 
 class CadastroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +36,7 @@ class CadastroActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        val linksTermos = findViewById<TextView>(R.id.termosLink)
+        val checkboxTermos = findViewById<TextView>(R.id.termosLink)
         val textoCompleto = "Concordo com os termos e condições"
         val textoLink = "termos e condições"
         val inicio = textoCompleto.indexOf(textoLink)
@@ -65,9 +63,9 @@ class CadastroActivity : AppCompatActivity() {
             inicio, fim, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-        linksTermos.text = spannable
-        linksTermos.movementMethod = LinkMovementMethod.getInstance()
-        linksTermos.highlightColor = Color.TRANSPARENT
+        checkboxTermos.text = spannable
+        checkboxTermos.movementMethod = LinkMovementMethod.getInstance()
+        checkboxTermos.highlightColor = Color.TRANSPARENT
 
         findViewById<ImageButton>(R.id.btn_back).setOnClickListener {
             finish()

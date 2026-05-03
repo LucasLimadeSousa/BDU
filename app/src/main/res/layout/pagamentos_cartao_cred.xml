@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.example.bdu.pagamentos.CartaoCredActivity">
 
     <LinearLayout
@@ -44,6 +45,7 @@
         android:layout_marginVertical="10dp"
         android:gravity="center"
         android:text="Valor total: R$00.00"
+        android:textColor="@color/black"
         android:textSize="28sp" />
 
     <EditText
@@ -79,6 +81,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Data de expiração"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
     <LinearLayout

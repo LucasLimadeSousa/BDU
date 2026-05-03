@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CartaoDebActivity">
+    android:background="@color/white"
+    tools:context=".pagamentos.CartaoDebActivity">
 
     <LinearLayout
         android:id="@+id/headerLayout"
@@ -44,9 +45,8 @@
         android:layout_height="71dp"
         android:layout_marginVertical="10sp"
         android:gravity="center"
-        android:shadowColor="#000000"
-        android:shadowRadius="60"
         android:text="Valor total: R$00.00"
+        android:textColor="@color/black"
         android:textSize="28sp" />
 
     <EditText
@@ -88,6 +88,7 @@
         android:layout_marginVertical="10sp"
         android:gravity="center"
         android:text="Data de expiração"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:translationY="20sp" />
 
@@ -116,7 +117,7 @@
             android:id="@+id/et_nova_senha8"
             android:layout_width="142dp"
             android:layout_height="50dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/border_edittext"

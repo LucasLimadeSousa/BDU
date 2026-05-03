@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
-import com.example.bdu.SelecionarMetodoActivity
 import com.example.bdu.usuario.InformacoesPessoaisActivity
 import com.google.android.material.button.MaterialButton
 

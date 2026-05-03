@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".pagamentos.BoletoActivity">
 
     <LinearLayout
@@ -55,9 +56,8 @@
             android:layout_height="71sp"
             android:layout_marginVertical="10sp"
             android:gravity="center"
-            android:shadowColor="#000000"
-            android:shadowRadius="60"
             android:text="Valor total: R$00.00"
+            android:textColor="@color/black"
             android:textSize="28sp"
             android:translationY="-20sp" />
 

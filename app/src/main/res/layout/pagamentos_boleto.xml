@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".pagamentos.BoletoActivity">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/headerLayout"
@@ -143,9 +143,6 @@
         android:textSize="20sp"
         android:translationY="-40sp"
         app:cornerRadius="28dp"
-        app:iconSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:iconSize="18dp" />
 
 </LinearLayout>

@@ -2,13 +2,17 @@ package com.example.bdu.pagamentos
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
 import com.example.bdu.SelecionarMetodoActivity
+import com.example.bdu.usuario.InformacoesPessoaisActivity
+import com.google.android.material.button.MaterialButton
 
 class JurosMultaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +29,10 @@ class JurosMultaActivity : AppCompatActivity() {
             finish()
         }
 
-        findViewById<android.view.View>(R.id.btnPagar).setOnClickListener {
+        findViewById<Button>(R.id.btnPagar).setOnClickListener {
             val intent = Intent(this, SelecionarMetodoActivity::class.java)
             startActivity(intent)
         }
     }
+
 }

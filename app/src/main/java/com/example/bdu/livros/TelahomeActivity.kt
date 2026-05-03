@@ -108,81 +108,66 @@ class TelahomeActivity : AppCompatActivity() {
         livroA?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livroB?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livroC?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livroD?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livroE?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         //Scroll 2
 
         livro1?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro2?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro3?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro4?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro5?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         //Scroll 3
 
         livro10?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro20?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro30?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro40?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro50?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 }

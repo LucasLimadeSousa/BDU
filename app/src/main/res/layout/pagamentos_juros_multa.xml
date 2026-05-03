@@ -86,16 +86,14 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
+                <Button
                     android:id="@+id/btnPagar"
+                    style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:text="PAGAR"
-                    android:textColor="@color/black"
-                    app:cornerRadius="8dp"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="1dp" />
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <!-- Card 1: Multa por Atraso -->

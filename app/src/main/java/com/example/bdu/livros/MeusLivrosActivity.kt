@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
+import com.example.bdu.suporte.ReportarProblemaActivity
 
 class MeusLivrosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,19 +48,17 @@ class MeusLivrosActivity : AppCompatActivity() {
             }, 1000)
         }
         btnVoltarHome?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
+            val intent = Intent(this, TelahomeActivity::class.java)
             startActivity(intent)
             finish()
         }
         btnReport?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
+            val intent = Intent(this, ReportarProblemaActivity::class.java)
             startActivity(intent)
-            finish()
         }
         btnVerTudo?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
+            val intent = Intent(this, VerTudoActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 

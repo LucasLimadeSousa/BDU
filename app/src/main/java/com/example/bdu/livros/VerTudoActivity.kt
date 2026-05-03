@@ -25,7 +25,6 @@ class VerTudoActivity : AppCompatActivity() {
         btnreturn?.setOnClickListener {
             val intent = Intent(this, TelahomeActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 }

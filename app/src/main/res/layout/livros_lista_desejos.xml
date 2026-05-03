@@ -6,41 +6,101 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="" >
+    tools:context=".livros.ListaDesejosActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".livros.ListaDesejosActivity">
+        tools:context=".TermosCondicoesActivity">
 
-        <!-- Header Azul Padrão BDU -->
-        <View
-            android:id="@+id/header_bar"
+        <LinearLayout
+            android:id="@+id/bottomNav"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/unifor_blue"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="64dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/card_border"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/header_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Lista de Desejos"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/header_bar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/header_bar" />
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_border"
+                android:contentDescription="@string/fila"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_nav_queue" />
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_border"
+                android:contentDescription="@string/livro_usuario"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_nav_book_user" />
+
+            <ImageButton
+                android:id="@+id/imageButton7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_border"
+                android:contentDescription="@string/home"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_nav_home" />
+
+            <ImageButton
+                android:id="@+id/imageButton8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_border"
+                android:contentDescription="@string/favoritos"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_nav_heart" />
+
+            <ImageButton
+                android:id="@+id/imageButton9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_border"
+                android:contentDescription="@string/perfil"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_person" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="-8dp"
+            tools:layout_editor_absoluteY="34dp" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/nav_top_divider"
-            app:layout_constraintTop_toBottomOf="@id/header_bar">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,9 +108,23 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/card_border"
+                    android:contentDescription="@string/back"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/black" />
+
+                <!-- Card dos Termos -->
+
+                <!-- Aceite dos Termos -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="534dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/card_border"
                     android:orientation="vertical"
@@ -62,7 +136,7 @@
                         android:orientation="horizontal">
 
                         <ImageButton
-                            android:id="@+id/imageButton18"
+                            android:id="@+id/imgBtnLivro"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
@@ -126,28 +200,28 @@
                         android:orientation="horizontal">
 
                         <ImageButton
-                            android:id="@+id/imageButton18"
+                            android:id="@+id/imageButton22"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton19"
+                            android:id="@+id/imageButton23"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton20"
+                            android:id="@+id/imageButton24"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton21"
+                            android:id="@+id/imageButton25"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
@@ -161,62 +235,28 @@
                         android:orientation="horizontal">
 
                         <ImageButton
-                            android:id="@+id/imageButton18"
+                            android:id="@+id/imageButton26"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton19"
+                            android:id="@+id/imageButton27"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton20"
+                            android:id="@+id/imageButton333"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton21"
-                            android:layout_width="70dp"
-                            android:layout_height="99dp"
-                            android:layout_marginLeft="15sp"
-                            app:srcCompat="@android:drawable/ic_menu_gallery" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="108dp"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:id="@+id/imageButton18"
-                            android:layout_width="70dp"
-                            android:layout_height="99dp"
-                            android:layout_marginLeft="15sp"
-                            app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                        <ImageButton
-                            android:id="@+id/imageButton19"
-                            android:layout_width="70dp"
-                            android:layout_height="99dp"
-                            android:layout_marginLeft="15sp"
-                            app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                        <ImageButton
-                            android:id="@+id/imageButton20"
-                            android:layout_width="70dp"
-                            android:layout_height="99dp"
-                            android:layout_marginLeft="15sp"
-                            app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-                        <ImageButton
-                            android:id="@+id/imageButton21"
+                            android:id="@+id/imageButton28"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
@@ -229,28 +269,62 @@
                         android:orientation="horizontal">
 
                         <ImageButton
-                            android:id="@+id/imageButton18"
+                            android:id="@+id/imageButton29"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton19"
+                            android:id="@+id/imageButton30"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton20"
+                            android:id="@+id/imageButton31"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton21"
+                            android:id="@+id/imageButton32"
+                            android:layout_width="70dp"
+                            android:layout_height="99dp"
+                            android:layout_marginLeft="15sp"
+                            app:srcCompat="@android:drawable/ic_menu_gallery" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="108dp"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton33"
+                            android:layout_width="70dp"
+                            android:layout_height="99dp"
+                            android:layout_marginLeft="15sp"
+                            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton34"
+                            android:layout_width="70dp"
+                            android:layout_height="99dp"
+                            android:layout_marginLeft="15sp"
+                            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton35"
+                            android:layout_width="70dp"
+                            android:layout_height="99dp"
+                            android:layout_marginLeft="15sp"
+                            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton36"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
@@ -263,28 +337,28 @@
                         android:orientation="horizontal">
 
                         <ImageButton
-                            android:id="@+id/imageButton18"
+                            android:id="@+id/imageButton37"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton19"
+                            android:id="@+id/imageButton38"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton20"
+                            android:id="@+id/imageButton39"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
                             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                         <ImageButton
-                            android:id="@+id/imageButton21"
+                            android:id="@+id/imageButto40"
                             android:layout_width="70dp"
                             android:layout_height="99dp"
                             android:layout_marginLeft="15sp"
@@ -295,88 +369,6 @@
 
             </LinearLayout>
         </ScrollView>
-
-        <LinearLayout
-            android:id="@+id/bottomNav"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/card_border"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="8dp">
-
-            <ImageButton
-                android:id="@+id/btn_nav_fila"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/fila"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_queue" />
-
-            <ImageButton
-                android:id="@+id/btn_nav_meuslivros"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/livro_usuario"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_book_user" />
-
-            <ImageButton
-                android:id="@+id/btn_nav_home"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/home"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_home" />
-
-            <ImageButton
-                android:id="@+id/btn_nav_desejos"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/favoritos"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_heart" />
-
-            <ImageButton
-                android:id="@+id/btn_nav_perfil"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/perfil"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_person" />
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            android:visibility="invisible"
-            tools:layout_editor_absoluteX="-8dp"
-            tools:layout_editor_absoluteY="34dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

@@ -5,211 +5,251 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    tools:context="com.example.bdu.ReportarProblema2Activity">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/report_problem_title"
-        android:textColor="#333333"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+    <!-- Header Bar -->
+    <View
+        android:id="@+id/header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/unifor_blue"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/card_border"
-        android:contentDescription="@string/desc_back"
-        android:padding="4dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_arrow_back"
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Reportar Problema"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/header_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+        app:layout_constraintTop_toTopOf="@id/header_bar" />
+
+    <!-- Subtitle section with Back Button -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/subtitle_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/header_bar">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_button_border"
+            android:contentDescription="@string/voltar"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tvQuestion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/reportar_problema_pergunta"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/report_problem_question_detailed"
         android:textColor="#333333"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+        app:layout_constraintTop_toBottomOf="@id/subtitle_layout" />
 
     <View
-        android:id="@+id/divider1"
+        android:id="@+id/divider_top"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="#DDDDDD"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal=""
+        android:background="#700000"
         app:layout_constraintTop_toBottomOf="@id/tvQuestion" />
 
-    <!-- Item 1 -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/itemDamage"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingVertical="12dp"
-        app:layout_constraintTop_toBottomOf="@id/divider1">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider_top">
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/problema_danificado"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ivChevron1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ivChevron1"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_chevron_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Item 1 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/itemDamage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="18dp">
 
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#DDDDDD"
-        app:layout_constraintTop_toBottomOf="@id/itemDamage" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/problem_damage_detailed"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ivChevron1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Item 2 -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/itemContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingVertical="12dp"
-        app:layout_constraintTop_toBottomOf="@id/divider2">
+                <ImageView
+                    android:id="@+id/ivChevron1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/unifor_blue" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/problema_conteudo"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ivChevron2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal=""
+                android:background="#700000" />
 
-        <ImageView
-            android:id="@+id/ivChevron2"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_chevron_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Item 2 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/itemContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="18dp">
 
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#DDDDDD"
-        app:layout_constraintTop_toBottomOf="@id/itemContent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/problem_content_detailed"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ivChevron2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Item 3 -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/itemInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingVertical="12dp"
-        app:layout_constraintTop_toBottomOf="@id/divider3">
+                <ImageView
+                    android:id="@+id/ivChevron2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/unifor_blue" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/problema_informacao"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ivChevron3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal=""
+                android:background="#700000" />
 
-        <ImageView
-            android:id="@+id/ivChevron3"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_chevron_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Item 3 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/itemInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="18dp">
 
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#DDDDDD"
-        app:layout_constraintTop_toBottomOf="@id/itemInfo" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/problem_info_detailed"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ivChevron3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Item 4 -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/itemOther"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingVertical="12dp"
-        app:layout_constraintTop_toBottomOf="@id/divider4">
+                <ImageView
+                    android:id="@+id/ivChevron3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/unifor_blue" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/problema_outro"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ivChevron4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal=""
+                android:background="#700000" />
 
-        <ImageView
-            android:id="@+id/ivChevron4"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_chevron_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Item 4 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/itemOther"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="18dp">
 
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#DDDDDD"
-        app:layout_constraintTop_toBottomOf="@id/itemOther" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/problem_other_detailed"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ivChevron4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivChevron4"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/unifor_blue" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal=""
+                android:background="#700000" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

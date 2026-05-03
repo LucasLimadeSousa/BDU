@@ -1,9 +1,12 @@
 package com.example.bdu.livros
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -16,6 +19,11 @@ class MeusLivrosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.livros_meuslivros)
+
+        val btnVoltarHome = findViewById<ImageButton?>(R.id.btn_backReturn)
+        val btnReport = findViewById<TextView?>(R.id.btn_report)
+        val btnVerTudo = findViewById<TextView?>(R.id.VerTudo)
+
 
         val mainView = findViewById<View>(R.id.main)
         if (mainView != null) {
@@ -38,5 +46,21 @@ class MeusLivrosActivity : AppCompatActivity() {
                 }, 5000)
             }, 1000)
         }
+        btnVoltarHome?.setOnClickListener {
+            val intent = Intent(this, PaginaDoLivroActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        btnReport?.setOnClickListener {
+            val intent = Intent(this, TelahomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        btnVerTudo?.setOnClickListener {
+            val intent = Intent(this, TelahomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
+
 }

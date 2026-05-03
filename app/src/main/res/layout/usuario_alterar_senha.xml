@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@color/white"
     tools:context=".usuario.AlterarSenhaActivity">
 
     <LinearLayout
@@ -20,7 +21,8 @@
             android:layout_height="40dp"
             android:background="@drawable/border_edittext"
             android:padding="8dp"
-            app:srcCompat="@drawable/ic_arrow_back" />
+            app:srcCompat="@drawable/ic_arrow_back"
+            app:tint="@color/black" />
 
         <TextView
             android:id="@+id/textView7"
@@ -29,16 +31,18 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="Redefinição de Senha"
-            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="12dp"
-            app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+            app:srcCompat="@android:drawable/ic_lock_idle_lock"
+            app:tint="@color/black" />
 
         <TextView
             android:id="@+id/textView8"
@@ -47,20 +51,25 @@
             android:layout_marginTop="16dp"
             android:gravity="start"
             android:text="Por favor, crie uma senha segura para manter seus dados"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:passwordToggleEnabled="true"
+            android:layout_marginTop="12dp"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            android:textColorHint="#666666"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Senha atual"
+                android:textColor="@color/black"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,13 +78,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:passwordToggleEnabled="true"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            android:textColorHint="#666666"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Senha nova"
+                android:textColor="@color/black"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -84,13 +97,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:passwordToggleEnabled="true"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            android:textColorHint="#666666"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirmar Senha"
+                android:textColor="@color/black"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -100,28 +117,30 @@
             android:layout_height="wrap_content"
             android:text="Nova senha deve ter:"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="12dp">
+            android:paddingVertical="4dp">
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/black"
                 android:text="1- Ter no mínimo 8 caracteres" />
             <ImageView
                 android:id="@+id/rule1Icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/ic_cancel"
-                app:tint="@android:color/darker_gray" />
+                app:tint="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -129,19 +148,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="4dp">
+            android:paddingVertical="4dp">
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/black"
                 android:text="2- Uma letra maiúscula" />
             <ImageView
                 android:id="@+id/rule2Icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/ic_cancel"
-                app:tint="@android:color/darker_gray" />
+                app:tint="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -149,40 +169,42 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="4dp">
+            android:paddingVertical="4dp">
             <TextView
                 android:id="@+id/textView23"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/black"
                 android:text="3- Um número e uma caractere especial" />
             <ImageView
                 android:id="@+id/rule3Icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/ic_cancel"
-                app:tint="@android:color/darker_gray" />
+                app:tint="@color/black" />
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button4"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="56dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:backgroundTint="#D32F2F"
-            android:text="Deseja mesmo alterar a senha?"
+            android:text="Alterar Senha"
+            android:textColor="@color/white"
             app:cornerRadius="8dp" />
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="Esqueceu a senha?"
+            android:textStyle="bold"
             android:textColor="#2196F3" />
 
     </LinearLayout>

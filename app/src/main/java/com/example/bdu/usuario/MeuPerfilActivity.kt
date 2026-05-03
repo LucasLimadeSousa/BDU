@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
 import com.example.bdu.livros.TelahomeActivity
 import com.example.bdu.login.LoginActivity
+import com.example.bdu.pagamentos.JurosMultaActivity
 import com.example.bdu.suporte.TermosCondicoesActivity
 
 class MeuPerfilActivity : AppCompatActivity() {
@@ -40,6 +41,11 @@ class MeuPerfilActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        findViewById<TextView>(R.id.textView13).setOnClickListener {
+            val intent = Intent(this, HistoricoDeLivrosActivity::class.java)
+            startActivity(intent)
+        }
+
         findViewById<TextView>(R.id.textView14).setOnClickListener {
             val intent = Intent(this, PrivacidadeActivity::class.java)
             startActivity(intent)
@@ -47,6 +53,11 @@ class MeuPerfilActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.textView15).setOnClickListener {
             val intent = Intent(this, AlterarSenhaActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<TextView>(R.id.textView16).setOnClickListener {
+            val intent = Intent(this, JurosMultaActivity::class.java)
             startActivity(intent)
         }
 

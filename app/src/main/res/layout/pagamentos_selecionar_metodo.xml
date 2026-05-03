@@ -6,64 +6,120 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".SelecionarMetodoActivity">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_background"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecionar método de pagamento"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imgBtnVoltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8sp"
-        android:text="Selecionar Método de Pagamento"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:translationY="20sp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="480dp"
-        android:layout_height="wrap_content"
-        android:text="______________________________________"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="←"
-        android:textSize="40sp"
-        android:textStyle="bold|italic" />
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/border_edittext"
+        android:padding="8dp"
+        android:textAlignment="textStart"
+        app:srcCompat="@drawable/ic_arrow_back" />
 
     <Button
-        android:id="@+id/button"
-        style="@style/Widget.Material3.Button.IconButton.Outlined"
+        android:id="@+id/btn_pix"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25sp"
-        android:text="PIX" />
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60sp"
+        android:layout_marginEnd="32sp"
+        android:backgroundTint="@color/unifor_blue"
+        android:insetLeft="25dp"
+        android:insetRight="25dp"
+        android:text="PIX"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:translationY="-40sp"
+        app:cornerRadius="28dp"
+        app:iconSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_confirmar" />
 
     <Button
-        android:id="@+id/button2"
-        style="@style/Widget.Material3.Button.IconButton.Outlined"
+        android:id="@+id/btn_cartaoCred"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25sp"
-        android:text="Cartão de Crédito" />
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60sp"
+        android:layout_marginEnd="32sp"
+        android:backgroundTint="@color/unifor_blue"
+        android:insetLeft="25dp"
+        android:insetRight="25dp"
+        android:text="Cartão de Crédito"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:translationY="-40sp"
+        app:cornerRadius="28dp"
+        app:iconSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_confirmar" />
 
     <Button
-        android:id="@+id/button3"
-        style="@style/Widget.Material3.Button.IconButton.Outlined"
+        android:id="@+id/btn_cartaoDeb"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25sp"
-        android:text="Cartão de Débito" />
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60sp"
+        android:layout_marginEnd="32sp"
+        android:backgroundTint="@color/unifor_blue"
+        android:insetLeft="25dp"
+        android:insetRight="25dp"
+        android:text="Cartão de Débito"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:translationY="-40sp"
+        app:cornerRadius="28dp"
+        app:iconSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_confirmar" />
 
     <Button
-        android:id="@+id/button4"
-        style="@style/Widget.Material3.Button.IconButton.Outlined"
+        android:id="@+id/btn_boleto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25sp"
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60sp"
+        android:layout_marginEnd="32sp"
+        android:backgroundTint="@color/unifor_blue"
+        android:insetLeft="25dp"
+        android:insetRight="25dp"
         android:text="Boleto Bancário"
-        android:textColorLink="#A28888" />
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:translationY="-40sp"
+        app:cornerRadius="28dp"
+        app:iconSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_confirmar" />
 
 </LinearLayout>

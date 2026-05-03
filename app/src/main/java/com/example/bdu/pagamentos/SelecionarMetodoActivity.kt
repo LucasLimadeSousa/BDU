@@ -1,21 +1,37 @@
-package com.example.bdu.pagamentos
+package com.example.bdu
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.bdu.R
 
 class SelecionarMetodoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContentView(R.layout.pagamentos_selecionar_metodo)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        findViewById<Button>(R.id.btn_pix).setOnClickListener{
+            startActivity(Intent(this, R.layout.pagamentos_pix::class.java))
+        }
+        findViewById<Button>(R.id.btn_cartaoCred).setOnClickListener{
+            startActivity(Intent(this, R.layout.pagamentos_cartao_cred::class.java))
+        }
+
+        findViewById<Button>(R.id.btn_cartaoDeb).setOnClickListener{
+            startActivity(Intent(this, R.layout.pagamentos_cartao_cred::class.java))
+        }
+
+        findViewById<Button>(R.id.btn_boleto).setOnClickListener{
+            startActivity(Intent(this, R.layout.pagamentos_boleto::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.imgBtnVoltar).setOnClickListener{
+            startActivity(Intent(this, R.layout.usuario_meu_perfil::class.java))
         }
     }
-}
+
+
+ }

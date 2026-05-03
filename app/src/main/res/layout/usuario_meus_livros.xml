@@ -51,7 +51,7 @@
                 android:background="@drawable/bg_button_border">
 
                 <ImageButton
-                    android:id="@+id/btn_back"
+                    android:id="@+id/btn_backReturn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"

@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
         <activity
+            android:name=".livros.VerTudoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".usuario.MeusLivrosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".livros.ListaDesejosActivity"
+            android:exported="false" />
+        <activity
             android:name=".pagamentos.JurosMultaActivity"
             android:exported="false" />
         <activity

@@ -11,33 +11,78 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
-
-        <activity android:name=".login.LoginActivity" android:exported="true">
+        <activity
+            android:name=".pagamentos.JurosMultaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".usuario.HistoricoDeLivrosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.CadastroActivity" android:exported="false" />
-        <activity android:name=".login.EsqueciSenhaActivity" android:exported="false" />
-        <activity android:name=".login.EmailRecuperacaoActivity" android:exported="false" />
-        <activity android:name=".login.AutenticacaoActivity" android:exported="false" />
-        <activity android:name=".usuario.MeuPerfilActivity" android:exported="false" />
-        <activity android:name=".usuario.InformacoesPessoaisActivity" android:exported="false" />
-        <activity android:name=".usuario.MensagensActivity" android:exported="false" />
-        <activity android:name=".usuario.PrivacidadeActivity" android:exported="false" />
-        <activity android:name=".usuario.AlterarSenhaActivity" android:exported="false" />
-        <activity android:name=".livros.TelahomeActivity" android:exported="false" />
-        <activity android:name=".livros.PaginaDoLivroActivity" android:exported="false" />
-        <activity android:name=".livros.MeusLivrosActivity" android:exported="false" />
-        <activity android:name=".livros.BuscaActivity" android:exported="false" />
-        <activity android:name=".livros.ListadeEsperaActivity" android:exported="false" />
-        <activity android:name=".pagamentos.BoletoActivity" android:exported="false" />
-        <activity android:name=".pagamentos.SelecionarMetodoActivity" android:exported="false" />
-        <activity android:name=".pagamentos.CartaoDebActivity" android:exported="false" />
-        <activity android:name=".pagamentos.CartaoCredActivity" android:exported="false" />
-        <activity android:name=".suporte.TermosCondicoesActivity" android:exported="false" />
-
+        <activity
+            android:name=".login.CadastroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.EsqueciSenhaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.EmailRecuperacaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.AutenticacaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".usuario.MeuPerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".usuario.InformacoesPessoaisActivity"
+            android:exported="false" />
+        <activity
+            android:name=".usuario.MensagensActivity"
+            android:exported="false" />
+        <activity
+            android:name=".usuario.PrivacidadeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".usuario.AlterarSenhaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".livros.TelahomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".livros.PaginaDoLivroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".livros.MeusLivrosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".livros.BuscaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".livros.ListadeEsperaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pagamentos.BoletoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pagamentos.SelecionarMetodoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pagamentos.CartaoDebActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pagamentos.CartaoCredActivity"
+            android:exported="false" />
+        <activity
+            android:name=".suporte.TermosCondicoesActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

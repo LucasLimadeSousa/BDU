@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.example.bdu.ReportarProblema2Activity">
+    tools:context=".suporte.ReportarProblema2Activity">
 
     <!-- Header Bar -->
     <View
@@ -74,7 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
-        android:layout_marginHorizontal=""
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="#700000"
         app:layout_constraintTop_toBottomOf="@id/tvQuestion" />
 
@@ -126,7 +127,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginHorizontal=""
+                android:layout_marginHorizontal="16dp"
                 android:background="#700000" />
 
             <!-- Item 2 -->
@@ -166,7 +167,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginHorizontal=""
+                android:layout_marginHorizontal="16dp"
                 android:background="#700000" />
 
             <!-- Item 3 -->
@@ -206,7 +207,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginHorizontal=""
+                android:layout_marginHorizontal="16dp"
                 android:background="#700000" />
 
             <!-- Item 4 -->
@@ -246,7 +247,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginHorizontal=""
+                android:layout_marginHorizontal="16dp"
                 android:background="#700000" />
 
         </LinearLayout>

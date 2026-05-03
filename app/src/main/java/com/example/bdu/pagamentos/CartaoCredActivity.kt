@@ -6,10 +6,13 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
+import com.example.bdu.SelecionarMetodoActivity
 import com.example.bdu.livros.TelahomeActivity
+import kotlin.jvm.java
 
 class CartaoCredActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,7 @@ class TelahomeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.livros_telahome)
 
-        val btnsearch = findViewById<TextView?>(R.id.search_container)
+        val btnsearch = findViewById<LinearLayout>(R.id.search_container)
 
         val btnvertudo = findViewById<TextView?>(R.id.VerTudo)
         val btnvertudo2 = findViewById<TextView?>(R.id.VerTudo2)

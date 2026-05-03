@@ -38,7 +38,7 @@
         android:translationY="-20sp">
 
         <ImageButton
-            android:id="@+id/imageButton10"
+            android:id="@+id/imgBtnVoltarBoleto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"

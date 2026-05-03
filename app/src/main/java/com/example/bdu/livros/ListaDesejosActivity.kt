@@ -14,40 +14,14 @@ class ListaDesejosActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.livros_lista_desejos)
 
-        val btnFila = findViewById<ImageButton?>(R.id.btn_nav_fila)
-        val btnMeusLivros = findViewById<ImageButton?>(R.id.btn_nav_meuslivros)
-        val btnHome = findViewById<ImageButton?>(R.id.btn_nav_home)
-        val btnDesejos = findViewById<ImageButton?>(R.id.btn_nav_desejos)
-        val btnPerfil = findViewById<ImageButton?>(R.id.btn_nav_perfil)
-
-        btnFila?.setOnClickListener {
-            val intent = Intent(this, ListadeEsperaActivity::class.java)
-            startActivity(intent)
-            finish()
+        findViewById<ImageButton>(R.id.btnBack).setOnClickListener{
+            startActivity(Intent(this, R.layout.livros_telahome::class.java))
         }
 
-        btnMeusLivros?.setOnClickListener {
-            val intent = Intent(this, MeusLivrosActivity::class.java)
-            startActivity(intent)
-            finish()
+        findViewById<ImageButton>(R.id.imgBtnLivro).setOnClickListener{
+            startActivity(Intent(this, R.layout.livros_pagina_do_livro::class.java))
         }
 
-        btnHome?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
 
-        btnDesejos?.setOnClickListener {
-            val intent = Intent(this, ListaDesejosActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        btnPerfil?.setOnClickListener {
-            val intent = Intent(this, MeuPerfilActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
     }
 }

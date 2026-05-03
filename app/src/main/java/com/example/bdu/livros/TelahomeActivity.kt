@@ -19,7 +19,7 @@ class TelahomeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.livros_telahome)
 
-        val btnsearch = findViewById<LinearLayout>(R.id.search_container)
+        val btnsearch = findViewById<LinearLayout?>(R.id.search_container)
 
         val btnvertudo = findViewById<TextView?>(R.id.VerTudo)
         val btnvertudo2 = findViewById<TextView?>(R.id.VerTudo2)
@@ -64,7 +64,6 @@ class TelahomeActivity : AppCompatActivity() {
         btnsearch?.setOnClickListener {
             val intent = Intent(this, BuscaActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         //ver tudo
@@ -72,45 +71,37 @@ class TelahomeActivity : AppCompatActivity() {
         btnvertudo?.setOnClickListener {
             val intent = Intent(this, VerTudoActivity::class.java)
             startActivity(intent)
-            finish()
         }
         btnvertudo2?.setOnClickListener {
             val intent = Intent(this, VerTudoActivity::class.java)
             startActivity(intent)
-            finish()
         }
         btnvertudo3?.setOnClickListener {
             val intent = Intent(this, VerTudoActivity::class.java)
             startActivity(intent)
-            finish()
         }
         btnFila?.setOnClickListener {
             val intent = Intent(this, ListadeEsperaActivity::class.java)
             startActivity(intent)
-            finish()
         }
         btnMeusLivros?.setOnClickListener {
             val intent = Intent(this, MeusLivrosActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         btnHome?.setOnClickListener {
             val intent = Intent(this, TelahomeActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         btnDesejos?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
+            val intent = Intent(this, ListaDesejosActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         btnperfil?.setOnClickListener {
             val intent = Intent(this, MeuPerfilActivity::class.java)
             startActivity(intent)
-            finish()
         }
         //Scroll 1
 

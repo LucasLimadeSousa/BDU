@@ -15,78 +15,6 @@
         android:background="@color/white"
         tools:context=".TermosCondicoesActivity">
 
-        <LinearLayout
-            android:id="@+id/bottomNav"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/card_border"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/fila"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_queue" />
-
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/livro_usuario"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_book_user" />
-
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/home"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_home" />
-
-            <ImageButton
-                android:id="@+id/imageButton8"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/favoritos"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_heart" />
-
-            <ImageButton
-                android:id="@+id/imageButton9"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/perfil"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_person" />
-
-        </LinearLayout>
-
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
@@ -124,7 +52,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="534dp"
+                    android:layout_height="606dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/card_border"
                     android:orientation="vertical"

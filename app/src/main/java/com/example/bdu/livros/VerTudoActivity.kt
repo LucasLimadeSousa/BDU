@@ -14,7 +14,7 @@ class VerTudoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val btnreturn = findViewById<ImageButton?>(R.id.btnBackLivro)
+        val btnreturn = findViewById<ImageButton?>(R.id.btnBack2)
 
         setContentView(R.layout.livros_ver_tudo)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

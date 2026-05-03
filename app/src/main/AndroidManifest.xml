@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BDU">
         <activity
+            android:name=".pagamentos.CartaoDebActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pagamentos.SelecionarMetodoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pagamentos.PixActivity"
+            android:exported="false" />
+        <activity
             android:name=".livros.VerTudoActivity"
             android:exported="false" />
         <activity
@@ -79,12 +88,6 @@
             android:exported="false" />
         <activity
             android:name=".pagamentos.BoletoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".pagamentos.SelecionarMetodoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".pagamentos.CartaoDebActivity"
             android:exported="false" />
         <activity
             android:name=".pagamentos.CartaoCredActivity"

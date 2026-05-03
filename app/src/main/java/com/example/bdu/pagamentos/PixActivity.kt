@@ -2,24 +2,20 @@ package com.example.bdu
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
-class CartaoDebActivity : AppCompatActivity() {
+class PixActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.pagamentos_cartao_deb)
+        setContentView(R.layout.pagamentos_pix)
 
-        findViewById<ImageButton>(R.id.imgBtnVoltarCred).setOnClickListener{
+        findViewById<ImageButton>(R.id.btnVoltarPix).setOnClickListener{
             startActivity(Intent(this, R.layout.pagamentos_selecionar_metodo::class.java))
         }
 
-        findViewById<Button>(R.id.btnConfirmarPagamento).setOnClickListener{
-            startActivity(Intent(this, R.layout.livros_telahome::class.java))
-        }
 
         }
     }

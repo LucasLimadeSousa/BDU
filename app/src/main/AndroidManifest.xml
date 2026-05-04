@@ -95,6 +95,21 @@
         <activity
             android:name=".suporte.TermosCondicoesActivity"
             android:exported="false" />
+        <activity
+            android:name=".suporte.ReportarProblemaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".suporte.ReportarProblema2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".adm.AdicionarLivroAdmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".adm.TelaPaginaDoLivroAdmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".adm.EditarLivroAdmActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

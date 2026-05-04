@@ -10,7 +10,6 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
-import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -67,7 +66,7 @@ class CadastroActivity : AppCompatActivity() {
         checkboxTermos.movementMethod = LinkMovementMethod.getInstance()
         checkboxTermos.highlightColor = Color.TRANSPARENT
 
-        findViewById<ImageButton>(R.id.btn_back).setOnClickListener {
+        findViewById<ImageButton>(R.id.btn_backReturn).setOnClickListener {
             finish()
         }
     }

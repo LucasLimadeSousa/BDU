@@ -69,21 +69,29 @@
             android:textStyle="bold"
             android:textColor="#000000" />
 
-        <EditText
-            android:id="@+id/editTextEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="E-mail"
-            android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/card_border"
+                android:paddingHorizontal="12dp"
+                android:hint="E-mail"
+                android:inputType="textEmailAddress"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
 
-        <EditText
-            android:id="@+id/editTextSenha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:hint="@string/label_senha"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/editTextSenha"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/card_border"
+                android:paddingHorizontal="12dp"
+                android:hint="@string/label_senha"
+                android:inputType="textPassword"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
 
         <TextView
             android:id="@+id/textViewEsqueciSenha"

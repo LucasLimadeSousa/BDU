@@ -15,13 +15,13 @@ class ListadeEsperaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        setContentView(R.layout.livros_lista_de_espera)
+
         val btnFila = findViewById<ImageButton?>(R.id.btn_nav_fila)
         val btnMeusLivros = findViewById<ImageButton?>(R.id.btn_nav_meuslivros)
         val btnHome = findViewById<ImageButton?>(R.id.btn_nav_home)
         val btnDesejos = findViewById<ImageButton?>(R.id.btn_nav_desejos)
         val btnperfil = findViewById<ImageButton?>(R.id.btn_nav_perfil)
-
-        setContentView(R.layout.livros_lista_de_espera)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -45,7 +45,7 @@ class ListadeEsperaActivity : AppCompatActivity() {
         }
 
         btnDesejos?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
+            val intent = Intent(this, ListaDesejosActivity::class.java)
             startActivity(intent)
             finish()
         }

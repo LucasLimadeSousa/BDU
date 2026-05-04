@@ -48,7 +48,7 @@
 
             <!-- Botão Voltar -->
             <ImageButton
-                android:id="@+id/btnBack"
+                android:id="@+id/btnBackLivro"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="16dp"
@@ -83,7 +83,8 @@
                 android:background="@drawable/card_border"
                 android:hint="TITULO DO LIVRO"
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/black"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <EditText
@@ -94,7 +95,8 @@
                 android:background="@drawable/card_border"
                 android:hint="AUTOR"
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/black"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <EditText
@@ -105,7 +107,8 @@
                 android:background="@drawable/card_border"
                 android:hint="GENERO"
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/black"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <TextView
@@ -125,7 +128,8 @@
                 android:background="@drawable/card_border"
                 android:gravity="top"
                 android:padding="12dp"
-                android:textColor="@color/black"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <!-- Data de Publicação -->
@@ -155,6 +159,8 @@
                     android:hint="DD/MM/AA"
                     android:inputType="date"
                     android:paddingHorizontal="8dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -173,7 +179,8 @@
                 android:background="@drawable/card_border"
                 android:hint="EDITORA"
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/black"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -191,7 +198,8 @@
                     android:background="@drawable/card_border"
                     android:hint="páginas: "
                     android:paddingHorizontal="12dp"
-                    android:textColor="@color/black"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
                     android:textSize="14sp" />
 
                 <EditText
@@ -202,7 +210,8 @@
                     android:background="@drawable/card_border"
                     android:hint="IDIOMA: "
                     android:paddingHorizontal="12dp"
-                    android:textColor="@color/black"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -214,7 +223,8 @@
                 android:background="@drawable/card_border"
                 android:hint="ISBN"
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/black"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <com.google.android.material.button.MaterialButton

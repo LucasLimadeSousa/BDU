@@ -21,7 +21,7 @@ class PrivacidadeActivity : AppCompatActivity() {
         }
 
         // Configuração do botão voltar padrão
-        findViewById<ImageButton>(R.id.btn_back)?.setOnClickListener {
+        findViewById<ImageButton>(R.id.btn_backReturn)?.setOnClickListener {
             finish()
         }
     }

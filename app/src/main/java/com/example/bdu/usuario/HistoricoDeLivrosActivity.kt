@@ -19,7 +19,7 @@ class HistoricoDeLivrosActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
+        findViewById<ImageButton>(R.id.btnBackLivro).setOnClickListener {
             finish()
         }
     }

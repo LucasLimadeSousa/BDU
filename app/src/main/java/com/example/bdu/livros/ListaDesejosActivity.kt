@@ -14,12 +14,24 @@ class ListaDesejosActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.livros_lista_desejos)
 
-        findViewById<ImageButton>(R.id.btnBack).setOnClickListener{
-            startActivity(Intent(this, R.layout.livros_telahome::class.java))
+        findViewById<ImageButton>(R.id.btn_nav_fila).setOnClickListener {
+            startActivity(Intent(this, ListadeEsperaActivity::class.java))
         }
 
-        findViewById<ImageButton>(R.id.imgBtnLivro).setOnClickListener{
-            startActivity(Intent(this, R.layout.livros_pagina_do_livro::class.java))
+        findViewById<ImageButton>(R.id.btn_nav_meuslivros).setOnClickListener {
+            startActivity(Intent(this, MeusLivrosActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_home).setOnClickListener {
+            startActivity(Intent(this, TelahomeActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_desejos).setOnClickListener {
+            // Já estamos na Lista de Desejos
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_perfil).setOnClickListener {
+            startActivity(Intent(this, MeuPerfilActivity::class.java))
         }
 
 

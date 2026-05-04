@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/biblioteca_digital"
+        android:text="Buscar"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/header_bar">
 
         <ImageButton
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_backReturn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_button_border"
@@ -50,15 +50,6 @@
             android:src="@drawable/ic_chevron_right"
             android:rotation="180"
             app:tint="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="@string/buscar"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#000000" />
 
     </LinearLayout>
 
@@ -74,12 +65,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="16dp"
-                android:background="#666666" />
-
             <!-- EditText de busca minimalista -->
             <EditText
                 android:id="@+id/editTextBusca"
@@ -89,12 +74,14 @@
                 android:background="@drawable/search_bar_background"
                 android:drawableStart="@android:drawable/ic_menu_search"
                 android:drawablePadding="16dp"
+                android:elevation="4dp"
                 android:hint="Buscar (título, autor, gênero, etc.)"
                 android:inputType="text"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:textSize="16sp"
-                android:elevation="4dp" />
+                android:textColor="#000000"
+                android:textColorHint="#000000"
+                android:textSize="16sp" />
 
             <!-- Texto de Filtros -->
             <TextView
@@ -122,7 +109,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/label_genero"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColorHint="#000000" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,7 +130,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/label_data_publicacao"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Filtro Curso -->
@@ -161,7 +151,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/label_curso"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColorHint="#000000" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

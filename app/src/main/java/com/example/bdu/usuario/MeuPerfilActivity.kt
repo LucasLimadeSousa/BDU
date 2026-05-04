@@ -25,10 +25,24 @@ class MeuPerfilActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
-            startActivity(intent)
-            finish()
+        findViewById<ImageButton>(R.id.btn_nav_fila).setOnClickListener {
+            startActivity(Intent(this, com.example.bdu.livros.ListadeEsperaActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_meuslivros).setOnClickListener {
+            startActivity(Intent(this, com.example.bdu.livros.MeusLivrosActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_home).setOnClickListener {
+            startActivity(Intent(this, TelahomeActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_desejos).setOnClickListener {
+            startActivity(Intent(this, com.example.bdu.livros.ListaDesejosActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_perfil).setOnClickListener {
+            // Já estamos no perfil
         }
 
         findViewById<TextView>(R.id.textView11).setOnClickListener {

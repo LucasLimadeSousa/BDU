@@ -6,36 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context="com.example.bdu.ReportarProblemaActivity">
+    tools:context="com.example.bdu.suporte.ReportarProblemaActivity">
 
-    <!-- Header Bar -->
-
+    <!-- Header Bar: Ajustado para 60dp de altura fixa e sem margem negativa -->
     <View
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="-20dp"
+        android:layout_height="60dp"
         android:background="@color/unifor_blue"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="38dp"
         android:text="Reportar Problema"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/header_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/header_bar" />
 
+    <!-- Botão Voltar: Posicionado 16dp abaixo da barra azul -->
     <ImageButton
         android:id="@+id/btnBackLivro"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_button_border"
@@ -47,20 +45,39 @@
         app:layout_constraintTop_toBottomOf="@id/header_bar"
         app:tint="#000000" />
 
+    <!-- CORREÇÃO: Spinner agora está preso ao botão de voltar -->
+    <TextView
+        android:id="@+id/tvSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/card_border"
+        android:padding="12dp"
+        android:text="@string/problema_danificado"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:drawableEndCompat="@android:drawable/arrow_down_float"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBackLivro" />
+
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/border_edittext"
+        android:background="@drawable/card_border"
         android:gravity="top"
         android:hint="@string/descreva_problema_hint"
         android:inputType="textMultiLine"
         android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSpinner" />
 
@@ -76,31 +93,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etDescription" />
 
-    <TextView
-        android:id="@+id/tvSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/border_edittext"
-        android:padding="12dp"
-        android:text="@string/problema_danificado"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:drawableEndCompat="@android:drawable/arrow_down_float"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="172dp" />
-
     <FrameLayout
         android:id="@+id/flImagePlaceholder"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/bg_button_border"
+        android:background="@drawable/card_border"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvInstruction">
 
@@ -110,9 +109,7 @@
             android:layout_gravity="center"
             android:contentDescription="@null"
             android:src="@drawable/ic_person"
-            app:tint="#CCCCCC"
-            tools:layout_editor_absoluteX="186dp"
-            tools:layout_editor_absoluteY="492dp" />
+            app:tint="#CCCCCC" />
 
         <ImageView
             android:layout_width="32dp"
@@ -123,9 +120,7 @@
             android:contentDescription="@null"
             android:padding="4dp"
             android:src="@android:drawable/ic_menu_camera"
-            app:tint="#FFFFFF"
-            tools:layout_editor_absoluteX="246dp"
-            tools:layout_editor_absoluteY="552dp" />
+            app:tint="#FFFFFF" />
     </FrameLayout>
 
     <Button

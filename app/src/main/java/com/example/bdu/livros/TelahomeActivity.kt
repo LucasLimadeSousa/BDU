@@ -3,6 +3,7 @@ package com.example.bdu.livros
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
+import com.example.bdu.adm.AdicionarLivroAdmActivity
 import com.example.bdu.usuario.MeuPerfilActivity
 
 class TelahomeActivity : AppCompatActivity() {
@@ -20,6 +22,8 @@ class TelahomeActivity : AppCompatActivity() {
         setContentView(R.layout.livros_telahome)
 
         val btnsearch = findViewById<LinearLayout?>(R.id.search_container)
+
+        val btnADM = findViewById<Button?>(R.id.btnADM)
 
         val btnvertudo = findViewById<TextView?>(R.id.VerTudo)
         val btnvertudo2 = findViewById<TextView?>(R.id.VerTudo2)
@@ -80,6 +84,10 @@ class TelahomeActivity : AppCompatActivity() {
             val intent = Intent(this, VerTudoActivity::class.java)
             startActivity(intent)
         }
+
+        //Barra de tarefas
+
+
         btnFila?.setOnClickListener {
             val intent = Intent(this, ListadeEsperaActivity::class.java)
             startActivity(intent)
@@ -167,6 +175,12 @@ class TelahomeActivity : AppCompatActivity() {
         }
         livro50?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
+            startActivity(intent)
+        }
+        //botão adm
+
+        btnADM?.setOnClickListener {
+            val intent = Intent(this, AdicionarLivroAdmActivity::class.java)
             startActivity(intent)
         }
     }

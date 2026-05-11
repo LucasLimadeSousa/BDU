@@ -25,7 +25,6 @@ class MeusLivrosActivity : AppCompatActivity() {
 
         val btnVoltarHome = findViewById<ImageButton?>(R.id.btn_backReturn)
         val btnReport = findViewById<TextView?>(R.id.btn_report)
-        val btnPagarJuros = findViewById<TextView?>(R.id.btn_pagar_juros)
         val btnVerTudo = findViewById<TextView?>(R.id.VerTudo)
 
         val mainView = findViewById<View>(R.id.main)
@@ -58,11 +57,6 @@ class MeusLivrosActivity : AppCompatActivity() {
 
         btnReport?.setOnClickListener {
             val intent = Intent(this, com.example.bdu.suporte.ReportarProblema2Activity::class.java)
-            startActivity(intent)
-        }
-
-        btnPagarJuros?.setOnClickListener {
-            val intent = Intent(this, JurosMultaActivity::class.java)
             startActivity(intent)
         }
 

@@ -1,11 +1,14 @@
 package com.example.bdu.usuario
 
+import android.graphics.Color
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
@@ -13,6 +16,7 @@ import com.example.bdu.livros.TelahomeActivity
 import com.example.bdu.login.LoginActivity
 import com.example.bdu.pagamentos.JurosMultaActivity
 import com.example.bdu.suporte.TermosCondicoesActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MeuPerfilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,11 +85,41 @@ class MeuPerfilActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.textView18).setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            // Limpa o histórico de telas para que o usuário não volte ao perfil apertando o botão 'voltar'
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
+            val builder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
+            builder.setMessage("Tem certeza que deseja sair da sua Conta?")
+
+            builder.setPositiveButton("Sim") { _, _ ->
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+
+            builder.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+
+            val dialog = builder.create()
+            dialog.show()
+
+            // Personalizando as cores dos botões para corresponder ao estilo da tela de alterar senha
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.let {
+                it.setBackgroundColor("#2E7D32".toColorInt()) // Verde
+                it.setTextColor(Color.WHITE)
+
+                val params = it.layoutParams as android.widget.LinearLayout.LayoutParams
+                params.setMargins(10, 0, 10, 0)
+                it.layoutParams = params
+            }
+
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.let {
+                it.setBackgroundColor("#D32F2F".toColorInt()) // Vermelho
+                it.setTextColor(Color.WHITE)
+
+                val params = it.layoutParams as android.widget.LinearLayout.LayoutParams
+                params.setMargins(10, 0, 10, 0)
+                it.layoutParams = params
+            }
         }
     }
 }

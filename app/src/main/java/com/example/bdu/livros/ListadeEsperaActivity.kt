@@ -3,6 +3,8 @@ package com.example.bdu.livros
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -52,6 +54,14 @@ class ListadeEsperaActivity : AppCompatActivity() {
 
         btnperfil?.setOnClickListener {
             val intent = Intent(this, MeuPerfilActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        findViewById<TextView>(R.id.btn_confirmar_reserva).setOnClickListener {
+            Toast.makeText(this, "Reserva confirmada!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, TelahomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
         }

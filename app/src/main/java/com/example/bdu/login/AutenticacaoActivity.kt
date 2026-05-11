@@ -3,6 +3,7 @@ package com.example.bdu.login
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,6 +22,7 @@ class AutenticacaoActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnConfirmarCodigo).setOnClickListener {
+            Toast.makeText(this, "Email cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, EsqueciSenhaActivity::class.java))
         }
 

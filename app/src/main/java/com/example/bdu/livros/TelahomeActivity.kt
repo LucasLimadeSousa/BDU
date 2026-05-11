@@ -119,6 +119,8 @@ class TelahomeActivity : AppCompatActivity() {
         }
         livroB?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
+            intent.putExtra("IS_ESGOTADO", true)
+            intent.putExtra("BOOK_TITLE", "Orgulho e Preconceito")
             startActivity(intent)
         }
         livroC?.setOnClickListener {

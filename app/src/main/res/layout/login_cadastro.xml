@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/biblioteca_digital"
+            android:text="Cadastro"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -55,7 +55,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btn_back"
+                    android:id="@+id/btn_backReturn"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/card_border"
@@ -64,14 +64,6 @@
                     android:src="@drawable/ic_arrow_back"
                     app:tint="@color/black" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/label_cadastro"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
             </LinearLayout>
 
             <ImageView
@@ -90,8 +82,10 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_border"
                 android:hint="@string/hint_nome_completo"
-                android:paddingHorizontal="12dp"
                 android:inputType="textPersonName"
+                android:paddingHorizontal="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <EditText
@@ -101,8 +95,10 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_border"
                 android:hint="@string/label_email"
-                android:paddingHorizontal="12dp"
                 android:inputType="textEmailAddress"
+                android:paddingHorizontal="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <EditText
@@ -112,8 +108,10 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_border"
                 android:hint="@string/hint_confirmar_email"
-                android:paddingHorizontal="12dp"
                 android:inputType="textEmailAddress"
+                android:paddingHorizontal="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <EditText
@@ -123,8 +121,10 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_border"
                 android:hint="@string/label_senha"
-                android:paddingHorizontal="12dp"
                 android:inputType="textPassword"
+                android:paddingHorizontal="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <EditText
@@ -134,8 +134,10 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_border"
                 android:hint="@string/hint_confirmar_senha"
-                android:paddingHorizontal="12dp"
                 android:inputType="textPassword"
+                android:paddingHorizontal="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <!-- Requisitos de Senha -->
@@ -143,26 +145,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_senha_deve_ter"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textColor="#000000"
+                android:textColorHint="#000000"
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/senha_req_1"
-                android:textColor="@color/black"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="12sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/senha_req_2"
-                android:textColor="@color/black"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="12sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:text="@string/senha_req_3"
-                android:textColor="@color/black"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="12sp" />
 
             <!-- Outros Dados -->
@@ -173,8 +182,10 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_border"
                 android:hint="@string/label_cpf"
-                android:paddingHorizontal="12dp"
                 android:inputType="number"
+                android:paddingHorizontal="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <EditText
@@ -184,8 +195,10 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_border"
                 android:hint="@string/label_telefone"
-                android:paddingHorizontal="12dp"
                 android:inputType="phone"
+                android:paddingHorizontal="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <EditText
@@ -195,8 +208,10 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/card_border"
                 android:hint="@string/label_curso"
-                android:paddingHorizontal="12dp"
                 android:inputType="text"
+                android:paddingHorizontal="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -204,16 +219,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
+
                 <EditText
                     android:id="@+id/editTextCidade"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/card_border"
                     android:hint="@string/hint_cidade"
                     android:paddingHorizontal="12dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
                     android:textSize="14sp" />
+
                 <EditText
                     android:id="@+id/editTextEstado"
                     android:layout_width="0dp"
@@ -222,6 +241,8 @@
                     android:background="@drawable/card_border"
                     android:hint="@string/label_estado"
                     android:paddingHorizontal="12dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -239,8 +260,10 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/card_border"
                 android:hint="@string/hint_data_nascimento"
-                android:paddingHorizontal="12dp"
                 android:inputType="date"
+                android:paddingHorizontal="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
                 android:textSize="14sp" />
             
             <LinearLayout

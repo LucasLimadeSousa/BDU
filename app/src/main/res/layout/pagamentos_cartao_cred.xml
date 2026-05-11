@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.example.bdu.pagamentos.CartaoCredActivity">
 
     <LinearLayout
@@ -44,6 +45,7 @@
         android:layout_marginVertical="10dp"
         android:gravity="center"
         android:text="Valor total: R$00.00"
+        android:textColor="@color/black"
         android:textSize="28sp" />
 
     <EditText
@@ -53,11 +55,13 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/border_edittext"
+        android:background="@drawable/card_border"
         android:hint="Nome no Cartão"
         android:inputType="textPersonName"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp" />
+        android:paddingEnd="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
 
     <EditText
         android:id="@+id/et_numero_cartao"
@@ -66,11 +70,13 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/border_edittext"
+        android:background="@drawable/card_border"
         android:hint="Número no Cartão"
         android:inputType="number"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp" />
+        android:paddingEnd="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
 
     <TextView
         android:id="@+id/textView4"
@@ -79,6 +85,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Data de expiração"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -92,22 +99,26 @@
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:background="@drawable/border_edittext"
+            android:background="@drawable/card_border"
             android:hint="Mês"
             android:inputType="number"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
+            android:paddingEnd="16dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
 
         <EditText
             android:id="@+id/et_ano_exp"
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:background="@drawable/border_edittext"
+            android:background="@drawable/card_border"
             android:hint="Ano"
             android:inputType="number"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
+            android:paddingEnd="16dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
     </LinearLayout>
 
     <EditText
@@ -117,11 +128,13 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/border_edittext"
+        android:background="@drawable/card_border"
         android:hint="Parcelamento (1x de R$00.00)"
         android:inputType="text"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp" />
+        android:paddingEnd="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
 
     <EditText
         android:id="@+id/et_cvv"
@@ -130,11 +143,13 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/border_edittext"
+        android:background="@drawable/card_border"
         android:hint="Código de Segurança (CVV)"
         android:inputType="numberPassword"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp" />
+        android:paddingEnd="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
 
     <Button
         android:id="@+id/btnConfirmarPagamento"

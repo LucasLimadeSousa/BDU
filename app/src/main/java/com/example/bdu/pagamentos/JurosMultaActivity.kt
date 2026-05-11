@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
-import com.example.bdu.SelecionarMetodoActivity
+import com.example.bdu.pagamentos.SelecionarMetodoActivity
 
 class JurosMultaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class JurosMultaActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
+        findViewById<ImageButton>(R.id.btnBackLivro).setOnClickListener {
             finish()
         }
 

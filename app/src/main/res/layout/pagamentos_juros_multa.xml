@@ -47,7 +47,7 @@
             android:padding="16dp">
 
             <ImageButton
-                android:id="@+id/btnBack"
+                android:id="@+id/btnBackLivro"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="16dp"
@@ -90,12 +90,10 @@
                     android:id="@+id/btnPagar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/blue_background"
                     android:text="PAGAR"
-                    android:textColor="@color/black"
-                    app:cornerRadius="8dp"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="1dp" />
+                    android:textColor="@color/white"
+                    app:cornerRadius="8dp" />
             </LinearLayout>
 
             <!-- Card 1: Multa por Atraso -->

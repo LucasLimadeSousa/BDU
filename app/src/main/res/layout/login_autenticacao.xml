@@ -97,7 +97,8 @@
                     android:hint="Confirmar Código"
                     android:inputType="number"
                     android:paddingHorizontal="16dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textColorHint="#000000" />
 
                 <TextView
                     android:id="@+id/textViewNaoRecebi"

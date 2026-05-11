@@ -14,40 +14,26 @@ class ListaDesejosActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.livros_lista_desejos)
 
-        val btnFila = findViewById<ImageButton?>(R.id.btn_nav_fila)
-        val btnMeusLivros = findViewById<ImageButton?>(R.id.btn_nav_meuslivros)
-        val btnHome = findViewById<ImageButton?>(R.id.btn_nav_home)
-        val btnDesejos = findViewById<ImageButton?>(R.id.btn_nav_desejos)
-        val btnPerfil = findViewById<ImageButton?>(R.id.btn_nav_perfil)
-
-        btnFila?.setOnClickListener {
-            val intent = Intent(this, ListadeEsperaActivity::class.java)
-            startActivity(intent)
-            finish()
+        findViewById<ImageButton>(R.id.btn_nav_fila).setOnClickListener {
+            startActivity(Intent(this, ListadeEsperaActivity::class.java))
         }
 
-        btnMeusLivros?.setOnClickListener {
-            val intent = Intent(this, MeusLivrosActivity::class.java)
-            startActivity(intent)
-            finish()
+        findViewById<ImageButton>(R.id.btn_nav_meuslivros).setOnClickListener {
+            startActivity(Intent(this, MeusLivrosActivity::class.java))
         }
 
-        btnHome?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
-            startActivity(intent)
-            finish()
+        findViewById<ImageButton>(R.id.btn_nav_home).setOnClickListener {
+            startActivity(Intent(this, TelahomeActivity::class.java))
         }
 
-        btnDesejos?.setOnClickListener {
-            val intent = Intent(this, ListaDesejosActivity::class.java)
-            startActivity(intent)
-            finish()
+        findViewById<ImageButton>(R.id.btn_nav_desejos).setOnClickListener {
+            // Já estamos na Lista de Desejos
         }
 
-        btnPerfil?.setOnClickListener {
-            val intent = Intent(this, MeuPerfilActivity::class.java)
-            startActivity(intent)
-            finish()
+        findViewById<ImageButton>(R.id.btn_nav_perfil).setOnClickListener {
+            startActivity(Intent(this, MeuPerfilActivity::class.java))
         }
+
+
     }
 }

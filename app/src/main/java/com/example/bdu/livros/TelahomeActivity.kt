@@ -3,13 +3,16 @@ package com.example.bdu.livros
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
+import com.example.bdu.adm.AdicionarLivroAdmActivity
 import com.example.bdu.usuario.MeuPerfilActivity
 
 class TelahomeActivity : AppCompatActivity() {
@@ -18,7 +21,9 @@ class TelahomeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.livros_telahome)
 
-        val btnsearch = findViewById<TextView?>(R.id.search_container)
+        val btnsearch = findViewById<LinearLayout?>(R.id.search_container)
+
+        val btnADM = findViewById<Button?>(R.id.btnADM)
 
         val btnvertudo = findViewById<TextView?>(R.id.VerTudo)
         val btnvertudo2 = findViewById<TextView?>(R.id.VerTudo2)
@@ -63,7 +68,6 @@ class TelahomeActivity : AppCompatActivity() {
         btnsearch?.setOnClickListener {
             val intent = Intent(this, BuscaActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         //ver tudo
@@ -71,17 +75,14 @@ class TelahomeActivity : AppCompatActivity() {
         btnvertudo?.setOnClickListener {
             val intent = Intent(this, VerTudoActivity::class.java)
             startActivity(intent)
-            finish()
         }
         btnvertudo2?.setOnClickListener {
             val intent = Intent(this, VerTudoActivity::class.java)
             startActivity(intent)
-            finish()
         }
         btnvertudo3?.setOnClickListener {
             val intent = Intent(this, VerTudoActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         //Barra de tarefas
@@ -90,111 +91,99 @@ class TelahomeActivity : AppCompatActivity() {
         btnFila?.setOnClickListener {
             val intent = Intent(this, ListadeEsperaActivity::class.java)
             startActivity(intent)
-            finish()
         }
         btnMeusLivros?.setOnClickListener {
             val intent = Intent(this, MeusLivrosActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         btnHome?.setOnClickListener {
             val intent = Intent(this, TelahomeActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         btnDesejos?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
+            val intent = Intent(this, ListaDesejosActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         btnperfil?.setOnClickListener {
             val intent = Intent(this, MeuPerfilActivity::class.java)
             startActivity(intent)
-            finish()
         }
         //Scroll 1
 
         livroA?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livroB?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
+            intent.putExtra("IS_ESGOTADO", true)
+            intent.putExtra("BOOK_TITLE", "Orgulho e Preconceito")
             startActivity(intent)
-            finish()
         }
         livroC?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livroD?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livroE?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         //Scroll 2
 
         livro1?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro2?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro3?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro4?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro5?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         //Scroll 3
 
         livro10?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro20?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro30?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro40?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
         }
         livro50?.setOnClickListener {
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
-            finish()
+        }
+        //botão adm
+
+        btnADM?.setOnClickListener {
+            val intent = Intent(this, AdicionarLivroAdmActivity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -19,7 +19,7 @@ class InformacoesPessoaisActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<View>(R.id.btnBack).setOnClickListener {
+        findViewById<View>(R.id.btnBackLivro).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
     }

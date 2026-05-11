@@ -13,7 +13,7 @@
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#0033CC"
+        android:background="@color/unifor_blue"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -51,7 +51,7 @@
                 android:background="@drawable/bg_button_border">
 
                 <ImageButton
-                    android:id="@+id/btn_back"
+                    android:id="@+id/btn_backReturn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -169,11 +169,12 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/VerTudo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="Ver tudo"
-                    android:textColor="#0033CC"
+                    android:text="@string/ver_tudo"
+                    android:textColor="@color/unifor_blue"
                     android:textSize="12sp" />
             </RelativeLayout>
 

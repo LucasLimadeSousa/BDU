@@ -76,7 +76,7 @@
 
             <!-- Campos de Cadastro -->
             <EditText
-                android:id="@+id/editTextNome"
+                android:id="@+id/inputNome"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="12dp"
@@ -89,7 +89,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/inputEmail"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="12dp"
@@ -102,7 +102,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextConfEmail"
+                android:id="@+id/inputConfEmail"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="12dp"
@@ -115,7 +115,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextSenha"
+                android:id="@+id/inputSenha"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="12dp"
@@ -128,7 +128,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextConfSenha"
+                android:id="@+id/inputConfSenha"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="12dp"
@@ -176,7 +176,7 @@
 
             <!-- Outros Dados -->
             <EditText
-                android:id="@+id/editTextCpf"
+                android:id="@+id/inputCpf"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="12dp"
@@ -189,7 +189,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextTelefone"
+                android:id="@+id/inputTelefone"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="12dp"
@@ -202,7 +202,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextCurso"
+                android:id="@+id/inputCurso"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="12dp"
@@ -221,7 +221,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editTextCidade"
+                    android:id="@+id/inputCidade"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_marginEnd="10dp"
@@ -234,7 +234,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/editTextEstado"
+                    android:id="@+id/inputEstado"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
@@ -254,7 +254,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/editTextData2"
+                android:id="@+id/inputDataNascimento"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="20dp"

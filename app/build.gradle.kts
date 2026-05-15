@@ -70,6 +70,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation(platform(libs.supabase.bom))
     implementation(libs.supabase.postgrest)
+    implementation("io.github.jan-tennert.supabase:auth-kt:3.6.0")
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.content.negotiation)

@@ -10,5 +10,6 @@ data class Usuario(
     val curso: String,
     val cidade: String,
     val estado: String,
-    val data_nascimento: String
+    val data_nascimento: String,
+    val adm: Boolean = false
 )

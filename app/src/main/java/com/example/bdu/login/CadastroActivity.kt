@@ -45,6 +45,15 @@ class CadastroActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.btn_backReturn).setOnClickListener { finish() }
     }
 
+    private fun senhaEValida(senha: String): Boolean{
+        val temOitoCaracteres = senha.length >= 8
+        val temMaiuscula = senha.any{ it.isUpperCase() }
+        val temNumero = senha.any { it.isDigit() }
+        val temEspecial = senha.any { !it.isLetterOrDigit() }
+
+        return temOitoCaracteres && temMaiuscula && temNumero && temEspecial
+    }
+
     private fun executarCadastro(){
         val nome = findViewById<EditText>(R.id.inputNome).text.toString().trim()
         val email = findViewById<EditText>(R.id.inputEmail).text.toString().trim()
@@ -56,11 +65,20 @@ class CadastroActivity : AppCompatActivity() {
         val curso = findViewById<EditText>(R.id.inputCurso).text.toString().trim()
         val cidade = findViewById<EditText>(R.id.inputCidade).text.toString().trim()
         val estado = findViewById<EditText>(R.id.inputEstado).text.toString().trim()
-        val dataNasc = findViewById<EditText>(R.id.inputDataNascimento).text.toString().trim()
+        val dataNascRaw = findViewById<EditText>(R.id.inputDataNascimento).text.toString().trim()
         val aceitouTermos = findViewById<CheckBox>(R.id.checkboxTermos).isChecked
 
+        val dataLimpa = dataNascRaw.replace(Regex("[^0-9]"), "")
+        if (dataLimpa.length != 8){
+            exibirAlerta("Data Inválida", "Por favor, insira a data completa (ex: 02/12/2000)")
+            return
+        }
+
+        val dataNascParaBanco = "${dataLimpa.substring(4, 8)}-${dataLimpa.substring(2, 4)}-${dataLimpa.substring(0,2)}"
+
+
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || cpf.isEmpty() ||
-            telefone.isEmpty() || curso.isEmpty() || cidade.isEmpty() || estado.isEmpty() || dataNasc.isEmpty())
+            telefone.isEmpty() || curso.isEmpty() || cidade.isEmpty() || estado.isEmpty() || dataNascRaw.isEmpty())
         {
             exibirAlerta("Campos Vazios", "Por favor, preencha todos os campos obrigatórios.")
             return
@@ -68,6 +86,17 @@ class CadastroActivity : AppCompatActivity() {
 
         if(email != confEmail){
             exibirAlerta("Erro no E-mail", "Os e-mails digitados não coincidem.")
+            return
+        }
+
+        if (!senhaEValida(senha)) {
+            exibirAlerta(
+                "Senha Fraca",
+                "A senha deve conter:\n" +
+                        "1- No mínimo 8 caracteres\n" +
+                        "2- Uma letra maiúscula\n" +
+                        "3- Um número e um caractere especial"
+            )
             return
         }
 
@@ -96,7 +125,8 @@ class CadastroActivity : AppCompatActivity() {
                     curso = curso,
                     cidade = cidade,
                     estado = estado,
-                    data_nascimento = dataNasc
+                    data_nascimento = dataNascParaBanco,
+                    adm = false
                 )
 
                 SupabaseConfig.client.from("Dados_Usuario").insert(novoUsuario)
@@ -148,4 +178,6 @@ class CadastroActivity : AppCompatActivity() {
             insets
         }
     }
+
+
 }

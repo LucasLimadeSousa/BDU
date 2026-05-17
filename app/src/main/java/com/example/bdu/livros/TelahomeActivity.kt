@@ -5,184 +5,237 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import coil.load
 import com.example.bdu.R
 import com.example.bdu.adm.AdicionarLivroAdmActivity
+import com.example.bdu.api.RetrofitInstance
 import com.example.bdu.usuario.MeuPerfilActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.delay
+
+private val apiKey = "AIzaSyCEr7bp6m5SGwLrOGSihqN5tmwkAbLogxU"
 
 class TelahomeActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.livros_telahome)
 
-        val btnsearch = findViewById<LinearLayout?>(R.id.search_container)
+        // --- Função de Carregamento Seguro ---
+        fun carregarLivroSeguro(idInclude: Int, query: String, delayMillis: Long = 0) {
+            val container = findViewById<LinearLayout>(idInclude)
+            val img = container.findViewById<ImageView>(R.id.imgLivro)
+            val txtTitulo = container.findViewById<TextView>(R.id.tituloLivro)
+            val txtAutor = container.findViewById<TextView>(R.id.autorLivro)
 
-        val btnADM = findViewById<Button?>(R.id.btnADM)
+            txtTitulo.text = "Carregando..."
 
-        val btnvertudo = findViewById<TextView?>(R.id.VerTudo)
-        val btnvertudo2 = findViewById<TextView?>(R.id.VerTudo2)
-        val btnvertudo3 = findViewById<TextView?>(R.id.VerTudo3)
+            lifecycleScope.launch {
+                try {
+                    if (delayMillis > 0) delay(delayMillis)
 
-        val btnFila = findViewById<ImageButton?>(R.id.btn_nav_fila)
-        val btnMeusLivros = findViewById<ImageButton?>(R.id.btn_nav_meuslivros)
-        val btnHome = findViewById<ImageButton?>(R.id.btn_nav_home)
-        val btnDesejos = findViewById<ImageButton?>(R.id.btn_nav_desejos)
-        val btnperfil = findViewById<ImageButton?>(R.id.btn_nav_perfil)
+                    val resposta = withContext(Dispatchers.IO) {
+                        RetrofitInstance.api.searchBooks(query, apiKey)
+                    }
 
-        //Scroll 1
+                    val livro = resposta.items?.firstOrNull { it.volumeInfo.imageLinks?.thumbnail != null }
 
-        val livroA = findViewById<View>(R.id.item_livro_a)
-        val livroB = findViewById<View>(R.id.item_livro_b)
-        val livroC = findViewById<View>(R.id.item_livro_c)
-        val livroD = findViewById<View>(R.id.item_livro_d)
-        val livroE = findViewById<View>(R.id.item_livro_e)
+                    if (livro != null) {
+                        txtTitulo.text = livro.volumeInfo.title ?: "Sem título"
+                        txtAutor.text = livro.volumeInfo.authors?.getOrNull(0) ?: "Autor desconhecido"
+                        
+                        val imagem = livro.volumeInfo.imageLinks?.thumbnail?.replace("http://", "https://")
+                        img.load(imagem) {
+                            crossfade(true)
+                            placeholder(R.drawable.ic_launcher_background)
+                            error(R.drawable.ic_launcher_background)
+                        }
+                    } else {
+                        txtTitulo.text = "Não encontrado"
+                    }
 
-        // Scroll 2
+                } catch (e: Exception) {
+                    txtTitulo.text = "Erro"
+                    e.printStackTrace()
+                }
+            }
+        }
 
-        val livro1 = findViewById<View>(R.id.item_livro_1)
-        val livro2 = findViewById<View>(R.id.item_livro_2)
-        val livro3 = findViewById<View>(R.id.item_livro_3)
-        val livro4 = findViewById<View>(R.id.item_livro_4)
-        val livro5 = findViewById<View>(R.id.item_livro_5)
+        // --- Chamadas dos Livros ---
 
-        //Scroll 3
+        // Lista de Desejos
+        carregarLivroSeguro(R.id.item_livro_a, "intitle:Harry Potter Rowling", 0)
+        carregarLivroSeguro(R.id.item_livro_b, "intitle:Dom Casmurro", 200)
+        carregarLivroSeguro(R.id.item_livro_c, "intitle:Invincible Kirkman", 400)
+        carregarLivroSeguro(R.id.item_livro_d, "intitle:Java Como Programar Deitel", 600)
+        carregarLivroSeguro(R.id.item_livro_e, "intitle:Java Efetivo Joshua Bloch", 800)
 
-        val livro10 = findViewById<View>(R.id.item_livro_10)
-        val livro20 = findViewById<View>(R.id.item_livro_20)
-        val livro30 = findViewById<View>(R.id.item_livro_30)
-        val livro40 = findViewById<View>(R.id.item_livro_40)
-        val livro50 = findViewById<View>(R.id.item_livro_50)
+        // Livros Populares do Curso
+        carregarLivroSeguro(R.id.item_livro_1, "intitle:Estrutura de Dados", 1000)
+        carregarLivroSeguro(R.id.item_livro_2, "intitle:Arquitetura de Software", 1200)
+        carregarLivroSeguro(R.id.item_livro_3, "intitle:Engenharia de Dados", 1400)
+        carregarLivroSeguro(R.id.item_livro_4, "intitle:JavaScript Guia Definitivo", 1600)
+        carregarLivroSeguro(R.id.item_livro_5, "intitle:Linguagem SQL", 1800)
+
+        // Livros Populares
+        carregarLivroSeguro(R.id.item_livro_10, "intitle:Pense em Python", 2000)
+        carregarLivroSeguro(R.id.item_livro_20, "intitle:Netter Atlas Anatomia", 2200)
+        carregarLivroSeguro(R.id.item_livro_30, "intitle:Clean Code", 2400)
+        carregarLivroSeguro(R.id.item_livro_40, "intitle:Design Patterns", 2600)
+        carregarLivroSeguro(R.id.item_livro_50, "intitle:Refactoring", 2800)
+
+        // Transições
+
+        val btnsearch =
+            findViewById<LinearLayout>(R.id.search_container)
+
+        val btnADM =
+            findViewById<Button>(R.id.btnADM)
+
+        val btnvertudo =
+            findViewById<TextView>(R.id.VerTudo)
+
+        val btnvertudo2 =
+            findViewById<TextView>(R.id.VerTudo2)
+
+        val btnvertudo3 =
+            findViewById<TextView>(R.id.VerTudo3)
+
+        val btnFila =
+            findViewById<ImageButton>(R.id.btn_nav_fila)
+
+        val btnMeusLivros =
+            findViewById<ImageButton>(R.id.btn_nav_meuslivros)
+
+        val btnHome =
+            findViewById<ImageButton>(R.id.btn_nav_home)
+
+        val btnDesejos =
+            findViewById<ImageButton>(R.id.btn_nav_desejos)
+
+        val btnperfil =
+            findViewById<ImageButton>(R.id.btn_nav_perfil)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+
+            val systemBars =
+                insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            v.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
+
             insets
         }
 
-        btnsearch?.setOnClickListener {
-            val intent = Intent(this, BuscaActivity::class.java)
+        // =========================
+        // PESQUISA
+        // =========================
+
+        btnsearch.setOnClickListener {
+
+            val intent =
+                Intent(this, BuscaActivity::class.java)
+
             startActivity(intent)
         }
 
-        //ver tudo
+        // =========================
+        // VER TUDO
+        // =========================
 
-        btnvertudo?.setOnClickListener {
-            val intent = Intent(this, VerTudoActivity::class.java)
-            startActivity(intent)
-        }
-        btnvertudo2?.setOnClickListener {
-            val intent = Intent(this, VerTudoActivity::class.java)
-            startActivity(intent)
-        }
-        btnvertudo3?.setOnClickListener {
-            val intent = Intent(this, VerTudoActivity::class.java)
+        btnvertudo.setOnClickListener {
+
+            val intent =
+                Intent(this, VerTudoActivity::class.java)
+
             startActivity(intent)
         }
 
-        //Barra de tarefas
+        btnvertudo2.setOnClickListener {
 
+            val intent =
+                Intent(this, VerTudoActivity::class.java)
 
-        btnFila?.setOnClickListener {
-            val intent = Intent(this, ListadeEsperaActivity::class.java)
-            startActivity(intent)
-        }
-        btnMeusLivros?.setOnClickListener {
-            val intent = Intent(this, MeusLivrosActivity::class.java)
             startActivity(intent)
         }
 
-        btnHome?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
+        btnvertudo3.setOnClickListener {
+
+            val intent =
+                Intent(this, VerTudoActivity::class.java)
+
             startActivity(intent)
         }
 
-        btnDesejos?.setOnClickListener {
-            val intent = Intent(this, ListaDesejosActivity::class.java)
+        // =========================
+        // NAVEGAÇÃO
+        // =========================
+
+        btnFila.setOnClickListener {
+
+            val intent =
+                Intent(this, ListadeEsperaActivity::class.java)
+
             startActivity(intent)
         }
 
-        btnperfil?.setOnClickListener {
-            val intent = Intent(this, MeuPerfilActivity::class.java)
-            startActivity(intent)
-        }
-        //Scroll 1
+        btnMeusLivros.setOnClickListener {
 
-        livroA?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livroB?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            intent.putExtra("IS_ESGOTADO", true)
-            intent.putExtra("BOOK_TITLE", "Orgulho e Preconceito")
-            startActivity(intent)
-        }
-        livroC?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livroD?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livroE?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        //Scroll 2
+            val intent =
+                Intent(this, MeusLivrosActivity::class.java)
 
-        livro1?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
             startActivity(intent)
         }
-        livro2?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livro3?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livro4?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livro5?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        //Scroll 3
 
-        livro10?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livro20?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livro30?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livro40?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        livro50?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            startActivity(intent)
-        }
-        //botão adm
+        btnHome.setOnClickListener {
 
-        btnADM?.setOnClickListener {
-            val intent = Intent(this, AdicionarLivroAdmActivity::class.java)
+            val intent =
+                Intent(this, TelahomeActivity::class.java)
+
+            startActivity(intent)
+        }
+
+        btnDesejos.setOnClickListener {
+
+            val intent =
+                Intent(this, ListaDesejosActivity::class.java)
+
+            startActivity(intent)
+        }
+
+        btnperfil.setOnClickListener {
+
+            val intent =
+                Intent(this, MeuPerfilActivity::class.java)
+
+            startActivity(intent)
+        }
+
+        // =========================
+        // ADM
+        // =========================
+
+        btnADM.setOnClickListener {
+
+            val intent =
+                Intent(this, AdicionarLivroAdmActivity::class.java)
+
             startActivity(intent)
         }
     }

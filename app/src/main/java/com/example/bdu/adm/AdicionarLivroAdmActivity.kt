@@ -27,7 +27,7 @@ class AdicionarLivroAdmActivity : AppCompatActivity() {
 
         val btnBack = findViewById<View>(R.id.btnBackLivro)
         btnBack?.setOnClickListener {
-            val intent = Intent(this, PaginaDoLivroActivity::class.java)
+            val intent = Intent(this, TelahomeActivity::class.java)
             startActivity(intent)
             finish()
         }

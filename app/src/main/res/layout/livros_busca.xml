@@ -66,22 +66,29 @@
             android:padding="16dp">
 
             <!-- EditText de busca minimalista -->
-            <EditText
-                android:id="@+id/editTextBusca"
+            <SearchView
+                android:id="@+id/searchViewBusca"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/search_bar_background"
-                android:drawableStart="@android:drawable/ic_menu_search"
-                android:drawablePadding="16dp"
                 android:elevation="4dp"
-                android:hint="Buscar (título, autor, gênero, etc.)"
                 android:inputType="text"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="16sp" />
+                android:iconifiedByDefault="false"
+                android:queryHint="Buscar livros..."/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSugestoes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/search_bar_background"
+                android:elevation="4dp"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone" />
+
 
             <!-- Texto de Filtros -->
             <TextView

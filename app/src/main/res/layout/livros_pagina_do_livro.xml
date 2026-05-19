@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".paginaDoLivroActivity">
+    tools:context=".livros.PaginaDoLivroActivity">
 
     <!-- Header Azul (Baseado na Foto 2) -->
 
@@ -216,18 +216,6 @@
                 android:text="ALUGAR"
                 android:textColor="@android:color/white"
                 app:cornerRadius="28dp" />
-
-            <Button
-                android:id="@+id/btnADM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="@android:color/transparent"
-                android:text="ADM"
-                android:textColor="@color/unifor_blue"
-                android:textSize="14sp"
-                style="@style/Widget.Material3.Button.TextButton" />
 
 
         </LinearLayout>

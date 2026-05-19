@@ -39,7 +39,7 @@ class PaginaDoLivroActivity : AppCompatActivity() {
         val btnDesejos = findViewById<ImageButton?>(R.id.btn_nav_desejos)
         val btnperfil = findViewById<ImageButton?>(R.id.btn_nav_perfil)
 
-        val btnADM = findViewById<Button>(R.id.btnADM)
+
 
         btnBotaoRetornar?.setOnClickListener {
             onBackPressed()
@@ -67,10 +67,7 @@ class PaginaDoLivroActivity : AppCompatActivity() {
             val intent = Intent(this, MeuPerfilActivity::class.java)
             startActivity(intent)
         }
-        btnADM?.setOnClickListener {
-            val intent = Intent(this, TelaPaginaDoLivroAdmActivity::class.java)
-            startActivity(intent)
-        }
+
 
         val btnAlugar = findViewById<MaterialButton>(R.id.btnAlugar)
         val tvBookTitle = findViewById<TextView>(R.id.tvBookTitleMain)

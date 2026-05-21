@@ -1,5 +1,6 @@
 package com.example.bdu.usuario
 
+import Usuario
 import android.graphics.Color
 import android.content.Intent
 import android.os.Bundle
@@ -11,12 +12,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.bdu.R
 import com.example.bdu.livros.TelahomeActivity
 import com.example.bdu.login.LoginActivity
+import com.example.bdu.network.SupabaseConfig
 import com.example.bdu.pagamentos.JurosMultaActivity
 import com.example.bdu.suporte.TermosCondicoesActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.query.Columns
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MeuPerfilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +37,9 @@ class MeuPerfilActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+        carregarNomeUsuario()
 
         findViewById<ImageButton>(R.id.btn_nav_fila).setOnClickListener {
             startActivity(Intent(this, com.example.bdu.livros.ListadeEsperaActivity::class.java))
@@ -119,6 +131,30 @@ class MeuPerfilActivity : AppCompatActivity() {
                 val params = it.layoutParams as android.widget.LinearLayout.LayoutParams
                 params.setMargins(10, 0, 10, 0)
                 it.layoutParams = params
+            }
+        }
+    }
+
+    private fun carregarNomeUsuario(){
+        lifecycleScope.launch {
+            try {
+                val usuarioLogado = SupabaseConfig.client.auth.currentUserOrNull()
+                val emailLogado = usuarioLogado?.email
+
+                if (emailLogado != null) {
+                    val usuarioDados = withContext(Dispatchers.IO) {
+                        SupabaseConfig.client.postgrest["Dados_Usuario"]
+                            .select(columns = Columns.ALL) {
+                                filter {
+                                    eq("email", emailLogado)
+                                }
+                            }.decodeSingle<Usuario>()
+                    }
+
+                    findViewById<TextView>(R.id.textView10).text = usuarioDados.nome
+            }
+        } catch (e : Exception){
+            e.printStackTrace()
             }
         }
     }

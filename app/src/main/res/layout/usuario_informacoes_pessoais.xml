@@ -110,6 +110,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvValueNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -133,6 +134,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvValueEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -179,6 +181,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvValueCpf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -202,6 +205,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvValueTelefone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -225,6 +229,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvValueEstado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -248,6 +253,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvValueIdade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -280,6 +286,7 @@
                 android:padding="12dp">
 
                 <TextView
+                    android:id="@+id/tvValueCurso"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -8,37 +8,33 @@
     android:background="@color/white"
     tools:context=".adm.AdicionarLivroAdmActivity">
 
-    <!-- Header Azul -->
-    <LinearLayout
-        android:id="@+id/headerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_background"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Adicionar Livro "
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
+    <!-- Standard Header -->
     <View
-        android:id="@+id/divider"
+        android:id="@+id/header_bar"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout" />
+        android:layout_height="60dp"
+        android:background="@color/unifor_blue"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Adicionar Livro"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/header_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/header_bar" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider">
+        app:layout_constraintTop_toBottomOf="@id/header_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,194 +47,258 @@
                 android:id="@+id/btnBackLivro"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_border"
-                android:contentDescription="@string/back"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_button_border"
+                android:contentDescription="@string/voltar"
+                android:padding="8dp"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_arrow_back"
                 app:tint="@color/black" />
 
-            <!-- Bloco da Capa -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/card_border"
-                android:gravity="center"
-                android:padding="16dp">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="24dp">
 
-                <ImageView
-                    android:id="@+id/ivBookCover"
-                    android:layout_width="100dp"
-                    android:layout_height="120dp"
-                    android:scaleType="centerInside"
-                    android:src="@android:drawable/ic_menu_report_image" />
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:background="@color/white">
 
-            <!-- Campos de Texto Principais -->
-            <EditText
-                android:id="@+id/etTitle"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/card_border"
-                android:hint="TITULO DO LIVRO"
-                android:paddingHorizontal="12dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="14sp" />
+                    <!-- Capa do Livro (Grid Verde) -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="120dp"
+                        android:layout_height="160dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="24dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp">
+                        <ImageView
+                            android:id="@+id/ivBookCover"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher_background" />
+                    </androidx.cardview.widget.CardView>
 
-            <EditText
-                android:id="@+id/etAuthor"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/card_border"
-                android:hint="AUTOR"
-                android:paddingHorizontal="12dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="14sp" />
+                    <!-- Campos de Texto -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TÍTULO DO LIVRO"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+                    <EditText
+                        android:id="@+id/etTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/card_border"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/etGenre"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/card_border"
-                android:hint="GENERO"
-                android:paddingHorizontal="12dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AUTOR"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+                    <EditText
+                        android:id="@+id/etAuthor"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/card_border"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="SINOPSE (MINIMO 2 LINHAS)"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GÊNERO"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+                    <EditText
+                        android:id="@+id/etGenre"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/card_border"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/etSynopsis"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_border"
-                android:gravity="top"
-                android:padding="12dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SINOPSE (MÍNIMO 2 LINHAS)"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+                    <EditText
+                        android:id="@+id/etSynopsis"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/card_border"
+                        android:gravity="top"
+                        android:padding="12dp"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
 
-            <!-- Data de Publicação -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="DATA DE PUBLICAÇÃO"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                    <!-- Data de Publicação -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="DATA DE PUBLICAÇÃO"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="24dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/editTextDate"
-                    android:layout_width="120dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/card_border"
-                    android:gravity="center"
-                    android:hint="DD/MM/AA"
-                    android:inputType="date"
-                    android:paddingHorizontal="8dp"
-                    android:textColor="#000000"
-                    android:textColorHint="#000000"
-                    android:textSize="14sp" />
+                        <EditText
+                            android:id="@+id/editTextDate"
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/card_border"
+                            android:gravity="center"
+                            android:hint="DD/MM/AA"
+                            android:inputType="date"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="8dp"
-                    android:src="@android:drawable/ic_menu_my_calendar"
-                    app:tint="@color/black" />
-            </LinearLayout>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="12dp"
+                            android:src="@android:drawable/ic_menu_my_calendar"
+                            app:tint="@color/unifor_blue" />
+                    </LinearLayout>
 
-            <EditText
-                android:id="@+id/etPublisher"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/card_border"
-                android:hint="EDITORA"
-                android:paddingHorizontal="12dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EDITORA"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+                    <EditText
+                        android:id="@+id/etPublisher"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/card_border"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/etPages"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/card_border"
-                    android:hint="páginas: "
-                    android:paddingHorizontal="12dp"
-                    android:textColor="#000000"
-                    android:textColorHint="#000000"
-                    android:textSize="14sp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PÁGINAS"
+                                android:textColor="#888888"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
+                            <EditText
+                                android:id="@+id/etPages"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:background="@drawable/card_border"
+                                android:paddingHorizontal="16dp"
+                                android:textColor="#333333"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/etLanguage"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/card_border"
-                    android:hint="IDIOMA: "
-                    android:paddingHorizontal="12dp"
-                    android:textColor="#000000"
-                    android:textColorHint="#000000"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IDIOMA"
+                                android:textColor="#888888"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
+                            <EditText
+                                android:id="@+id/etLanguage"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:background="@drawable/card_border"
+                                android:paddingHorizontal="16dp"
+                                android:textColor="#333333"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
-            <EditText
-                android:id="@+id/etIsbn"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="24dp"
-                android:background="@drawable/card_border"
-                android:hint="ISBN"
-                android:paddingHorizontal="12dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ISBN"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+                    <EditText
+                        android:id="@+id/etIsbn"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="32dp"
+                        android:background="@drawable/card_border"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAddBook"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginHorizontal="32dp"
-                android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/blue_background"
-                android:text="Adicionar Livro"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:cornerRadius="28dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAddBook"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="Adicionar Livro"
+                        app:cornerRadius="12dp"
+                        android:backgroundTint="@color/unifor_blue"
+                        android:textAllCaps="false" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </ScrollView>

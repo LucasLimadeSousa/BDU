@@ -4,6 +4,7 @@ import Usuario
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -71,25 +72,25 @@ class InformacoesPessoaisActivity : AppCompatActivity() {
         }
     }
 
-    private fun preencherCamposDaTela(usuario: Usuario){
+    private fun preencherCamposDaTela(usuario: Usuario) {
         val tvNome = findViewById<TextView>(R.id.tvValueNome)
         val tvEmail = findViewById<TextView>(R.id.tvValueEmail)
         val tvCpf = findViewById<TextView>(R.id.tvValueCpf)
         val tvTelefone = findViewById<TextView>(R.id.tvValueTelefone)
+        val tvDataNasc = findViewById<TextView>(R.id.tvValueDataNascimento)
+        val tvCidade = findViewById<TextView>(R.id.tvValueCidade)
         val tvEstado = findViewById<TextView>(R.id.tvValueEstado)
-        val tvIdade = findViewById<TextView>(R.id.tvValueIdade)
         val tvCurso = findViewById<TextView>(R.id.tvValueCurso)
 
         tvNome.text = usuario.nome
         tvEmail.text = usuario.email
         tvCpf.text = formatarCpf(usuario.cpf)
         tvTelefone.text = usuario.telefone
+        tvDataNasc.text = usuario.data_nascimento
+        tvCidade.text = usuario.cidade
         tvEstado.text = usuario.estado
         tvCurso.text = usuario.curso
-
-        tvIdade.text = calcularIdade(usuario.data_nascimento)
     }
-
     private fun formatarCpf(cpf: String): String{
 
         val cpfLimpo = cpf.replace(Regex("[^\\d]"),"")

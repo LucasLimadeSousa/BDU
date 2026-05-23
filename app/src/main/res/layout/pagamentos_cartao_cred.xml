@@ -1,166 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
     tools:context="com.example.bdu.pagamentos.CartaoCredActivity">
 
-    <LinearLayout
-        android:id="@+id/headerLayout"
+    <!-- Standard Header -->
+    <View
+        android:id="@+id/header_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_background"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="60dp"
+        android:background="@color/unifor_blue"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cartão de Crédito"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/imgBtnVoltarCred"
+    <TextView
+        android:id="@+id/header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/border_edittext"
-        android:padding="8dp"
-        app:srcCompat="@drawable/ic_arrow_back" />
-
-    <TextView
-        android:id="@+id/textViewValorTotal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:gravity="center"
-        android:text="Valor total: R$00.00"
-        android:textColor="@color/black"
-        android:textSize="28sp" />
-
-    <EditText
-        android:id="@+id/et_nome_cartao"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/card_border"
-        android:hint="Nome no Cartão"
-        android:inputType="textPersonName"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
-
-    <EditText
-        android:id="@+id/et_numero_cartao"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/card_border"
-        android:hint="Número no Cartão"
-        android:inputType="number"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Data de expiração"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
-
-        <EditText
-            android:id="@+id/et_mes_exp"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/card_border"
-            android:hint="Mês"
-            android:inputType="number"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:textColorHint="#000000" />
-
-        <EditText
-            android:id="@+id/et_ano_exp"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/card_border"
-            android:hint="Ano"
-            android:inputType="number"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:textColorHint="#000000" />
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/et_parcelamento"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/card_border"
-        android:hint="Parcelamento (1x de R$00.00)"
-        android:inputType="text"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
-
-    <EditText
-        android:id="@+id/et_cvv"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/card_border"
-        android:hint="Código de Segurança (CVV)"
-        android:inputType="numberPassword"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
-
-    <Button
-        android:id="@+id/btnConfirmarPagamento"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/unifor_blue"
-        android:text="Confirmar Pagamento"
+        android:layout_marginStart="16dp"
+        android:text="Cartão de Crédito"
         android:textColor="#FFFFFF"
-        app:cornerRadius="28dp" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/header_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/header_bar" />
 
-</LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Botão Voltar -->
+            <ImageButton
+                android:id="@+id/imgBtnVoltarCred"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_button_border"
+                android:contentDescription="@string/voltar"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/black" />
+
+            <!-- Valor Total -->
+            <TextView
+                android:id="@+id/textViewValorTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="Valor total: R$00.00"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Card de Dados do Cartão -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:background="@color/white">
+
+                    <!-- Nome no Cartão -->
+                    <EditText
+                        android:id="@+id/et_nome_cartao"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/card_border"
+                        android:hint="Nome no Cartão"
+                        android:inputType="textPersonName"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+                    <!-- Número do Cartão -->
+                    <EditText
+                        android:id="@+id/et_numero_cartao"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/card_border"
+                        android:hint="Número no Cartão"
+                        android:inputType="number"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+                    <!-- Data de Expiração Section -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="8dp"
+                        android:text="Data de expiração"
+                        android:textColor="#333333"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <EditText
+                            android:id="@+id/et_mes_exp"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/card_border"
+                            android:hint="Mês"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:paddingHorizontal="16dp"
+                            android:textColor="#333333"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/et_ano_exp"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/card_border"
+                            android:hint="Ano"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:paddingHorizontal="16dp"
+                            android:textColor="#333333"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <!-- Parcelamento -->
+                    <EditText
+                        android:id="@+id/et_parcelamento"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/card_border"
+                        android:hint="Parcelamento (1x de R$00.00)"
+                        android:inputType="text"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+                    <!-- CVV -->
+                    <EditText
+                        android:id="@+id/et_cvv"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/card_border"
+                        android:hint="Código de Segurança (CVV)"
+                        android:gravity="center"
+                        android:inputType="numberPassword"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+                    <!-- Botão de Confirmação -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnConfirmarPagamento"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="32dp"
+                        android:text="Confirmar Pagamento"
+                        app:cornerRadius="28dp"
+                        android:backgroundTint="@color/unifor_blue"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

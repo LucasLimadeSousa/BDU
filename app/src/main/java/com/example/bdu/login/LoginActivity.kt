@@ -15,6 +15,7 @@ import com.example.bdu.R
 import com.example.bdu.livros.TelahomeActivity
 import com.example.bdu.network.SupabaseConfig
 import com.google.android.material.button.MaterialButton
+import android.widget.ImageButton
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.postgrest.from
@@ -44,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
         findViewById<MaterialButton>(R.id.buttonLogar).setOnClickListener {
             executarLogin()
         }
+
     }
 
     private fun executarLogin() {

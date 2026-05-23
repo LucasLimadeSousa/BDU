@@ -3,6 +3,7 @@ package com.example.bdu.login
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import com.example.bdu.R
@@ -20,5 +21,6 @@ class EmailRecuperacaoActivity : ComponentActivity() {
         findViewById<Button>(R.id.buttonVoltar).setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+
     }
 }

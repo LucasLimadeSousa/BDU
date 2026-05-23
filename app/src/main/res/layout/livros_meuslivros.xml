@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/white"
     tools:context=".livros.MeusLivrosActivity">
 
-    <!-- Blue Header Bar (Based on Privacy Image) -->
+    <!-- Blue Header Bar -->
     <View
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
@@ -33,193 +33,181 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:clipToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/nav_top_divider"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavCard"
         app:layout_constraintTop_toBottomOf="@id/header_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
-            <!-- Subtitle Bar with Back Button -->
-            <LinearLayout
+            <!-- Botão Voltar -->
+
+            <!-- Seção: Livro em posse -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Livro em posse:"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="16dp">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="20dp">
 
-                <ImageButton
-                    android:id="@+id/btn_backReturn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg_button_border"
-                    android:contentDescription="@string/voltar"
-                    android:padding="8dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_chevron_right"
-                    android:rotation="180" />
-
-            </LinearLayout>
-
-            <!-- Book in Possession Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/livro_em_posse"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/titulo_do_livro"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:layout_marginBottom="8dp" />
-
-            <!-- Book Cover Placeholder with Cross (As in the sketch) -->
-            <FrameLayout
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/bg_button_border"
-                android:padding="1dp">
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
-                <!-- Simple Cross using Views -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#000000"
-                    android:rotation="53" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#000000"
-                    android:rotation="-53" />
-            </FrameLayout>
-
-            <!-- Wishlist Button -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:background="@android:drawable/btn_default"
-                android:gravity="center"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp">
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_nav_heart"
-                    app:tint="#000000" />
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/lista_de_desejos"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:gravity="center_horizontal"
+                    android:background="@color/white">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="@string/devolver_ate_dias_unifor"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvBookTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/titulo_do_livro"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#666666" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="120dp"
+                        android:layout_height="160dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher_background" />
+                    </androidx.cardview.widget.CardView>
 
-            <TextView
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_desejos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/unifor_blue"
+                        android:text="Lista de Desejos"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:cornerRadius="20dp"
+                        app:icon="@drawable/ic_nav_heart"
+                        app:iconSize="16dp"
+                        app:iconTint="@color/white" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/devolver_ate_dias_unifor"
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Reportar Problema (Label Interativa) -->
+            <LinearLayout
                 android:id="@+id/btn_report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:drawablePadding="6dp"
-                android:text="@string/reportar_problema"
-                android:textColor="#FF0000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@android:drawable/stat_notify_error"
-                app:drawableTint="#FF0000" />
+                android:layout_marginBottom="32dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:orientation="horizontal">
 
-            <!-- History Section -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/stat_notify_error"
+                    app:tint="#FF4444" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/historico_de_reservas"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:layout_marginStart="8dp"
+                    android:text="Reportar Problema"
+                    android:textColor="#FF4444"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Histórico -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Histórico de reservas:"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/VerTudo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/ver_tudo"
+                    android:layout_centerVertical="true"
+                    android:text="Ver tudo"
                     android:textColor="@color/unifor_blue"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
-            <!-- Grid matching the sketch exactly -->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:columnCount="2"
-                android:background="#000000"
-                android:padding="0.5dp">
+                android:alignmentMode="alignMargins"
+                android:padding="2dp">
 
                 <!-- Row 1 -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:layout_margin="0.5dp"
-                    android:background="#FFFFFF"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
                     android:orientation="vertical"
-                    android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/titulo_do_livro" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_atrasado_dias" android:textColor="#FF0000" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: ATRASADO há (Dias)" android:textColor="#FF0000" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:layout_margin="0.5dp"
-                    android:background="#FFFFFF"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
                     android:orientation="vertical"
-                    android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nome_do_livro_placeholder" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_atrasado_dias" android:textColor="#FF0000" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
                 </LinearLayout>
 
                 <!-- Row 2 -->
@@ -227,26 +215,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:layout_margin="0.5dp"
-                    android:background="#FFFFFF"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
                     android:orientation="vertical"
-                    android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nome_do_livro_placeholder" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_devolvido_dias" android:textColor="#008800" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:layout_margin="0.5dp"
-                    android:background="#FFFFFF"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
                     android:orientation="vertical"
-                    android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nome_do_livro_placeholder" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_devolvido_dias" android:textColor="#008800" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
                 </LinearLayout>
 
                 <!-- Row 3 -->
@@ -254,38 +244,86 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:layout_margin="0.5dp"
-                    android:background="#FFFFFF"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
                     android:orientation="vertical"
-                    android:padding="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nome_do_livro_placeholder" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_em_posse_dias" android:textColor="#333333" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/alugado_em_data" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/devolver_em_ate_dias" android:textSize="10sp"/>
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Em posse há (Dias)" android:textColor="#FFA500" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Devolver em ATÉ (Dias)" android:textSize="8sp" android:textColor="#888888"/>
+                </LinearLayout>
+
+                <!-- Novos itens adicionados para substituir a seta -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:layout_margin="0.5dp"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/arrow_down_float"
-                        app:tint="#000000"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/more_dots"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="-8dp"/>
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/bg_history_item"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
                 </LinearLayout>
 
             </GridLayout>
@@ -293,159 +331,84 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Top border line for the navigation bar -->
-    <View
-        android:id="@+id/nav_top_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000"
-        app:layout_constraintBottom_toTopOf="@id/bottom_nav" />
-
-    <!-- Bottom Navigation Icons as Buttons (Exactly as the sketch) -->
-    <LinearLayout
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FFFFFF"
-        android:elevation="0dp"
-        android:orientation="horizontal"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:gravity="center_vertical">
-
-        <ImageButton
-            android:id="@+id/btn_navFila"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
-            android:contentDescription="@string/fila"
-            android:padding="12dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_nav_queue"
-            app:tint="#000000" />
-
-        <ImageButton
-            android:id="@+id/btn_navMeusLivros"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
-            android:contentDescription="@string/livro_usuario"
-            android:padding="12dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_nav_book_user"
-            app:tint="#000000" />
-
-        <ImageButton
-            android:id="@+id/btn_navHome"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
-            android:contentDescription="@string/home"
-            android:padding="12dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_nav_home"
-            app:tint="#000000" />
-
-        <ImageButton
-            android:id="@+id/btn_navDesejos"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
-            android:contentDescription="@string/favoritos"
-            android:padding="12dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_nav_heart"
-            app:tint="#000000" />
-
-        <ImageButton
-            android:id="@+id/btn_navPerfil"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_button_border"
-            android:contentDescription="@string/perfil"
-            android:padding="12dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_person"
-            app:tint="#000000" />
-    </LinearLayout>
-
-    <!-- Popup Notification (Floating Toast style based on second sketch) -->
+    <!-- Bottom Navigation -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/popup_notification"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/bottomNavCard"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
         android:layout_margin="16dp"
-        android:visibility="gone"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_bar">
+        app:cardCornerRadius="32dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="#FFFFFF">
-
-            <View
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="#CCCCCC"
-                android:layout_gravity="center_vertical" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/biblioteca_digital_unifor"
-                        android:textColor="#000000"
-                        android:textSize="14sp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/time_placeholder"
-                        android:textSize="12sp"
-                        android:textColor="#666666" />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/notificacao_devolucao_amanha"
-                    android:textColor="#000000"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
-        <!-- Simple black border as in the sketch -->
-        <View
+            android:id="@+id/bottomNav"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_button_border" />
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <ImageButton
+                android:id="@+id/btn_nav_fila"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/fila"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_nav_queue"
+                app:tint="#333333" />
+
+            <ImageButton
+                android:id="@+id/btn_nav_meuslivros"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/livro_usuario"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_nav_book_user"
+                app:tint="@color/unifor_blue" />
+
+            <ImageButton
+                android:id="@+id/btn_nav_home"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/home"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_nav_home"
+                app:tint="#333333" />
+
+            <ImageButton
+                android:id="@+id/btn_nav_desejos"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/favoritos"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_nav_heart"
+                app:tint="#333333" />
+
+            <ImageButton
+                android:id="@+id/btn_nav_perfil"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/perfil"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_person"
+                app:tint="#333333" />
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

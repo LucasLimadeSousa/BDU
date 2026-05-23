@@ -26,12 +26,16 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import Usuario
+import com.example.bdu.databinding.LivrosMeuslivrosBinding
+import com.example.bdu.model.VolumeInfo
+import retrofit2.HttpException
 
-private const val apiKey = "AIzaSyCEr7bp6m5SGwLrOGSihqN5tmwkAbLogxU"
+private const val apiKey = "AIzaSyDQ6UjmHMd4SmKrLfxp8h3UfJqIrtNk7BE"
 
 class TelahomeActivity : AppCompatActivity() {
 
     private var isAdm: Boolean = false
+    private val livrosCarregados = mutableMapOf<Int, VolumeInfo>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +103,7 @@ class TelahomeActivity : AppCompatActivity() {
                         }
 
                         if (livro != null) {
+                            livrosCarregados[idInclude] = livro.volumeInfo
                             txtTitulo.text = livro.volumeInfo.title ?: "Sem título"
                             txtAutor.text =
                                 livro.volumeInfo.authors?.getOrNull(0) ?: "Autor desconhecido"
@@ -118,8 +123,17 @@ class TelahomeActivity : AppCompatActivity() {
                             if (tentativa == 3) {
                                 txtTitulo.text = "Não encontrado"
                             } else {
-                                delay(1000)
+                                delay(2000)
                             }
+                        }
+                    } catch (e: HttpException) {
+                        if (e.code() == 429) {
+                            txtTitulo.text = "Cota Excedida"
+                            sucesso = true // Para de tentar se for erro de cota
+                        } else {
+                            tentativa++
+                            if (tentativa >= 3) txtTitulo.text = "Erro API"
+                            delay(2000)
                         }
                     } catch (e: Exception) {
                         tentativa++
@@ -127,7 +141,7 @@ class TelahomeActivity : AppCompatActivity() {
                             txtTitulo.text = "Erro"
                             e.printStackTrace()
                         } else {
-                            delay(1500)
+                            delay(2000)
                         }
                     }
                 }
@@ -140,22 +154,22 @@ class TelahomeActivity : AppCompatActivity() {
 
     private fun carregarLivrosHome() {
         carregarLivroSeguro(R.id.item_livro_a, "intitle:Harry Potter Rowling", 0)
-        carregarLivroSeguro(R.id.item_livro_b, "intitle:Dom Casmurro Machado", 500)
-        carregarLivroSeguro(R.id.item_livro_c, "intitle:Invincible Robert Kirkman", 1000)
-        carregarLivroSeguro(R.id.item_livro_d, "intitle:Java Como Programar Deitel", 1500)
-        carregarLivroSeguro(R.id.item_livro_e, "intitle:Java Efetivo Joshua Bloch", 2000)
+        carregarLivroSeguro(R.id.item_livro_b, "intitle:Dom Casmurro Machado", 800)
+        carregarLivroSeguro(R.id.item_livro_c, "intitle:Invencível Robert Kirkman", 1600)
+        carregarLivroSeguro(R.id.item_livro_d, "intitle:Java Como Programar Deitel", 2400)
+        carregarLivroSeguro(R.id.item_livro_e, "intitle:Java Efetivo Joshua Bloch", 3200)
 
-        carregarLivroSeguro(R.id.item_livro_1, "intitle:Estrutura de Dados", 2500)
-        carregarLivroSeguro(R.id.item_livro_2, "intitle:Arquitetura de Software", 3000)
-        carregarLivroSeguro(R.id.item_livro_3, "intitle:Engenharia de Dados", 3500)
-        carregarLivroSeguro(R.id.item_livro_4, "intitle:JavaScript Guia Definitivo", 4000)
-        carregarLivroSeguro(R.id.item_livro_5, "intitle:Linguagem SQL", 4500)
+        carregarLivroSeguro(R.id.item_livro_1, "intitle:Estrutura de Dados", 4000)
+        carregarLivroSeguro(R.id.item_livro_2, "intitle:Arquitetura de Software", 4800)
+        carregarLivroSeguro(R.id.item_livro_3, "intitle:Engenharia de Dados", 5600)
+        carregarLivroSeguro(R.id.item_livro_4, "intitle:JavaScript Guia Definitivo", 6400)
+        carregarLivroSeguro(R.id.item_livro_5, "intitle:Linguagem SQL", 7200)
 
-        carregarLivroSeguro(R.id.item_livro_10, "intitle:Pense em Python", 5000)
-        carregarLivroSeguro(R.id.item_livro_20, "intitle:Netter Atlas Anatomia", 5500)
-        carregarLivroSeguro(R.id.item_livro_30, "intitle:Clean Code Martin", 6000)
-        carregarLivroSeguro(R.id.item_livro_40, "intitle:Design Patterns", 6500)
-        carregarLivroSeguro(R.id.item_livro_50, "intitle:Refactoring Fowler", 7000)
+        carregarLivroSeguro(R.id.item_livro_10, "intitle:Pense em Python", 8000)
+        carregarLivroSeguro(R.id.item_livro_20, "intitle:Netter Atlas Anatomia", 8800)
+        carregarLivroSeguro(R.id.item_livro_30, "intitle:Código Limpo Martin", 9600)
+        carregarLivroSeguro(R.id.item_livro_40, "intitle:Padrões de Projetos GoF", 10400)
+        carregarLivroSeguro(R.id.item_livro_50, "intitle:Refatoração Fowler", 11200)
     }
 
     private fun configurarCliquesLivros() {
@@ -168,9 +182,23 @@ class TelahomeActivity : AppCompatActivity() {
         val clickLivro = View.OnClickListener { v ->
             val destino = if (isAdm) TelaPaginaDoLivroAdmActivity::class.java else PaginaDoLivroActivity::class.java
             val intent = Intent(this, destino)
+
+            val info = livrosCarregados[v.id]
+            if (info != null) {
+                intent.putExtra("BOOK_TITLE", info.title)
+                intent.putExtra("BOOK_AUTHOR", info.authors?.joinToString(", "))
+                intent.putExtra("BOOK_GENRE", info.categories?.joinToString(", "))
+                intent.putExtra("BOOK_PUBLICATION", info.publishedDate)
+                intent.putExtra("BOOK_ISBN", info.industryIdentifiers?.firstOrNull { it.type == "ISBN_13" }?.identifier
+                    ?: info.industryIdentifiers?.firstOrNull { it.type == "ISBN_10" }?.identifier)
+                intent.putExtra("BOOK_PUBLISHER", info.publisher)
+                intent.putExtra("BOOK_PAGES", info.pageCount?.toString())
+                intent.putExtra("BOOK_SYNOPSIS", info.description)
+                intent.putExtra("BOOK_IMAGE", info.imageLinks?.thumbnail?.replace("http://", "https://"))
+            }
+
             if (v.id == R.id.item_livro_b) {
                 intent.putExtra("IS_ESGOTADO", true)
-                intent.putExtra("BOOK_TITLE", "Dom Casmurro")
             }
             startActivity(intent)
         }
@@ -186,13 +214,16 @@ class TelahomeActivity : AppCompatActivity() {
         }
 
         findViewById<TextView?>(R.id.VerTudo)?.setOnClickListener {
-            startActivity(Intent(this, VerTudoActivity::class.java))
+            val intent = Intent(this, VerTudoActivity::class.java)
+            startActivity(intent)
         }
         findViewById<TextView?>(R.id.VerTudo2)?.setOnClickListener {
-            startActivity(Intent(this, VerTudoActivity::class.java))
+            val intent = Intent(this, VerTudoActivity::class.java)
+            startActivity(intent)
         }
         findViewById<TextView?>(R.id.VerTudo3)?.setOnClickListener {
-            startActivity(Intent(this, VerTudoActivity::class.java))
+            val intent = Intent(this, VerTudoActivity::class.java)
+            startActivity(intent)
         }
 
         findViewById<ImageButton?>(R.id.btn_nav_fila)?.setOnClickListener {

@@ -8,24 +8,27 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
-import com.example.bdu.pagamentos.SelecionarMetodoActivity
+import com.google.android.material.button.MaterialButton
 
 class JurosMultaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.pagamentos_juros_multa)
+        
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        // Botão Voltar
         findViewById<ImageButton>(R.id.btnBackLivro).setOnClickListener {
             finish()
         }
 
-        findViewById<android.view.View>(R.id.btnPagar).setOnClickListener {
+        // Botão Pagar -> Direciona para a Activity correta
+        findViewById<MaterialButton>(R.id.btnPagar).setOnClickListener {
             val intent = Intent(this, SelecionarMetodoActivity::class.java)
             startActivity(intent)
         }

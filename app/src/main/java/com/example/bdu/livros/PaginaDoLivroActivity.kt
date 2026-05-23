@@ -1,6 +1,7 @@
 package com.example.bdu.livros
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
@@ -24,6 +25,8 @@ import com.example.bdu.usuario.MeuPerfilActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import androidx.core.graphics.toColorInt
+import android.widget.ImageView
+import coil.load
 
 class PaginaDoLivroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,51 +36,79 @@ class PaginaDoLivroActivity : AppCompatActivity() {
 
         val btnBotaoRetornar = findViewById<ImageButton>(R.id.btnBackLivro)
 
-        val btnFila = findViewById<ImageButton?>(R.id.btn_nav_fila)
-        val btnMeusLivros = findViewById<ImageButton?>(R.id.btn_nav_meuslivros)
-        val btnHome = findViewById<ImageButton?>(R.id.btn_nav_home)
-        val btnDesejos = findViewById<ImageButton?>(R.id.btn_nav_desejos)
-        val btnperfil = findViewById<ImageButton?>(R.id.btn_nav_perfil)
-
-
 
         btnBotaoRetornar?.setOnClickListener {
             onBackPressed()
-        }
-        btnFila?.setOnClickListener {
-            val intent = Intent(this, ListadeEsperaActivity::class.java)
-            startActivity(intent)
-        }
-        btnMeusLivros?.setOnClickListener {
-            val intent = Intent(this, MeusLivrosActivity::class.java)
-            startActivity(intent)
-        }
-
-        btnHome?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
-            startActivity(intent)
-        }
-
-        btnDesejos?.setOnClickListener {
-            val intent = Intent(this, ListaDesejosActivity::class.java)
-            startActivity(intent)
-        }
-
-        btnperfil?.setOnClickListener {
-            val intent = Intent(this, MeuPerfilActivity::class.java)
-            startActivity(intent)
         }
 
 
         val btnAlugar = findViewById<MaterialButton>(R.id.btnAlugar)
         val tvBookTitle = findViewById<TextView>(R.id.tvBookTitleMain)
+        val ivBookCover = findViewById<ImageView>(R.id.ivBookCover)
+        val tvBookAuthor = findViewById<TextView>(R.id.tvBookAuthor)
+        val tvBookGenre = findViewById<TextView>(R.id.tvBookGenre)
+        val tvBookPublication = findViewById<TextView>(R.id.tvBookPublication)
+        val tvBookIsbn = findViewById<TextView>(R.id.tvBookIsbn)
+        val tvBookPublisher = findViewById<TextView>(R.id.tvBookPublisher)
+        val tvBookPages = findViewById<TextView>(R.id.tvBookPages)
+        val tvBookSynopsis = findViewById<TextView>(R.id.tvBookSynopsis)
 
         val isEsgotado = intent.getBooleanExtra("IS_ESGOTADO", false)
-        val bookTitleFromIntent = intent.getStringExtra("BOOK_TITLE")
+        val bookTitle = intent.getStringExtra("BOOK_TITLE")
+        val bookAuthor = intent.getStringExtra("BOOK_AUTHOR")
+        val bookGenre = intent.getStringExtra("BOOK_GENRE")
+        val bookPublication = intent.getStringExtra("BOOK_PUBLICATION")
+        val bookIsbn = intent.getStringExtra("BOOK_ISBN")
+        val bookPublisher = intent.getStringExtra("BOOK_PUBLISHER")
+        val bookPages = intent.getStringExtra("BOOK_PAGES")
+        val bookSynopsis = intent.getStringExtra("BOOK_SYNOPSIS")
+        val bookImage = intent.getStringExtra("BOOK_IMAGE")
         
-        if (bookTitleFromIntent != null) {
-            tvBookTitle.text = bookTitleFromIntent
+        tvBookTitle.text = bookTitle ?: "Título Indisponível"
+        tvBookAuthor.text = "Autor: ${bookAuthor ?: "Desconhecido"}"
+        tvBookGenre.text = "Gênero: ${bookGenre ?: "Não informado"}"
+        tvBookPublication.text = "Publicação: ${bookPublication ?: "N/A"}"
+        tvBookIsbn.text = "ISBN: ${bookIsbn ?: "N/A"}"
+        tvBookPublisher.text = "Editora: ${bookPublisher ?: "N/A"}"
+        tvBookPages.text = "Páginas: ${bookPages ?: "N/A"}"
+        tvBookSynopsis.text = bookSynopsis ?: "Sinopse não disponível."
+
+        ivBookCover.load(bookImage) {
+            placeholder(R.drawable.ic_launcher_background)
+            error(R.drawable.ic_launcher_background)
         }
+
+        // --- LÓGICA DE PERSISTÊNCIA DO CORAÇÃO ---
+        val btnWishlist = findViewById<MaterialButton>(R.id.btnWishlist)
+        val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
+        // Usamos o título do livro como chave para saber se ele está favoritado
+        val bookKey = "fav_$bookTitle" 
+        
+        var isFavorito = prefs.getBoolean(bookKey, false)
+
+        // Define a cor inicial baseada no que foi salvo
+        if (isFavorito) {
+            btnWishlist.iconTint = ColorStateList.valueOf(Color.RED)
+        } else {
+            btnWishlist.iconTint = ColorStateList.valueOf(Color.WHITE)
+        }
+
+        btnWishlist?.setOnClickListener {
+            isFavorito = !isFavorito
+            
+            // Salva o novo estado
+            prefs.edit().putBoolean(bookKey, isFavorito).apply()
+
+            // Atualiza visualmente
+            if (isFavorito) {
+                btnWishlist.iconTint = ColorStateList.valueOf(Color.RED)
+                Toast.makeText(this, "Adicionado aos favoritos", Toast.LENGTH_SHORT).show()
+            } else {
+                btnWishlist.iconTint = ColorStateList.valueOf(Color.WHITE)
+                Toast.makeText(this, "Removido dos favoritos", Toast.LENGTH_SHORT).show()
+            }
+        }
+        // ----------------------------------------
 
         btnAlugar?.setOnClickListener {
             val bookTitle = tvBookTitle?.text?.toString() ?: "O Livro"

@@ -62,11 +62,16 @@ class CadastroActivity : AppCompatActivity() {
         val confSenha = findViewById<EditText>(R.id.inputConfSenha).text.toString()
         val cpf = findViewById<EditText>(R.id.inputCpf).text.toString().trim()
         val telefone = findViewById<EditText>(R.id.inputTelefone).text.toString().trim()
-        val curso = findViewById<EditText>(R.id.inputCurso).text.toString().trim()
+        val curso = findViewById<Spinner>(R.id.inputCurso).selectedItem.toString()
         val cidade = findViewById<EditText>(R.id.inputCidade).text.toString().trim()
         val estado = findViewById<EditText>(R.id.inputEstado).text.toString().trim()
         val dataNascRaw = findViewById<EditText>(R.id.inputDataNascimento).text.toString().trim()
         val aceitouTermos = findViewById<CheckBox>(R.id.checkboxTermos).isChecked
+
+        if (curso == "Cursos") {
+            exibirAlerta("Campo Obrigatório", "Por favor, selecione seu curso.")
+            return
+        }
 
         val dataLimpa = dataNascRaw.replace(Regex("[^0-9]"), "")
         if (dataLimpa.length != 8){

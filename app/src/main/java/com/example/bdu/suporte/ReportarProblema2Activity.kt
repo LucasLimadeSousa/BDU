@@ -19,6 +19,8 @@ class ReportarProblema2Activity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.suporte_reportar_problema_2)
 
+        val buttonBack = findViewById<View>(R.id.btnBack)
+
         val itemDamage = findViewById<View>(R.id.itemDamage)
         val itemContent = findViewById<View>(R.id.itemContent)
         val itemInfo = findViewById<View>(R.id.itemInfo)
@@ -31,38 +33,8 @@ class ReportarProblema2Activity : AppCompatActivity() {
         itemInfo?.setOnClickListener { startActivity(reportIntent) }
         itemOther?.setOnClickListener { startActivity(reportIntent) }
 
-        val btnFila = findViewById<ImageButton?>(R.id.btn_nav_fila)
-        val btnMeusLivros = findViewById<ImageButton?>(R.id.btn_nav_meuslivros)
-        val btnHome = findViewById<ImageButton?>(R.id.btn_nav_home)
-        val btnDesejos = findViewById<ImageButton?>(R.id.btn_nav_desejos)
-        val btnPerfil = findViewById<ImageButton?>(R.id.btn_nav_perfil)
-
-        btnFila?.setOnClickListener {
-            val intent = Intent(this, ListadeEsperaActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        btnMeusLivros?.setOnClickListener {
+        buttonBack?.setOnClickListener {
             val intent = Intent(this, MeusLivrosActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        btnHome?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        btnDesejos?.setOnClickListener {
-            val intent = Intent(this, ListaDesejosActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        btnPerfil?.setOnClickListener {
-            val intent = Intent(this, MeuPerfilActivity::class.java)
             startActivity(intent)
             finish()
         }

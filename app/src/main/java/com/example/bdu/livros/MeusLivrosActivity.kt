@@ -1,19 +1,21 @@
 package com.example.bdu.livros
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
 import com.example.bdu.usuario.MeuPerfilActivity
+import com.google.android.material.button.MaterialButton
 
 class MeusLivrosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,15 +23,15 @@ class MeusLivrosActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.livros_meuslivros)
 
-        val btnVoltarHome = findViewById<ImageButton?>(R.id.btn_backReturn)
-        val btnReport = findViewById<TextView?>(R.id.btn_report)
+        val btnReport = findViewById<LinearLayout?>(R.id.btn_report)
         val btnVerTudo = findViewById<TextView?>(R.id.VerTudo)
+        val btnAddDesejos = findViewById<MaterialButton?>(R.id.btn_desejos)
 
-        val btnFila = findViewById<ImageButton?>(R.id.btn_navFila)
-        val btnMeusLivros = findViewById<ImageButton?>(R.id.btn_navMeusLivros)
-        val btnHome = findViewById<ImageButton?>(R.id.btn_navHome)
-        val btnDesejos = findViewById<ImageButton?>(R.id.btn_navDesejos)
-        val btnPerfil = findViewById<ImageButton?>(R.id.btn_navPerfil)
+        val btnFila = findViewById<ImageButton?>(R.id.btn_nav_fila)
+        val btnMeusLivros = findViewById<ImageButton?>(R.id.btn_nav_meuslivros)
+        val btnHome = findViewById<ImageButton?>(R.id.btn_nav_home)
+        val btnDesejosNav = findViewById<ImageButton?>(R.id.btn_nav_desejos)
+        val btnPerfil = findViewById<ImageButton?>(R.id.btn_nav_perfil)
 
         val mainView = findViewById<View>(R.id.main)
         if (mainView != null) {
@@ -40,20 +42,33 @@ class MeusLivrosActivity : AppCompatActivity() {
             }
         }
 
-        val popup = findViewById<CardView>(R.id.popup_notification)
-        if (popup != null) {
-            Handler(Looper.getMainLooper()).postDelayed({
-                popup.visibility = View.VISIBLE
-                Handler(Looper.getMainLooper()).postDelayed({
-                    popup.visibility = View.GONE
-                }, 0)
-            }, 1000)
+        // Lógica do botão "Lista de Desejos" (Coração: Branco <-> Vermelho) com Persistência
+        val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
+        val bookTitle = findViewById<TextView>(R.id.tvBookTitle)?.text?.toString() ?: "LivroPosse"
+        val bookKey = "fav_$bookTitle"
+
+        var isFavorito = prefs.getBoolean(bookKey, false)
+
+        // Estado inicial
+        if (isFavorito) {
+            btnAddDesejos?.iconTint = ColorStateList.valueOf(Color.RED)
+        } else {
+            btnAddDesejos?.iconTint = ColorStateList.valueOf(Color.WHITE)
         }
 
-        btnVoltarHome?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
-            startActivity(intent)
-            finish()
+        btnAddDesejos?.setOnClickListener {
+            isFavorito = !isFavorito
+            
+            // Salva o estado
+            prefs.edit().putBoolean(bookKey, isFavorito).apply()
+
+            if (isFavorito) {
+                btnAddDesejos.iconTint = ColorStateList.valueOf(Color.RED)
+                Toast.makeText(this, "Adicionado aos favoritos", Toast.LENGTH_SHORT).show()
+            } else {
+                btnAddDesejos.iconTint = ColorStateList.valueOf(Color.WHITE)
+                Toast.makeText(this, "Removido dos favoritos", Toast.LENGTH_SHORT).show()
+            }
         }
 
         btnReport?.setOnClickListener {
@@ -65,26 +80,26 @@ class MeusLivrosActivity : AppCompatActivity() {
             val intent = Intent(this, VerTudoActivity::class.java)
             startActivity(intent)
         }
-        //barra de tarefas
 
+        // Barra de tarefas
         btnFila?.setOnClickListener {
-            val intent = Intent(this, ListadeEsperaActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, ListadeEsperaActivity::class.java))
         }
+        
         btnMeusLivros?.setOnClickListener {
             // Já está na atividade Meus Livros
         }
+        
         btnHome?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, TelahomeActivity::class.java))
         }
-        btnDesejos?.setOnClickListener {
-            val intent = Intent(this, ListaDesejosActivity::class.java)
-            startActivity(intent)
+        
+        btnDesejosNav?.setOnClickListener {
+            startActivity(Intent(this, ListaDesejosActivity::class.java))
         }
+        
         btnPerfil?.setOnClickListener {
-            val intent = Intent(this, MeuPerfilActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MeuPerfilActivity::class.java))
         }
     }
 }

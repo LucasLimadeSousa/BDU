@@ -18,13 +18,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bdu.R
 import com.example.bdu.api.RetrofitInstance
 import com.example.bdu.model.BookItem
+import com.example.bdu.usuario.MeuPerfilActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-private val apiKey = "AIzaSyCEr7bp6m5SGwLrOGSihqN5tmwkAbLogxU"
+private val apiKey = "AIzaSyDQ6UjmHMd4SmKrLfxp8h3UfJqIrtNk7BE"
 
 class BuscaActivity : AppCompatActivity() {
 
@@ -50,8 +51,18 @@ class BuscaActivity : AppCompatActivity() {
 
         adapter = SugestoesAdapter { livro ->
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
-            intent.putExtra("BOOK_TITLE", livro.volumeInfo.title)
-            intent.putExtra("IS_ESGOTADO", false) 
+            val info = livro.volumeInfo
+            intent.putExtra("BOOK_TITLE", info.title)
+            intent.putExtra("BOOK_AUTHOR", info.authors?.joinToString(", "))
+            intent.putExtra("BOOK_GENRE", info.categories?.joinToString(", "))
+            intent.putExtra("BOOK_PUBLICATION", info.publishedDate)
+            intent.putExtra("BOOK_ISBN", info.industryIdentifiers?.firstOrNull { it.type == "ISBN_13" }?.identifier
+                ?: info.industryIdentifiers?.firstOrNull { it.type == "ISBN_10" }?.identifier)
+            intent.putExtra("BOOK_PUBLISHER", info.publisher)
+            intent.putExtra("BOOK_PAGES", info.pageCount?.toString())
+            intent.putExtra("BOOK_SYNOPSIS", info.description)
+            intent.putExtra("BOOK_IMAGE", info.imageLinks?.thumbnail?.replace("http://", "https://"))
+            intent.putExtra("IS_ESGOTADO", false)
             startActivity(intent)
         }
         recyclerViewSugestoes.layoutManager = LinearLayoutManager(this)
@@ -83,6 +94,26 @@ class BuscaActivity : AppCompatActivity() {
             val intent = Intent(this, TelahomeActivity::class.java)
             startActivity(intent)
             finish()
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_fila)?.setOnClickListener {
+            startActivity(Intent(this, ListadeEsperaActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_meuslivros)?.setOnClickListener {
+            startActivity(Intent(this, MeusLivrosActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_home)?.setOnClickListener {
+            startActivity(Intent(this, TelahomeActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_desejos)?.setOnClickListener {
+            startActivity(Intent(this, ListaDesejosActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.btn_nav_perfil)?.setOnClickListener {
+            startActivity(Intent(this, MeuPerfilActivity::class.java))
         }
     }
 

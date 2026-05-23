@@ -8,7 +8,7 @@
     android:background="@color/white"
     tools:context=".livros.BuscaActivity">
 
-    <!-- Header Azul Padrão BDU -->
+    <!-- Header Azul -->
     <View
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
@@ -29,139 +29,103 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/header_bar" />
 
-    <!-- Barra de Subtítulo e Voltar -->
-    <LinearLayout
-        android:id="@+id/subtitle_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/header_bar">
-
-        <ImageButton
-            android:id="@+id/btn_backReturn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/bg_button_border"
-            android:contentDescription="@string/voltar"
-            android:padding="8dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_chevron_right"
-            android:rotation="180"
-            app:tint="@color/black" />
-
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subtitle_layout">
+        app:layout_constraintTop_toBottomOf="@id/header_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
-            <!-- EditText de busca minimalista -->
-            <SearchView
-                android:id="@+id/searchViewBusca"
+            <!-- Botão Voltar -->
+            <ImageButton
+                android:id="@+id/btn_backReturn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_button_border"
+                android:contentDescription="@string/voltar"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/black" />
+
+            <!-- Search Bar Card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/search_bar_background"
-                android:elevation="4dp"
-                android:inputType="text"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:iconifiedByDefault="false"
-                android:queryHint="Buscar livros..."/>
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="4dp">
+
+                <SearchView
+                    android:id="@+id/searchViewBusca"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Buscar livros..."
+                    android:searchIcon="@android:drawable/ic_menu_search"
+                    android:background="@android:color/transparent" />
+            </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSugestoes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/search_bar_background"
-                android:elevation="4dp"
-                android:nestedScrollingEnabled="false"
+                android:background="@drawable/card_border"
+                android:elevation="2dp"
                 android:visibility="gone" />
-
 
             <!-- Texto de Filtros -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_filtros"
-                android:textSize="16sp"
+                android:text="Filtros:"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/black"
                 android:layout_marginBottom="16dp" />
 
             <!-- Filtro Gênero -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <Spinner
+                android:id="@+id/spinnerGenero"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="16dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteGenero"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_genero"
-                    android:inputType="none"
-                    android:textColorHint="#000000" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:background="@drawable/bg_spinner"
+                android:entries="@array/generos_livros"
+                android:paddingHorizontal="12dp"
+                android:spinnerMode="dropdown" />
 
             <!-- Filtro Data -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <EditText
+                android:id="@+id/editTextData"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="16dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextData"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_data_publicacao"
-                    android:inputType="none"
-                    android:textColor="#000000"
-                    android:textColorHint="#000000" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:background="@drawable/card_border"
+                android:hint="Data de publicação"
+                android:inputType="date"
+                android:paddingHorizontal="16dp"
+                android:textColor="#333333"
+                android:textSize="14sp" />
 
             <!-- Filtro Curso -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <Spinner
+                android:id="@+id/spinnerCursoBusca"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="16dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteCurso"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_curso"
-                    android:inputType="none"
-                    android:textColorHint="#000000" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:background="@drawable/bg_spinner"
+                android:entries="@array/cursos_unifor"
+                android:paddingHorizontal="12dp"
+                android:spinnerMode="dropdown" />
 
         </LinearLayout>
     </ScrollView>

@@ -8,133 +8,131 @@
     android:background="@color/white"
     tools:context=".login.AutenticacaoActivity">
 
-    <!-- Header Azul -->
-    <LinearLayout
-        android:id="@+id/headerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_background"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Autenticação"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
+    <!-- Standard Header -->
     <View
-        android:id="@+id/divider"
+        android:id="@+id/header_bar"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout" />
+        android:layout_height="60dp"
+        android:background="@color/unifor_blue"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Autenticação"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/header_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/header_bar" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider">
+        app:layout_constraintTop_toBottomOf="@id/header_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp"
+            android:gravity="center_horizontal">
 
-            <!-- Card de Instruções -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_border"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/imageViewEmail"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@android:drawable/ic_dialog_email" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Perfeito, acabamos de enviar uma mensagem ao seu e-mail. Digite o código que aparecerá para você:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Card do Código -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_border"
-                android:orientation="vertical"
-                android:padding="16dp">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="32dp">
 
                 <LinearLayout
-                    android:id="@+id/otp_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="16dp" />
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:background="@color/white"
+                    android:gravity="center_horizontal">
 
-                <EditText
-                    android:id="@+id/editTextCodigo"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/card_border"
-                    android:hint="Confirmar Código"
-                    android:inputType="number"
-                    android:paddingHorizontal="16dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="#000000" />
+                    <ImageView
+                        android:id="@+id/imageViewEmail"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginBottom="24dp"
+                        android:src="@android:drawable/ic_dialog_email"
+                        app:tint="@color/unifor_blue" />
 
-                <TextView
-                    android:id="@+id/textViewNaoRecebi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
-                    android:text="Não recebi o código? Enviar Novamente"
-                    android:textColor="@android:color/holo_blue_dark"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Verifique seu E-mail"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
 
-            <!-- Botões de Ação -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Acabamos de enviar uma mensagem ao seu e-mail. Digite o código de confirmação abaixo:"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="32dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/unifor_blue"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextCodigo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Confirmar Código"
+                            android:gravity="center"
+                            android:letterSpacing="0.2"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:inputType="number" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textViewNaoRecebi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Não recebi o código? Enviar Novamente"
+                        android:textColor="@color/unifor_blue"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnConfirmarCodigo"
-                android:layout_width="246dp"
+                android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginLeft="57sp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="@color/unifor_blue"
-                android:text="Confirmar"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:layout_marginBottom="16dp"
+                android:text="CONFIRMAR"
+                app:cornerRadius="12dp"
+                android:backgroundTint="@color/unifor_blue" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnVoltar"
-                android:layout_width="246dp"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginLeft="57dp"
-                android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/unifor_blue"
-                android:text="Voltar"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="16dp"/>
+                android:text="VOLTAR"
+                android:textColor="@color/unifor_blue" />
 
         </LinearLayout>
     </ScrollView>

@@ -101,6 +101,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextSenhaAtual"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Senha atual"
@@ -116,6 +117,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNovaSenha"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Nova senha"
@@ -131,6 +133,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextConfirmarSenha"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Confirmar nova senha"
@@ -166,6 +169,7 @@
                                 android:src="@drawable/ic_cancel"
                                 app:tint="#888888" />
                             <TextView
+                                android:id="@+id/rule1Text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -187,6 +191,7 @@
                                 android:src="@drawable/ic_cancel"
                                 app:tint="#888888" />
                             <TextView
+                                android:id="@+id/rule2Text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -207,6 +212,7 @@
                                 android:src="@drawable/ic_cancel"
                                 app:tint="#888888" />
                             <TextView
+                                android:id="@+id/rule3Text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"

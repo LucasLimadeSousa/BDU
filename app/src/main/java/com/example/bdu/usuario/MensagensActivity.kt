@@ -67,9 +67,9 @@ class MensagensActivity : AppCompatActivity() {
 
     private fun adicionarMensagem(container: LinearLayout, inflater: LayoutInflater, title: String, body: String, time: String) {
         val view = inflater.inflate(R.layout.item_mensagem, container, false)
-        view.findViewById<TextView>(R.id.msg_title).text = title
-        view.findViewById<TextView>(R.id.msg_body).text = body
-        view.findViewById<TextView>(R.id.msg_time).text = time
+        view.findViewById<TextView>(R.id.txtRemetente).text = title
+        view.findViewById<TextView>(R.id.txtPreview).text = body
+        view.findViewById<TextView>(R.id.txtHorario).text = time
         container.addView(view)
     }
 }

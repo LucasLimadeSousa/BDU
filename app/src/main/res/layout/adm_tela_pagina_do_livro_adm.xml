@@ -225,29 +225,46 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginBottom="32dp"
                 android:gravity="center">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnEditarLivro"
-                    android:layout_width="0dp"
+                    android:id="@+id/btnAlugarLivro"
+                    android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:text="EDITAR"
+                    android:layout_marginBottom="8dp"
+                    android:text="ALUGAR LIVRO"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:backgroundTint="@color/unifor_blue"
                     app:cornerRadius="12dp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnExcluir"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:text="EXCLUIR"
-                    android:backgroundTint="#FF4444"
-                    app:cornerRadius="12dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEditarLivro"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="EDITAR"
+                        android:backgroundTint="@color/unifor_blue"
+                        app:cornerRadius="12dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnExcluir"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="EXCLUIR"
+                        android:backgroundTint="#FF4444"
+                        app:cornerRadius="12dp" />
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

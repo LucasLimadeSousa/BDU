@@ -50,6 +50,7 @@ class EsqueciSenhaActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 try {
+                    // Atualizando no CLIENT ORIGINAL
                     SupabaseConfig.client.auth.updateUser {
                         password = novaSenha
                     }

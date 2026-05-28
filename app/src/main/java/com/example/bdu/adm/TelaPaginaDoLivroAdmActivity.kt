@@ -48,6 +48,13 @@ class TelaPaginaDoLivroAdmActivity : AppCompatActivity() {
         }
 
         val btnExcluir = findViewById<MaterialButton>(R.id.btnExcluir)
+        val btnAlugar = findViewById<MaterialButton>(R.id.btnAlugarLivro)
+
+        btnAlugar?.setOnClickListener {
+            val bookTitle = intent.getStringExtra("BOOK_TITLE") ?: "Este livro"
+            Toast.makeText(this, "Processando aluguel de: $bookTitle", Toast.LENGTH_SHORT).show()
+            // Adicione aqui a lógica de navegação para a tela de aluguel/pagamento se necessário
+        }
         val tvBookTitle = findViewById<TextView>(R.id.tvBookTitleMain)
         val ivBookCover = findViewById<ImageView>(R.id.ivBookCover)
         val tvBookAuthor = findViewById<TextView>(R.id.tvBookAuthor)

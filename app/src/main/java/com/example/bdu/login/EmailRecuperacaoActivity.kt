@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.bdu.R
 import com.example.bdu.network.SupabaseConfig
@@ -15,7 +15,7 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
 
-class EmailRecuperacaoActivity : ComponentActivity() {
+class EmailRecuperacaoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,8 +25,9 @@ class EmailRecuperacaoActivity : ComponentActivity() {
 
         findViewById<Button>(R.id.buttonConfirmar).setOnClickListener {
             val email = emailInput.text.toString().trim()
+
             if (email.isEmpty()) {
-                Toast.makeText(this, "Por favor, insira o seu e-mail", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Por favor, insira seu e-mail", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -60,6 +61,5 @@ class EmailRecuperacaoActivity : ComponentActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
-
     }
 }

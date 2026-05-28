@@ -40,7 +40,8 @@ class AutenticacaoActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 try {
-                    SupabaseConfig.client.auth.verifyEmailOtp(
+                    // Validando no CLIENT ORIGINAL
+                    SupabaseConfig.newClient.auth.verifyEmailOtp(
                         type = OtpType.Email.RECOVERY,
                         email = email,
                         token = codigo
@@ -57,6 +58,7 @@ class AutenticacaoActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textViewNaoRecebi).setOnClickListener {
             lifecycleScope.launch {
                 try {
+                    // Reenviando pelo CLIENT ORIGINAL
                     SupabaseConfig.client.auth.resetPasswordForEmail(email)
                     Toast.makeText(this@AutenticacaoActivity, "Novo código enviado!", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {

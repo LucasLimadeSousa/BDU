@@ -107,6 +107,7 @@
                             android:orientation="vertical">
 
                             <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switch_marketing"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
@@ -150,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/desc_dados_leitura"
+                        android:text="Seus livros favoritados são usados também para personalizar sua experiência."
                         android:textColor="#666666"
                         android:textSize="13sp" />
 
@@ -170,7 +171,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toStartOf="@+id/switchLayout2"
-                            android:text="@string/label_privar_avaliacoes"
+                            android:text="Privar Favoritos"
                             android:textColor="#333333"
                             android:textSize="14sp" />
 
@@ -183,12 +184,14 @@
                             android:orientation="vertical">
 
                             <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switch_privar_favoritos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
                                 app:thumbTint="@color/unifor_blue" />
 
                             <TextView
+                                android:id="@+id/tv_status_privar_favoritos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/label_ativado"
@@ -259,12 +262,14 @@
                             android:orientation="vertical">
 
                             <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switch_algoritmo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
                                 app:thumbTint="@color/unifor_blue" />
 
                             <TextView
+                                android:id="@+id/tv_status_algoritmo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/label_ativado"

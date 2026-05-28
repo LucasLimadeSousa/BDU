@@ -55,7 +55,19 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp" />
 
+            <TextView
+                android:id="@+id/tvNoBookMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Você não possui nenhum livro alugado no momento."
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginVertical="20dp"
+                android:visibility="gone" />
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardRentedBook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="24dp"
@@ -86,6 +98,7 @@
                         app:cardCornerRadius="12dp"
                         app:cardElevation="2dp">
                         <ImageView
+                            android:id="@+id/ivBookCoverRented"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
@@ -175,156 +188,14 @@
             </RelativeLayout>
 
             <GridLayout
+                android:id="@+id/grid_historico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
                 android:alignmentMode="alignMargins"
                 android:padding="2dp">
 
-                <!-- Row 1 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: ATRASADO há (Dias)" android:textColor="#FF0000" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                </LinearLayout>
-
-                <!-- Row 2 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                </LinearLayout>
-
-                <!-- Row 3 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Em posse há (Dias)" android:textColor="#FFA500" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Devolver em ATÉ (Dias)" android:textSize="8sp" android:textColor="#888888"/>
-                </LinearLayout>
-
-                <!-- Novos itens adicionados para substituir a seta -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/bg_history_item"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(NOME DO LIVRO):" android:textColor="@color/unifor_blue" android:textSize="11sp" android:textStyle="bold" android:maxLines="1" android:ellipsize="end"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Status: Devolvido há (Dias)" android:textColor="#008800" android:textSize="9sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alugado em: DD/MM/AAAA" android:textSize="9sp" android:textColor="#888888"/>
-                </LinearLayout>
+                <!-- Itens serão adicionados dinamicamente -->
 
             </GridLayout>
 

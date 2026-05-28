@@ -53,24 +53,17 @@
                 android:letterSpacing="0.1"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Grid de 3 Colunas com o novo layout de item -->
+            <!-- Grid de 3 Colunas -->
             <GridLayout
                 android:id="@+id/grid_favoritos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="3"
                 android:alignmentMode="alignMargins"
-                android:columnOrderPreserved="false">
+                android:columnOrderPreserved="false"
+                android:layout_marginTop="8dp">
 
-                <include layout="@layout/item_book_wishlist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp" />
-                <include layout="@layout/item_book_wishlist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp" />
-                <include layout="@layout/item_book_wishlist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp" />
-                <include layout="@layout/item_book_wishlist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp" />
-                <include layout="@layout/item_book_wishlist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp" />
-                <include layout="@layout/item_book_wishlist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp" />
-                <include layout="@layout/item_book_wishlist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp" />
-                <include layout="@layout/item_book_wishlist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp" />
-                <include layout="@layout/item_book_wishlist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp" />
+                <!-- Itens serão adicionados dinamicamente via código -->
 
             </GridLayout>
 

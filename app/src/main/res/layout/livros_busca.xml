@@ -8,7 +8,7 @@
     android:background="@color/white"
     tools:context=".livros.BuscaActivity">
 
-    <!-- Header Azul -->
+    <!-- Header Bar (Padrão: 60dp, unifor_blue) -->
     <View
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Buscar"
+        android:text="Buscar Livros"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -32,7 +32,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_bar">
 
@@ -42,25 +43,26 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Botão Voltar -->
+            <!-- Botão Voltar (Padrão: bg_button_border) -->
             <ImageButton
                 android:id="@+id/btn_backReturn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/bg_button_border"
-                android:contentDescription="@string/voltar"
+                android:contentDescription="@string/back"
                 android:padding="8dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_arrow_back"
                 app:tint="@color/black" />
 
-            <!-- Search Bar Card -->
+            <!-- Barra de Busca (Padrão: CardView com 28dp radius) -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardSearch"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="56dp"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="30dp"
+                app:cardCornerRadius="28dp"
                 app:cardElevation="4dp">
 
                 <SearchView
@@ -68,64 +70,99 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:iconifiedByDefault="false"
-                    android:queryHint="Buscar livros..."
+                    android:queryHint="Digite o título ou autor..."
                     android:searchIcon="@android:drawable/ic_menu_search"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:queryBackground="@android:color/transparent" />
             </androidx.cardview.widget.CardView>
 
+            <!-- Sugestões -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSugestoes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/card_border"
+                android:background="@drawable/bg_spinner"
                 android:elevation="2dp"
                 android:visibility="gone" />
 
-            <!-- Texto de Filtros -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filtros:"
-                android:textSize="18sp"
+                android:text="FILTROS"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="#999999"
+                android:letterSpacing="0.1"
                 android:layout_marginBottom="16dp" />
 
             <!-- Filtro Gênero -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gênero Literário"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
             <Spinner
                 android:id="@+id/spinnerGenero"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="54dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/bg_spinner"
                 android:entries="@array/generos_livros"
-                android:paddingHorizontal="12dp"
+                android:paddingHorizontal="16dp"
                 android:spinnerMode="dropdown" />
 
             <!-- Filtro Data -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ano de Publicação"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
             <EditText
                 android:id="@+id/editTextData"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_border"
-                android:hint="Data de publicação"
-                android:inputType="date"
+                android:layout_height="54dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_spinner"
+                android:hint="Ex: 2023"
+                android:inputType="number"
                 android:paddingHorizontal="16dp"
                 android:textColor="#333333"
                 android:textSize="14sp" />
 
             <!-- Filtro Curso -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Curso Relacionado"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
             <Spinner
                 android:id="@+id/spinnerCursoBusca"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="54dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/bg_spinner"
                 android:entries="@array/cursos_unifor"
-                android:paddingHorizontal="12dp"
+                android:paddingHorizontal="16dp"
                 android:spinnerMode="dropdown" />
+
+            <!-- Botão Aplicar (Padrão: MaterialButton, unifor_blue) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAplicarFiltros"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="APLICAR FILTROS"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="28dp"
+                android:backgroundTint="@color/unifor_blue" />
 
         </LinearLayout>
     </ScrollView>

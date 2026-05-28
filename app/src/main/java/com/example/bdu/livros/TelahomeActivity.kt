@@ -26,16 +26,19 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import Usuario
-import com.example.bdu.databinding.LivrosMeuslivrosBinding
 import com.example.bdu.model.VolumeInfo
+import com.example.bdu.model.ImageLinks
+import com.example.bdu.model.IndustryIdentifier
 import retrofit2.HttpException
 
-private const val apiKey = "AIzaSyDQ6UjmHMd4SmKrLfxp8h3UfJqIrtNk7BE"
+private const val apiKey = "AIzaSyB0MZ-X3tR51eJW1GOTcN6v57tzojhIvw8"
 
 class TelahomeActivity : AppCompatActivity() {
 
     private var isAdm: Boolean = false
     private val livrosCarregados = mutableMapOf<Int, VolumeInfo>()
+    private val displayedTitles = mutableSetOf<String>()
+    private var favoritesSet = mutableSetOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +51,13 @@ class TelahomeActivity : AppCompatActivity() {
         configurarInsets()
         configurarBotoes()
         configurarCliquesLivros()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
+        favoritesSet = prefs.getStringSet("favorites_list", null)?.toMutableSet() ?: mutableSetOf()
+        displayedTitles.clear()
         carregarLivrosHome()
     }
 
@@ -59,8 +69,15 @@ class TelahomeActivity : AppCompatActivity() {
                     val usuario = SupabaseConfig.client.from("Dados_Usuario")
                         .select { filter { eq("email", userEmail) } }.decodeSingle<Usuario>()
                     isAdm = usuario.adm
+                    
+                    // Algoritmo: Identifica e salva o curso do usuário para recomendações específicas
+                    RecommendationManager.setUserCourse(this@TelahomeActivity, usuario.curso)
+                    
                     atualizarVisibilidadeAdm()
                     configurarCliquesLivros()
+                    
+                    // Recarrega os livros agora que o curso foi identificado
+                    carregarLivrosHome()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -99,12 +116,22 @@ class TelahomeActivity : AppCompatActivity() {
                         }
 
                         val livro = resposta.items?.firstOrNull {
-                            it.volumeInfo.imageLinks?.thumbnail != null
+                            val title = it.volumeInfo.title ?: ""
+                            val normalizedTitle = title.lowercase().trim()
+                            
+                            it.volumeInfo.imageLinks?.thumbnail != null &&
+                            title.isNotBlank() &&
+                            !it.volumeInfo.authors.isNullOrEmpty() &&
+                            !displayedTitles.contains(normalizedTitle) && // Não repetir
+                            !favoritesSet.any { fav -> fav.lowercase().trim() == normalizedTitle } // Não estar nos favoritos
                         }
 
                         if (livro != null) {
+                            val finalTitle = livro.volumeInfo.title ?: ""
+                            displayedTitles.add(finalTitle.lowercase().trim())
+                            
                             livrosCarregados[idInclude] = livro.volumeInfo
-                            txtTitulo.text = livro.volumeInfo.title ?: "Sem título"
+                            txtTitulo.text = finalTitle
                             txtAutor.text =
                                 livro.volumeInfo.authors?.getOrNull(0) ?: "Autor desconhecido"
 
@@ -129,7 +156,7 @@ class TelahomeActivity : AppCompatActivity() {
                     } catch (e: HttpException) {
                         if (e.code() == 429) {
                             txtTitulo.text = "Cota Excedida"
-                            sucesso = true // Para de tentar se for erro de cota
+                            sucesso = true 
                         } else {
                             tentativa++
                             if (tentativa >= 3) txtTitulo.text = "Erro API"
@@ -153,23 +180,67 @@ class TelahomeActivity : AppCompatActivity() {
     }
 
     private fun carregarLivrosHome() {
-        carregarLivroSeguro(R.id.item_livro_a, "intitle:Harry Potter Rowling", 0)
-        carregarLivroSeguro(R.id.item_livro_b, "intitle:Dom Casmurro Machado", 800)
-        carregarLivroSeguro(R.id.item_livro_c, "intitle:Invencível Robert Kirkman", 1600)
-        carregarLivroSeguro(R.id.item_livro_d, "intitle:Java Como Programar Deitel", 2400)
-        carregarLivroSeguro(R.id.item_livro_e, "intitle:Java Efetivo Joshua Bloch", 3200)
+        // --- Seção: Lista de Desejos (Favoritos Reais) ---
+        val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
+        val listFavoritos = favoritesSet.toList()
+        val idsFavoritos = listOf(R.id.item_livro_a, R.id.item_livro_b, R.id.item_livro_c, R.id.item_livro_d, R.id.item_livro_e)
 
-        carregarLivroSeguro(R.id.item_livro_1, "intitle:Estrutura de Dados", 4000)
-        carregarLivroSeguro(R.id.item_livro_2, "intitle:Arquitetura de Software", 4800)
-        carregarLivroSeguro(R.id.item_livro_3, "intitle:Engenharia de Dados", 5600)
-        carregarLivroSeguro(R.id.item_livro_4, "intitle:JavaScript Guia Definitivo", 6400)
-        carregarLivroSeguro(R.id.item_livro_5, "intitle:Linguagem SQL", 7200)
+        idsFavoritos.forEachIndexed { index, id ->
+            val container = findViewById<LinearLayout>(id)
+            if (index < listFavoritos.size) {
+                val title = listFavoritos[index]
+                val author = prefs.getString("author_$title", "Autor desconhecido")
+                val image = prefs.getString("image_$title", null)
+                
+                displayedTitles.add(title.lowercase().trim()) // Marcamos como já exibido
+                container?.visibility = View.VISIBLE
+                val img = container?.findViewById<ImageView>(R.id.imgLivro)
+                val txtTitulo = container?.findViewById<TextView>(R.id.tituloLivro)
+                val txtAutor = container?.findViewById<TextView>(R.id.autorLivro)
 
-        carregarLivroSeguro(R.id.item_livro_10, "intitle:Pense em Python", 8000)
-        carregarLivroSeguro(R.id.item_livro_20, "intitle:Netter Atlas Anatomia", 8800)
-        carregarLivroSeguro(R.id.item_livro_30, "intitle:Código Limpo Martin", 9600)
-        carregarLivroSeguro(R.id.item_livro_40, "intitle:Padrões de Projetos GoF", 10400)
-        carregarLivroSeguro(R.id.item_livro_50, "intitle:Refatoração Fowler", 11200)
+                txtTitulo?.text = title
+                txtAutor?.text = author
+                img?.load(image) {
+                    crossfade(true)
+                    placeholder(R.drawable.ic_launcher_background)
+                    error(R.drawable.ic_launcher_background)
+                }
+
+                // Guardar no mapa para o clique funcionar
+                livrosCarregados[id] = VolumeInfo(
+                    title = title,
+                    authors = listOf(author ?: "Desconhecido"),
+                    description = prefs.getString("synopsis_$title", null),
+                    categories = listOf(prefs.getString("genre_$title", "") ?: ""),
+                    publishedDate = prefs.getString("publication_$title", null),
+                    pageCount = prefs.getString("pages_$title", null)?.toIntOrNull(),
+                    publisher = prefs.getString("publisher_$title", null),
+                    industryIdentifiers = listOf(IndustryIdentifier("ISBN", prefs.getString("isbn_$title", null))),
+                    imageLinks = ImageLinks(image)
+                )
+            } else {
+                // Se não houver livro para este slot, deixa em branco (invisível)
+                container?.visibility = View.INVISIBLE
+            }
+        }
+
+        // --- Seção: Recomendações por Curso ---
+        val courseTerms = RecommendationManager.getCourseSearchTerms(this)
+        val genericFallback = listOf("livro", "estudo", "academia", "ciência", "educação").shuffled()
+
+        carregarLivroSeguro(R.id.item_livro_1, courseTerms.getOrElse(0) { genericFallback[0] }, 2000)
+        carregarLivroSeguro(R.id.item_livro_2, courseTerms.getOrElse(1) { genericFallback[1] }, 2800)
+        carregarLivroSeguro(R.id.item_livro_3, courseTerms.getOrElse(2) { genericFallback[2] }, 3600)
+        carregarLivroSeguro(R.id.item_livro_4, courseTerms.getOrElse(3) { genericFallback[3] }, 4400)
+        carregarLivroSeguro(R.id.item_livro_5, courseTerms.getOrElse(4) { genericFallback[4] }, 5200)
+
+        // --- Seção: Livros Populares ---
+        val generalTerms = RecommendationManager.getGeneralSearchTerms(this)
+        carregarLivroSeguro(R.id.item_livro_10, generalTerms.getOrElse(0) { "ficção" }, 6000)
+        carregarLivroSeguro(R.id.item_livro_20, generalTerms.getOrElse(1) { "história" }, 6800)
+        carregarLivroSeguro(R.id.item_livro_30, generalTerms.getOrElse(2) { "romance" }, 7600)
+        carregarLivroSeguro(R.id.item_livro_40, generalTerms.getOrElse(3) { "biografia" }, 8400)
+        carregarLivroSeguro(R.id.item_livro_50, generalTerms.getOrElse(4) { "ciência" }, 9200)
     }
 
     private fun configurarCliquesLivros() {
@@ -195,6 +266,11 @@ class TelahomeActivity : AppCompatActivity() {
                 intent.putExtra("BOOK_PAGES", info.pageCount?.toString())
                 intent.putExtra("BOOK_SYNOPSIS", info.description)
                 intent.putExtra("BOOK_IMAGE", info.imageLinks?.thumbnail?.replace("http://", "https://"))
+                
+                // Algoritmo: Aprende quando o usuário clica num livro
+                info.title?.let { RecommendationManager.addInterest(this, it) }
+                info.categories?.firstOrNull()?.let { RecommendationManager.addInterest(this, it) }
+                info.authors?.firstOrNull()?.let { RecommendationManager.addInterest(this, it) }
             }
 
             if (v.id == R.id.item_livro_b) {
@@ -214,15 +290,16 @@ class TelahomeActivity : AppCompatActivity() {
         }
 
         findViewById<TextView?>(R.id.VerTudo)?.setOnClickListener {
-            val intent = Intent(this, VerTudoActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, ListaDesejosActivity::class.java))
         }
         findViewById<TextView?>(R.id.VerTudo2)?.setOnClickListener {
             val intent = Intent(this, VerTudoActivity::class.java)
+            intent.putExtra("TIPO_LISTA", "CURSO")
             startActivity(intent)
         }
         findViewById<TextView?>(R.id.VerTudo3)?.setOnClickListener {
             val intent = Intent(this, VerTudoActivity::class.java)
+            intent.putExtra("TIPO_LISTA", "ALGORITMO")
             startActivity(intent)
         }
 

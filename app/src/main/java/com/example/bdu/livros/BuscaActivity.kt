@@ -25,7 +25,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-private val apiKey = "AIzaSyDQ6UjmHMd4SmKrLfxp8h3UfJqIrtNk7BE"
+private val apiKey = "AIzaSyB0MZ-X3tR51eJW1GOTcN6v57tzojhIvw8"
 
 class BuscaActivity : AppCompatActivity() {
 
@@ -48,7 +48,6 @@ class BuscaActivity : AppCompatActivity() {
             insets
         }
 
-
         adapter = SugestoesAdapter { livro ->
             val intent = Intent(this, PaginaDoLivroActivity::class.java)
             val info = livro.volumeInfo
@@ -63,33 +62,45 @@ class BuscaActivity : AppCompatActivity() {
             intent.putExtra("BOOK_SYNOPSIS", info.description)
             intent.putExtra("BOOK_IMAGE", info.imageLinks?.thumbnail?.replace("http://", "https://"))
             intent.putExtra("IS_ESGOTADO", false)
+            
+            // Algoritmo: Aprende com o livro que o usuário escolheu ver
+            info.title?.let { RecommendationManager.addInterest(this, it) }
+            info.categories?.firstOrNull()?.let { RecommendationManager.addInterest(this, it) }
+            
             startActivity(intent)
         }
         recyclerViewSugestoes.layoutManager = LinearLayoutManager(this)
         recyclerViewSugestoes.adapter = adapter
 
+        val btnAplicar = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnAplicarFiltros)
+
         searchViewBusca.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+                if (!query.isNullOrBlank()) {
+                    RecommendationManager.addInterest(this@BuscaActivity, query)
+                }
+                buscarComFiltros()
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchJob?.cancel()
-                if (!newText.isNullOrBlank()) {
-                    searchJob = lifecycleScope.launch {
-                        delay(500) // Debounce
-                        buscarLivros(newText)
-                    }
-                } else {
-                    recyclerViewSugestoes.visibility = View.GONE
+                searchJob = lifecycleScope.launch {
+                    delay(600)
+                    buscarComFiltros()
                 }
                 return true
             }
         })
 
-        findViewById<ImageButton>(R.id.btn_backReturn)?.setOnClickListener {
-            finish()
+        btnAplicar?.setOnClickListener {
+            val query = searchViewBusca.query.toString()
+            if (query.isNotBlank()) {
+                RecommendationManager.addInterest(this, query)
+            }
+            buscarComFiltros()
         }
+
         btnreturn?.setOnClickListener {
             val intent = Intent(this, TelahomeActivity::class.java)
             startActivity(intent)
@@ -117,24 +128,78 @@ class BuscaActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun buscarLivros(query: String) {
-        try {
-            val response = withContext(Dispatchers.IO) {
-                RetrofitInstance.api.searchBooks(query, apiKey)
-            }
-            val livros = response.items ?: emptyList()
-            withContext(Dispatchers.Main) {
-                if (livros.isNotEmpty()) {
-                    adapter.setLivros(livros)
-                    recyclerViewSugestoes.visibility = View.VISIBLE
-                } else {
-                    recyclerViewSugestoes.visibility = View.GONE
+    private fun buscarComFiltros() {
+        val searchViewBusca = findViewById<SearchView>(R.id.searchViewBusca)
+        val queryText = searchViewBusca.query.toString()
+        
+        val spinnerGenero = findViewById<android.widget.Spinner>(R.id.spinnerGenero)
+        val editTextData = findViewById<android.widget.EditText>(R.id.editTextData)
+        val spinnerCurso = findViewById<android.widget.Spinner>(R.id.spinnerCursoBusca)
+        
+        val genero = spinnerGenero?.selectedItem?.toString() ?: ""
+        val ano = editTextData?.text?.toString() ?: ""
+        val curso = spinnerCurso?.selectedItem?.toString() ?: ""
+
+        if (queryText.isBlank() && (genero == "Todos os Gêneros" || genero == "") && ano.isBlank() && (curso == "Todos os Cursos" || curso == "")) {
+            recyclerViewSugestoes.visibility = View.GONE
+            return
+        }
+
+        lifecycleScope.launch {
+            try {
+                var apiQuery = ""
+                
+                if (queryText.isNotBlank()) {
+                    apiQuery += "intitle:\"$queryText\""
                 }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            withContext(Dispatchers.Main) {
-                recyclerViewSugestoes.visibility = View.GONE
+                
+                if (genero != "Todos os Gêneros" && genero.isNotBlank()) {
+                    if (apiQuery.isNotBlank()) apiQuery += "+"
+                    apiQuery += "subject:\"$genero\""
+                    RecommendationManager.addInterest(this@BuscaActivity, genero)
+                }
+
+                if (curso != "Todos os Cursos" && curso.isNotBlank()) {
+                    if (apiQuery.isNotBlank()) apiQuery += "+"
+                    apiQuery += "\"$curso\""
+                    RecommendationManager.addInterest(this@BuscaActivity, curso)
+                }
+
+                if (ano.isNotBlank()) {
+                    if (apiQuery.isBlank()) apiQuery = "publishedDate:$ano"
+                    else apiQuery += "+inpublisher:$ano"
+                }
+                
+                if (apiQuery.isBlank()) apiQuery = "livros"
+
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.searchBooks(apiQuery, apiKey)
+                }
+
+                val originalResults = response.items ?: emptyList()
+                
+                val filteredResults = originalResults.filter { book ->
+                    val title = book.volumeInfo.title ?: ""
+                    val matchesText = queryText.isBlank() || title.contains(queryText, ignoreCase = true)
+                    val matchesYear = ano.isBlank() || (book.volumeInfo.publishedDate?.contains(ano) == true)
+                    matchesText && matchesYear
+                }
+
+                withContext(Dispatchers.Main) {
+                    if (filteredResults.isNotEmpty()) {
+                        adapter.setLivros(filteredResults)
+                        recyclerViewSugestoes.visibility = View.VISIBLE
+                    } else {
+                        if (originalResults.isNotEmpty() && queryText.length <= 2) {
+                            adapter.setLivros(originalResults.take(5))
+                            recyclerViewSugestoes.visibility = View.VISIBLE
+                        } else {
+                            recyclerViewSugestoes.visibility = View.GONE
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

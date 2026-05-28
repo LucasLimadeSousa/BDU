@@ -8,13 +8,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
-import com.example.bdu.pagamentos.SelecionarMetodoActivity
 import com.example.bdu.livros.TelahomeActivity
-import kotlin.jvm.java
+import java.util.Locale
 
 class CartaoCredActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,14 +26,22 @@ class CartaoCredActivity : AppCompatActivity() {
             insets
         }
 
+        val tvValorTotal = findViewById<TextView>(R.id.textViewValorTotal)
+        
+        // Exibir o valor atual da dívida
+        tvValorTotal?.text = String.format(Locale.getDefault(), "Valor total: R$%.2f", PaymentManager.divida)
+
         findViewById<ImageButton>(R.id.imgBtnVoltarCred).setOnClickListener {
             finish()
         }
 
         findViewById<Button>(R.id.btnConfirmarPagamento).setOnClickListener {
-            val valorTotal = findViewById<TextView>(R.id.textViewValorTotal).text.toString().replace("Valor total: ", "")
+            val valorTotalStr = String.format(Locale.getDefault(), "R$%.2f", PaymentManager.divida)
+
+            // Zera a dívida
+            PaymentManager.divida = 0.0
             
-            Toast.makeText(this, "O valor $valorTotal foi quitado com sucesso.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "O valor $valorTotalStr foi quitado com sucesso.", Toast.LENGTH_LONG).show()
 
             val intent = Intent(this, TelahomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

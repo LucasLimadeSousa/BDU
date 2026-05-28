@@ -31,7 +31,7 @@ import com.example.bdu.model.ImageLinks
 import com.example.bdu.model.IndustryIdentifier
 import retrofit2.HttpException
 
-private const val apiKey = "AIzaSyB0MZ-X3tR51eJW1GOTcN6v57tzojhIvw8"
+private const val apiKey = "AIzaSyBiIxsUcqL9mzrxTAnSFmowMpL7e-e9ow4"
 
 class TelahomeActivity : AppCompatActivity() {
 

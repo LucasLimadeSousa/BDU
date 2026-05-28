@@ -56,12 +56,15 @@
                 app:tint="@color/black" />
 
             <!-- Valor a Pagar Section -->
+
+            <!-- Card 1: Multa por Atraso -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp">
 
                 <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -90,15 +93,26 @@
                     android:id="@+id/btnPagar"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
+                    android:backgroundTint="@color/unifor_blue"
                     android:text="PAGAR"
                     app:cornerRadius="28dp"
-                    android:backgroundTint="@color/unifor_blue"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/buttonSomar"
+                    android:layout_width="58dp"
+                    android:layout_height="46dp"
+                    android:text="+"
+                    android:textColorLink="#EF0000"
+                    android:backgroundTint="@color/unifor_blue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Card 1: Multa por Atraso -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

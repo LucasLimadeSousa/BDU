@@ -22,7 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-private const val apiKey = "AIzaSyB0MZ-X3tR51eJW1GOTcN6v57tzojhIvw8"
+private const val apiKey = "AIzaSyBiIxsUcqL9mzrxTAnSFmowMpL7e-e9ow4"
 
 class VerTudoActivity : AppCompatActivity() {
 

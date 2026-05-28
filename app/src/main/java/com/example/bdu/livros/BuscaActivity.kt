@@ -25,7 +25,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-private val apiKey = "AIzaSyB0MZ-X3tR51eJW1GOTcN6v57tzojhIvw8"
+private val apiKey = "AIzaSyBiIxsUcqL9mzrxTAnSFmowMpL7e-e9ow4"
 
 class BuscaActivity : AppCompatActivity() {
 

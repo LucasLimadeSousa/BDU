@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
 import com.example.bdu.livros.TelahomeActivity
+import java.util.Locale
 
 class CartaoDebActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,15 +29,22 @@ class CartaoDebActivity : AppCompatActivity() {
 
         val btnConfirmar = findViewById<Button>(R.id.btnConfirmarPagamento)
         val btnVoltar = findViewById<ImageButton>(R.id.imgBtnVoltarCred)
+        val tvValorTotal = findViewById<TextView>(R.id.textViewValorTotal)
+
+        // Exibir o valor atual da dívida
+        tvValorTotal?.text = String.format(Locale.getDefault(), "Valor total: R$%.2f", PaymentManager.divida)
 
         btnVoltar?.setOnClickListener {
             finish()
         }
 
         btnConfirmar?.setOnClickListener {
-            val valorTotal = findViewById<TextView>(R.id.textViewValorTotal).text.toString().replace("Valor total: ", "")
+            val valorTotalStr = String.format(Locale.getDefault(), "R$%.2f", PaymentManager.divida)
             
-            Toast.makeText(this, "O valor $valorTotal foi quitado com sucesso.", Toast.LENGTH_LONG).show()
+            // Zera a dívida
+            PaymentManager.divida = 0.0
+            
+            Toast.makeText(this, "O valor $valorTotalStr foi quitado com sucesso.", Toast.LENGTH_LONG).show()
 
             val intent = Intent(this, TelahomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -1,5 +1,6 @@
 package com.example.bdu.login
 
+import Usuario
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -32,27 +33,24 @@ class EmailRecuperacaoActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 try {
-                    // Voltando para o CLIENT ORIGINAL para buscar o usuário e enviar o e-mail
+                    // Verificar se o email existe na tabela Dados_Usuario
                     val response = SupabaseConfig.client.from("Dados_Usuario")
                         .select {
                             filter {
                                 eq("email", email)
                             }
                         }
-                    
-                    val userExists = response.data != "[]"
+                    val userExists = response.decodeList<Usuario>().isNotEmpty()
 
-                    if (!userExists) {
-                        Toast.makeText(this@EmailRecuperacaoActivity, "Este e-mail não está cadastrado.", Toast.LENGTH_SHORT).show()
-                        return@launch
+                    if (userExists) {
+                        SupabaseConfig.client.auth.resetPasswordForEmail(email)
+                        Toast.makeText(this@EmailRecuperacaoActivity, "Código de recuperação enviado!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@EmailRecuperacaoActivity, AutenticacaoActivity::class.java)
+                        intent.putExtra("email", email)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this@EmailRecuperacaoActivity, "E-mail não encontrado.", Toast.LENGTH_SHORT).show()
                     }
-
-                    // Enviando pelo CLIENT ORIGINAL
-                    SupabaseConfig.client.auth.resetPasswordForEmail(email)
-                    
-                    val intent = Intent(this@EmailRecuperacaoActivity, AutenticacaoActivity::class.java)
-                    intent.putExtra("email", email)
-                    startActivity(intent)
                 } catch (e: Exception) {
                     Toast.makeText(this@EmailRecuperacaoActivity, "Erro: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -60,6 +58,7 @@ class EmailRecuperacaoActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonVoltar).setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }

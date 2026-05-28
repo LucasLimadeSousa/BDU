@@ -28,7 +28,35 @@ import androidx.core.graphics.toColorInt
 import android.widget.ImageView
 import coil.load
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
+import androidx.core.app.NotificationCompat
+
 class PaginaDoLivroActivity : AppCompatActivity() {
+
+    private fun showRentalNotification(bookTitle: String) {
+        val channelId = "rental_channel"
+        val notificationId = 101
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, "Aluguéis", NotificationManager.IMPORTANCE_DEFAULT)
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        val builder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_nav_book_user) // Usando um ícone existente
+            .setContentTitle("Livro Alugado!")
+            .setContentText("Você alugou: $bookTitle")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+
+        notificationManager.notify(notificationId, builder.build())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -96,17 +124,53 @@ class PaginaDoLivroActivity : AppCompatActivity() {
         btnWishlist?.setOnClickListener {
             isFavorito = !isFavorito
             
-            // Salva o novo estado
-            prefs.edit().putBoolean(bookKey, isFavorito).apply()
+            val editor = prefs.edit()
+            editor.putBoolean(bookKey, isFavorito)
+            
+            val favoritesSet = prefs.getStringSet("favorites_list", null)?.toMutableSet() ?: mutableSetOf()
 
-            // Atualiza visualmente
             if (isFavorito) {
                 btnWishlist.iconTint = ColorStateList.valueOf(Color.RED)
                 Toast.makeText(this, "Adicionado aos favoritos", Toast.LENGTH_SHORT).show()
+                
+                // Salva os dados do livro para mostrar na lista de desejos
+                bookTitle?.let { title ->
+                    favoritesSet.add(title)
+                    editor.putString("author_$title", bookAuthor)
+                    editor.putString("image_$title", bookImage)
+                    editor.putString("genre_$title", bookGenre)
+                    editor.putString("publication_$title", bookPublication)
+                    editor.putString("isbn_$title", bookIsbn)
+                    editor.putString("publisher_$title", bookPublisher)
+                    editor.putString("pages_$title", bookPages)
+                    editor.putString("synopsis_$title", bookSynopsis)
+
+                    // Algoritmo: Adiciona interesse (se a privacidade de favoritos permitir)
+                    if (!RecommendationManager.isFavoritesPrivate(this)) {
+                        RecommendationManager.addInterest(this, title)
+                        bookGenre?.split(",")?.firstOrNull()?.let { RecommendationManager.addInterest(this, it.trim()) }
+                        bookAuthor?.let { RecommendationManager.addInterest(this, it) }
+                    }
+                }
             } else {
                 btnWishlist.iconTint = ColorStateList.valueOf(Color.WHITE)
                 Toast.makeText(this, "Removido dos favoritos", Toast.LENGTH_SHORT).show()
+                
+                bookTitle?.let { title ->
+                    favoritesSet.remove(title)
+                    editor.remove("author_$title")
+                    editor.remove("image_$title")
+                    editor.remove("genre_$title")
+                    editor.remove("publication_$title")
+                    editor.remove("isbn_$title")
+                    editor.remove("publisher_$title")
+                    editor.remove("pages_$title")
+                    editor.remove("synopsis_$title")
+                }
             }
+            
+            editor.putStringSet("favorites_list", favoritesSet)
+            editor.apply()
         }
         // ----------------------------------------
 
@@ -119,10 +183,22 @@ class PaginaDoLivroActivity : AppCompatActivity() {
                 builder.setMessage("Este livro está esgotado. Gostaria de colocá-lo em sua lista de espera?")
 
                 builder.setPositiveButton("Sim") { _, _ ->
+                    // Adiciona à lista de espera real
+                    val waitlistItem = WaitlistItem(
+                        title = bookTitle ?: "Livro",
+                        author = bookAuthor,
+                        image = bookImage,
+                        position = "${(2..10).random()} de ${(11..20).random()}",
+                        date = "1${(0..9).random()}/05"
+                    )
+                    WaitlistManager.addToWaitlist(this@PaginaDoLivroActivity, waitlistItem)
+                    
+                    Toast.makeText(this@PaginaDoLivroActivity, "livro na lista de espera", Toast.LENGTH_LONG).show()
+
                     // Segundo Pop Up com link clicável
                     val infoBuilder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
                     
-                    val message = "Livro reservado com sucesso.\nVisualize sua lista de reservas."
+                    val message = "Livro na lista de espera.\nVisualize sua lista de reservas."
                     val spannableString = SpannableString(message)
                     
                     val clickableSpan = object : ClickableSpan() {
@@ -164,22 +240,40 @@ class PaginaDoLivroActivity : AppCompatActivity() {
                     it.setTextColor(Color.WHITE)
                 }
                 dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.let {
+                    val tvBookTitle = findViewById<TextView>(R.id.tvBookTitleMain)
+                    val ivBookCover = findViewById<ImageView>(R.id.ivBookCover)
+                    val tvBookSynopsis = findViewById<TextView>(R.id.tvBookSynopsis)
                     it.setBackgroundColor("#D32F2F".toColorInt())
                     it.setTextColor(Color.WHITE)
                 }
 
             } else {
                 // LÓGICA NORMAL PARA LIVRO DISPONÍVEL
+                if (RentalManager.hasRentedInSession()) {
+                    Toast.makeText(this, "Você já possui um livro alugado nesta sessão. Devolva-o para alugar outro.", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
                 val builder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
                 builder.setMessage("Você tem certeza que quer reservar o livro: $bookTitle ?")
 
                 builder.setPositiveButton("Sim") { _, _ ->
+                    // Salva o livro no gerenciador de sessão e no histórico permanente
+                    RentalManager.rentBook(this, bookTitle ?: "Livro sem título", bookImage, bookAuthor)
+                    
+                    // Algoritmo: Adiciona interesse ao alugar
+                    RecommendationManager.addInterest(this, bookTitle ?: "")
+                    bookAuthor?.let { RecommendationManager.addInterest(this, it) }
+                    bookGenre?.split(",")?.firstOrNull()?.let { RecommendationManager.addInterest(this, it.trim()) }
+
+                    // Mostra notificação
+                    showRentalNotification(bookTitle ?: "Livro")
+
                     val infoBuilder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
-                    infoBuilder.setMessage("O livro está reservado para (Seu nome).\nBusque na Biblioteca Unifor em até (Dias) apresentando documento com foto.")
+                    infoBuilder.setMessage("O livro está reservado para você.\nBusque na Biblioteca Unifor em até 3 dias apresentando documento com foto.")
                     infoBuilder.setPositiveButton("OK") { _, _ ->
-                        val intentHome = Intent(this, TelahomeActivity::class.java)
-                        intentHome.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intentHome)
+                        val intentMeusLivros = Intent(this, MeusLivrosActivity::class.java)
+                        startActivity(intentMeusLivros)
                         finish()
                     }
                     val infoDialog = infoBuilder.create()

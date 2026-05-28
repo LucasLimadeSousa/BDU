@@ -125,10 +125,12 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilConfirmarSenha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         app:endIconMode="password_toggle"
+                        app:errorIconDrawable="@null"
                         app:hintTextColor="@color/unifor_blue"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 

@@ -24,6 +24,7 @@ import com.example.bdu.login.LoginActivity
 import com.example.bdu.network.SupabaseConfig
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputLayout
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
@@ -40,14 +41,29 @@ class AlterarSenhaActivity : AppCompatActivity() {
         }
 
         val editNovaSenha = findViewById<EditText>(R.id.editTextNovaSenha)
-        
-        editNovaSenha.addTextChangedListener(object : TextWatcher {
+        val editConfirmarSenha = findViewById<EditText>(R.id.editTextConfirmarSenha)
+        val tilConfirmarSenha = findViewById<TextInputLayout>(R.id.tilConfirmarSenha)
+
+        val watcherSenhas = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                atualizarRequisitos(s.toString())
+                val nova = editNovaSenha.text.toString()
+                val confirma = editConfirmarSenha.text.toString()
+
+                atualizarRequisitos(nova)
+
+                if (confirma.isNotEmpty() && nova != confirma) {
+                    tilConfirmarSenha.error = "As senhas não coincidem"
+                } else {
+                    tilConfirmarSenha.error = null
+                    tilConfirmarSenha.isErrorEnabled = false
+                }
             }
             override fun afterTextChanged(s: Editable?) {}
-        })
+        }
+
+        editNovaSenha.addTextChangedListener(watcherSenhas)
+        editConfirmarSenha.addTextChangedListener(watcherSenhas)
 
         findViewById<ImageButton>(R.id.imageButton2).setOnClickListener {
             finish()
@@ -96,7 +112,7 @@ class AlterarSenhaActivity : AppCompatActivity() {
 
     private fun executarVerificacaoEConfirmacao() {
         val senhaAtual = findViewById<EditText>(R.id.editTextSenhaAtual).text.toString()
-        val novaSenha = findViewById<EditText>(R.id.editTextNovaSenha)!!.text.toString()
+        val novaSenha = findViewById<EditText>(R.id.editTextNovaSenha).text.toString()
         val confirmarSenha = findViewById<EditText>(R.id.editTextConfirmarSenha).text.toString()
 
         if (senhaAtual.isEmpty() || novaSenha.isEmpty() || confirmarSenha.isEmpty()) {
@@ -106,6 +122,11 @@ class AlterarSenhaActivity : AppCompatActivity() {
 
         if (novaSenha != confirmarSenha) {
             Toast.makeText(this, "As novas senhas não coincidem", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (novaSenha == senhaAtual) {
+            Toast.makeText(this, "A nova senha não pode ser igual à senha atual", Toast.LENGTH_SHORT).show()
             return
         }
 

@@ -41,7 +41,7 @@ class AutenticacaoActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     // Validando no CLIENT ORIGINAL
-                    SupabaseConfig.newClient.auth.verifyEmailOtp(
+                    SupabaseConfig.client.auth.verifyEmailOtp(
                         type = OtpType.Email.RECOVERY,
                         email = email,
                         token = codigo

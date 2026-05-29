@@ -31,8 +31,6 @@ import com.example.bdu.model.ImageLinks
 import com.example.bdu.model.IndustryIdentifier
 import retrofit2.HttpException
 
-private const val apiKey = "AIzaSyBiIxsUcqL9mzrxTAnSFmowMpL7e-e9ow4"
-
 class TelahomeActivity : AppCompatActivity() {
 
     private var isAdm: Boolean = false
@@ -112,7 +110,7 @@ class TelahomeActivity : AppCompatActivity() {
                 while (tentativa < 3 && !sucesso) {
                     try {
                         val resposta = withContext(Dispatchers.IO) {
-                            RetrofitInstance.api.searchBooks(query, apiKey)
+                            RetrofitInstance.api.searchBooks(query, RetrofitInstance.API_KEY)
                         }
 
                         val livro = resposta.items?.firstOrNull {

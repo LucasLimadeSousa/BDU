@@ -62,7 +62,8 @@ class ListadeEsperaActivity : AppCompatActivity() {
                 
                 val btnMoverDesejos = itemView.findViewById<MaterialButton>(R.id.btn_mover_desejos)
                 btnMoverDesejos.setOnClickListener {
-                    Toast.makeText(this, "Mover para Desejos em breve!", Toast.LENGTH_SHORT).show()
+                    WishlistManager.addToWishlist(this, item)
+                    Toast.makeText(this, "Adicionado à Lista de Desejos", Toast.LENGTH_SHORT).show()
                 }
 
                 itemView.findViewById<MaterialButton>(R.id.btn_remover_espera).setOnClickListener {

@@ -296,9 +296,12 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAdicionarLivro"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_margin="32dp"
-                android:text="ADICIONAR LIVRO" />
+                android:text="ADICIONAR LIVRO"
+                android:backgroundTint="@color/unifor_blue"
+                android:textStyle="bold"
+                app:cornerRadius="28dp" />
 
         </LinearLayout>
     </ScrollView>

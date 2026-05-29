@@ -5,6 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
+    const val API_KEY = "AIzaSyBaLvjc1Ky2-L9OqJOv9lxICkslUQ6x-wY"
+
     val api: BooksApi by lazy {
 
         Retrofit.Builder()

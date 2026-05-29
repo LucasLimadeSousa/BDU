@@ -13,13 +13,4 @@ object SupabaseConfig {
         install(Postgrest)
         install(Auth)
     }
-
-    // Novo cliente (fornecido recentemente)
-    val newClient = createSupabaseClient(
-        supabaseUrl = "https://apllujvhuogomchstley.supabase.co",
-        supabaseKey = "sb_publishable_MxMjxOn8piFUyZ_8ezNS9g_WZQ8GevL"
-    ) {
-        install(Postgrest)
-        install(Auth)
-    }
 }

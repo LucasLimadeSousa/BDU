@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.bdu.R
 import com.example.bdu.network.SupabaseConfig
 import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
 
 class EsqueciSenhaActivity : AppCompatActivity() {
@@ -50,10 +51,27 @@ class EsqueciSenhaActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 try {
-                    // Atualizando no CLIENT ORIGINAL
+                    // 1. Atualiza a senha no Supabase Auth (Sistema de Autenticação)
                     SupabaseConfig.client.auth.updateUser {
                         password = novaSenha
                     }
+
+                    // 2. Atualiza a senha na tabela Dados_Usuario (Banco de Dados)
+                    // Buscamos o email do usuário atual logado
+                    val userEmail = SupabaseConfig.client.auth.currentUserOrNull()?.email
+                    
+                    if (userEmail != null) {
+                        SupabaseConfig.client.from("Dados_Usuario").update(
+                            {
+                                set("senha", novaSenha)
+                            }
+                        ) {
+                            filter {
+                                eq("email", userEmail)
+                            }
+                        }
+                    }
+
                     Toast.makeText(this@EsqueciSenhaActivity, "Senha alterada com sucesso!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@EsqueciSenhaActivity, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

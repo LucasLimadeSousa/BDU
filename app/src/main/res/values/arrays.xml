@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="generos_livros">
+        <item>Ficção</item>
+        <item>Não-Ficção</item>
+        <item>Romance</item>
+        <item>Suspense</item>
+        <item>Terror</item>
+        <item>Fantasia</item>
+        <item>Autoajuda</item>
+        <item>História</item>
+        <item>Biografia</item>
+    </string-array>
+
+    <string-array name="cursos_unifor">
+        <item>Arquitetura e Urbanismo</item>
+        <item>Cinema e Audiovisual</item>
+        <item>Design de Moda</item>
+        <item>Jornalismo</item>
+        <item>Publicidade e Propaganda</item>
+        <item>Administração</item>
+        <item>Ciências Contábeis</item>
+        <item>Ciências Econômicas</item>
+        <item>Comércio Exterior</item>
+        <item>Direito</item>
+        <item>Educação Física</item>
+        <item>Enfermagem</item>
+        <item>Farmácia</item>
+        <item>Fisioterapia</item>
+        <item>Fonoaudiologia</item>
+        <item>Medicina</item>
+        <item>Medicina Veterinária</item>
+        <item>Nutrição</item>
+        <item>Odontologia</item>
+        <item>Psicologia</item>
+        <item>Engenharia Civil</item>
+        <item>Engenharia de Computação</item>
+        <item>Engenharia de Produção</item>
+        <item>Engenharia Elétrica</item>
+        <item>Engenharia Mecânica</item>
+        <item>Análise e Desenvolvimento de Sistemas</item>
+        <item>Ciência da Computação</item>
+    </string-array>
+</resources>

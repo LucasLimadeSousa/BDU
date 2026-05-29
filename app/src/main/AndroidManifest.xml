@@ -27,9 +27,6 @@
             android:name=".livros.VerTudoActivity"
             android:exported="false" />
         <activity
-            android:name=".usuario.MeusLivrosActivity"
-            android:exported="false" />
-        <activity
             android:name=".livros.ListaDesejosActivity"
             android:exported="false" />
         <activity

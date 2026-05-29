@@ -109,10 +109,12 @@ class PaginaDoLivroActivity : AppCompatActivity() {
         // --- LÓGICA DE PERSISTÊNCIA DO CORAÇÃO ---
         val btnWishlist = findViewById<MaterialButton>(R.id.btnWishlist)
         val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
-        // Usamos o título do livro como chave para saber se ele está favoritado
-        val bookKey = "fav_$bookTitle" 
         
-        var isFavorito = prefs.getBoolean(bookKey, false)
+        // Usamos o título do livro como chave para saber se ele está favoritado
+        val titleForPrefs = bookTitle ?: ""
+        val bookKey = "fav_$titleForPrefs" 
+        
+        var isFavorito = if (titleForPrefs.isNotEmpty()) prefs.getBoolean(bookKey, false) else false
 
         // Define a cor inicial baseada no que foi salvo
         if (isFavorito) {
@@ -122,6 +124,11 @@ class PaginaDoLivroActivity : AppCompatActivity() {
         }
 
         btnWishlist?.setOnClickListener {
+            if (titleForPrefs.isEmpty()) {
+                Toast.makeText(this, "Título do livro indisponível", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             isFavorito = !isFavorito
             
             val editor = prefs.edit()
@@ -134,39 +141,35 @@ class PaginaDoLivroActivity : AppCompatActivity() {
                 Toast.makeText(this, "Adicionado aos favoritos", Toast.LENGTH_SHORT).show()
                 
                 // Salva os dados do livro para mostrar na lista de desejos
-                bookTitle?.let { title ->
-                    favoritesSet.add(title)
-                    editor.putString("author_$title", bookAuthor)
-                    editor.putString("image_$title", bookImage)
-                    editor.putString("genre_$title", bookGenre)
-                    editor.putString("publication_$title", bookPublication)
-                    editor.putString("isbn_$title", bookIsbn)
-                    editor.putString("publisher_$title", bookPublisher)
-                    editor.putString("pages_$title", bookPages)
-                    editor.putString("synopsis_$title", bookSynopsis)
+                favoritesSet.add(titleForPrefs)
+                editor.putString("author_$titleForPrefs", bookAuthor)
+                editor.putString("image_$titleForPrefs", bookImage)
+                editor.putString("genre_$titleForPrefs", bookGenre)
+                editor.putString("publication_$titleForPrefs", bookPublication)
+                editor.putString("isbn_$titleForPrefs", bookIsbn)
+                editor.putString("publisher_$titleForPrefs", bookPublisher)
+                editor.putString("pages_$titleForPrefs", bookPages)
+                editor.putString("synopsis_$titleForPrefs", bookSynopsis)
 
-                    // Algoritmo: Adiciona interesse (se a privacidade de favoritos permitir)
-                    if (!RecommendationManager.isFavoritesPrivate(this)) {
-                        RecommendationManager.addInterest(this, title)
-                        bookGenre?.split(",")?.firstOrNull()?.let { RecommendationManager.addInterest(this, it.trim()) }
-                        bookAuthor?.let { RecommendationManager.addInterest(this, it) }
-                    }
+                // Algoritmo: Adiciona interesse (se a privacidade de favoritos permitir)
+                if (!RecommendationManager.isFavoritesPrivate(this)) {
+                    RecommendationManager.addInterest(this, titleForPrefs)
+                    bookGenre?.split(",")?.firstOrNull()?.let { RecommendationManager.addInterest(this, it.trim()) }
+                    bookAuthor?.let { RecommendationManager.addInterest(this, it) }
                 }
             } else {
                 btnWishlist.iconTint = ColorStateList.valueOf(Color.WHITE)
                 Toast.makeText(this, "Removido dos favoritos", Toast.LENGTH_SHORT).show()
                 
-                bookTitle?.let { title ->
-                    favoritesSet.remove(title)
-                    editor.remove("author_$title")
-                    editor.remove("image_$title")
-                    editor.remove("genre_$title")
-                    editor.remove("publication_$title")
-                    editor.remove("isbn_$title")
-                    editor.remove("publisher_$title")
-                    editor.remove("pages_$title")
-                    editor.remove("synopsis_$title")
-                }
+                favoritesSet.remove(titleForPrefs)
+                editor.remove("author_$titleForPrefs")
+                editor.remove("image_$titleForPrefs")
+                editor.remove("genre_$titleForPrefs")
+                editor.remove("publication_$titleForPrefs")
+                editor.remove("isbn_$titleForPrefs")
+                editor.remove("publisher_$titleForPrefs")
+                editor.remove("pages_$titleForPrefs")
+                editor.remove("synopsis_$titleForPrefs")
             }
             
             editor.putStringSet("favorites_list", favoritesSet)

@@ -25,8 +25,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-private val apiKey = "AIzaSyBiIxsUcqL9mzrxTAnSFmowMpL7e-e9ow4"
-
 class BuscaActivity : AppCompatActivity() {
 
     private var searchJob: Job? = null
@@ -173,7 +171,7 @@ class BuscaActivity : AppCompatActivity() {
                 if (apiQuery.isBlank()) apiQuery = "livros"
 
                 val response = withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.searchBooks(apiQuery, apiKey)
+                    RetrofitInstance.api.searchBooks(apiQuery, RetrofitInstance.API_KEY)
                 }
 
                 val originalResults = response.items ?: emptyList()

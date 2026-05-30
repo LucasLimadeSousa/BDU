@@ -4,8 +4,10 @@ import Usuario
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
@@ -26,8 +28,6 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
-import android.widget.ImageButton
-import android.widget.TextView
 
 class CadastroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,9 @@ class CadastroActivity : AppCompatActivity() {
 
         configurarLayoutEdgetoEdge()
         configurarLinkTermos()
+        configurarMascaraCPF()
+        configurarMascaraTelefone()
+        configurarMascaraData()
 
         findViewById<TextView>(R.id.btnFinalizar).setOnClickListener {
             executarCadastro()
@@ -197,5 +200,122 @@ class CadastroActivity : AppCompatActivity() {
         }
     }
 
+    private fun configurarMascaraCPF() {
+        val inputCpf = findViewById<EditText>(R.id.inputCpf)
+        inputCpf.addTextChangedListener(object : TextWatcher {
+            private var isUpdating = false
 
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val str = s.toString().replace(Regex("[^\\d]"), "")
+                if (isUpdating) {
+                    isUpdating = false
+                    return
+                }
+
+                var formatted = ""
+                var i = 0
+                val mask = "###.###.###-##"
+                for (m in mask.toCharArray()) {
+                    if (m != '#' && str.length > i) {
+                        formatted += m
+                        continue
+                    }
+                    try {
+                        formatted += str[i]
+                    } catch (e: Exception) {
+                        break
+                    }
+                    i++
+                }
+
+                isUpdating = true
+                inputCpf.setText(formatted)
+                inputCpf.setSelection(formatted.length)
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    private fun configurarMascaraTelefone() {
+        val inputTelefone = findViewById<EditText>(R.id.inputTelefone)
+        inputTelefone.addTextChangedListener(object : TextWatcher {
+            private var isUpdating = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val str = s.toString().replace(Regex("[^\\d]"), "")
+                if (isUpdating) {
+                    isUpdating = false
+                    return
+                }
+
+                var formatted = ""
+                var i = 0
+                val mask = "(##) #####-####"
+                
+                for (m in mask.toCharArray()) {
+                    if (m != '#' && str.length > i) {
+                        formatted += m
+                        continue
+                    }
+                    try {
+                        formatted += str[i]
+                    } catch (e: Exception) {
+                        break
+                    }
+                    i++
+                }
+
+                isUpdating = true
+                inputTelefone.setText(formatted)
+                inputTelefone.setSelection(formatted.length)
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    private fun configurarMascaraData() {
+        val inputData = findViewById<EditText>(R.id.inputDataNascimento)
+        inputData.addTextChangedListener(object : TextWatcher {
+            private var isUpdating = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val str = s.toString().replace(Regex("[^\\d]"), "")
+                if (isUpdating) {
+                    isUpdating = false
+                    return
+                }
+
+                var formatted = ""
+                var i = 0
+                val mask = "##/##/####"
+                
+                for (m in mask.toCharArray()) {
+                    if (m != '#' && str.length > i) {
+                        formatted += m
+                        continue
+                    }
+                    try {
+                        formatted += str[i]
+                    } catch (e: Exception) {
+                        break
+                    }
+                    i++
+                }
+
+                isUpdating = true
+                inputData.setText(formatted)
+                inputData.setSelection(formatted.length)
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
 }

@@ -1,10 +1,12 @@
 package com.example.bdu.usuario
 
 import Usuario
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -23,6 +25,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
+import io.github.jan.supabase.storage.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -39,7 +42,7 @@ class MeuPerfilActivity : AppCompatActivity() {
         }
 
 
-        carregarNomeUsuario()
+        carregarDadosUsuario()
 
         findViewById<ImageButton>(R.id.btn_nav_fila).setOnClickListener {
             startActivity(Intent(this, com.example.bdu.livros.ListadeEsperaActivity::class.java))
@@ -135,7 +138,12 @@ class MeuPerfilActivity : AppCompatActivity() {
         }
     }
 
-    private fun carregarNomeUsuario(){
+    override fun onResume() {
+        super.onResume()
+        carregarDadosUsuario()
+    }
+
+    private fun carregarDadosUsuario(){
         lifecycleScope.launch {
             try {
                 val usuarioLogado = SupabaseConfig.client.auth.currentUserOrNull()
@@ -152,6 +160,23 @@ class MeuPerfilActivity : AppCompatActivity() {
                     }
 
                     findViewById<TextView>(R.id.textView10).text = usuarioDados.nome
+
+                    // Faz o download da foto caso ela exista no banco
+                    if (!usuarioDados.foto.isNullOrEmpty()) {
+                        try {
+                            val bytes = withContext(Dispatchers.IO) {
+                                SupabaseConfig.client.storage.from("avatars").downloadPublic(usuarioDados.foto!!)
+                            }
+                            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                            if (bitmap != null) {
+                                val ivProfile = findViewById<ImageView>(R.id.imageView6)
+                                ivProfile.setImageBitmap(bitmap)
+                                ivProfile.imageTintList = null
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
             }
         } catch (e : Exception){
             e.printStackTrace()

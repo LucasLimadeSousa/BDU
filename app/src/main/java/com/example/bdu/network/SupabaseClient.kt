@@ -3,6 +3,7 @@ package com.example.bdu.network
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.storage.Storage
 
 object SupabaseConfig {
     // Cliente original (usado para login e banco atual)
@@ -12,5 +13,6 @@ object SupabaseConfig {
     ) {
         install(Postgrest)
         install(Auth)
+        install(Storage)
     }
 }

@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.Toast
 import com.example.bdu.R
+import com.example.bdu.livros.MeusLivrosActivity
 import com.example.bdu.livros.TelahomeActivity
 
 class ReportarProblemaActivity : AppCompatActivity() {
@@ -29,7 +30,7 @@ class ReportarProblemaActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnReport).setOnClickListener {
             Toast.makeText(this, "Relatório enviado com sucesso!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, TelahomeActivity::class.java)
+            val intent = Intent(this, MeusLivrosActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
         }

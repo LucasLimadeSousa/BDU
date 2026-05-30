@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.core)
     implementation("io.github.jan-tennert.supabase:supabase-kt:VERSION")
+    implementation("io.github.jan-tennert.supabase:storage-kt:VERSION")
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")

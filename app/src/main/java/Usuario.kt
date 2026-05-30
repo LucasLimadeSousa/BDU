@@ -11,5 +11,6 @@ data class Usuario(
     val cidade: String,
     val estado: String,
     val data_nascimento: String,
-    val adm: Boolean = false
+    val adm: Boolean = false,
+    val foto: String? = null
 )

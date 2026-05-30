@@ -71,8 +71,12 @@ class MeusLivrosActivity : AppCompatActivity() {
 
         // Lógica do botão "Lista de Desejos"
         val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
-        val currentBookTitle = RentalManager.sessionRentedTitle ?: "LivroPosse"
-        val bookKey = "fav_$currentBookTitle"
+        val currentBookTitle = RentalManager.sessionRentedTitle
+        val currentBookImage = RentalManager.sessionRentedImage
+        val history = RentalManager.getPersistentHistory(this)
+        val currentBookAuthor = history.find { it.title == currentBookTitle }?.author
+
+        val bookKey = "fav_${currentBookTitle ?: "LivroPosse"}"
 
         var isFavorito = prefs.getBoolean(bookKey, false)
         if (isFavorito) {
@@ -82,10 +86,32 @@ class MeusLivrosActivity : AppCompatActivity() {
         }
 
         btnAddDesejos?.setOnClickListener {
+            if (currentBookTitle == null) {
+                Toast.makeText(this, "Nenhum livro alugado para favoritar", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             isFavorito = !isFavorito
-            prefs.edit().putBoolean(bookKey, isFavorito).apply()
-            btnAddDesejos.iconTint = ColorStateList.valueOf(if (isFavorito) Color.RED else Color.WHITE)
-            Toast.makeText(this, if (isFavorito) "Adicionado aos favoritos" else "Removido", Toast.LENGTH_SHORT).show()
+            val editor = prefs.edit()
+            editor.putBoolean(bookKey, isFavorito)
+
+            val favoritesSet = prefs.getStringSet("favorites_list", null)?.toMutableSet() ?: mutableSetOf()
+
+            if (isFavorito) {
+                btnAddDesejos.iconTint = ColorStateList.valueOf(Color.RED)
+                favoritesSet.add(currentBookTitle)
+                editor.putString("author_$currentBookTitle", currentBookAuthor)
+                editor.putString("image_$currentBookTitle", currentBookImage)
+                Toast.makeText(this, "Adicionado aos favoritos", Toast.LENGTH_SHORT).show()
+            } else {
+                btnAddDesejos.iconTint = ColorStateList.valueOf(Color.WHITE)
+                favoritesSet.remove(currentBookTitle)
+                editor.remove("author_$currentBookTitle")
+                editor.remove("image_$currentBookTitle")
+                Toast.makeText(this, "Removido", Toast.LENGTH_SHORT).show()
+            }
+            editor.putStringSet("favorites_list", favoritesSet)
+            editor.apply()
         }
 
         btnReport?.setOnClickListener {

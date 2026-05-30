@@ -116,6 +116,19 @@ class CadastroActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
+                val emailExiste = SupabaseConfig.client.from("Dados_Usuario")
+                    .select {
+                        filter {
+                            eq("email", email)
+                        }
+                    }.data != "[]"
+
+                if (emailExiste) {
+                    exibirAlerta("E-mail Já Cadastrado", "Este e-mail já está sendo utilizado por outra conta")
+                    return@launch
+                }
+
+
                 val response = SupabaseConfig.client.auth.signUpWith(Email){
                     this.email = email
                     this.password = senha

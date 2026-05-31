@@ -58,10 +58,12 @@
                     android:background="@color/white"
                     android:gravity="center">
 
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imageView6"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/CircleImage"
                         app:srcCompat="@drawable/ic_person"
                         app:tint="@color/unifor_blue" />
 

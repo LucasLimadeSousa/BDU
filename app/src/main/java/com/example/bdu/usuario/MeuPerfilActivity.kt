@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -22,6 +21,7 @@ import com.example.bdu.network.SupabaseConfig
 import com.example.bdu.pagamentos.JurosMultaActivity
 import com.example.bdu.suporte.TermosCondicoesActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.imageview.ShapeableImageView
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
@@ -165,16 +165,27 @@ class MeuPerfilActivity : AppCompatActivity() {
                     if (!usuarioDados.foto.isNullOrEmpty()) {
                         try {
                             val bytes = withContext(Dispatchers.IO) {
-                                SupabaseConfig.client.storage.from("avatars").downloadPublic(usuarioDados.foto!!)
+                                // Adicionamos um timestamp para ignorar o cache e pegar a foto nova
+                                val urlComCacheBust = "${usuarioDados.foto!!}?v=${System.currentTimeMillis()}"
+                                SupabaseConfig.client.storage.from("avatars").downloadPublic(urlComCacheBust)
                             }
                             val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                             if (bitmap != null) {
-                                val ivProfile = findViewById<ImageView>(R.id.imageView6)
-                                ivProfile.setImageBitmap(bitmap)
-                                ivProfile.imageTintList = null
+                                withContext(Dispatchers.Main) {
+                                    val ivProfile = findViewById<ShapeableImageView>(R.id.imageView6)
+                                    ivProfile.setImageBitmap(bitmap)
+                                    ivProfile.imageTintList = null
+                                }
                             }
                         } catch (e: Exception) {
                             e.printStackTrace()
+                        }
+                    } else {
+                        // Caso não tenha foto, garante que o ícone padrão apareça com a cor correta
+                        withContext(Dispatchers.Main) {
+                            val ivProfile = findViewById<ShapeableImageView>(R.id.imageView6)
+                            ivProfile.setImageResource(R.drawable.ic_person)
+                            ivProfile.imageTintList = android.content.res.ColorStateList.valueOf(getColor(R.color.unifor_blue))
                         }
                     }
             }

@@ -78,12 +78,14 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="32dp">
 
-                        <ImageView
+                        <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/ivProfile"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:contentDescription="@string/desc_foto_perfil"
                             android:src="@drawable/ic_person"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/CircleImage"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

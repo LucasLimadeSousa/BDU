@@ -1,6 +1,6 @@
 package com.example.bdu.usuario
 
-import Usuario
+import com.example.bdu.model.Usuario
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.content.Intent

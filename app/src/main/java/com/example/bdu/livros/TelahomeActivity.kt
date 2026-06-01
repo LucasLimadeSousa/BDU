@@ -25,7 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import Usuario
+import com.example.bdu.model.Usuario
 import com.example.bdu.model.VolumeInfo
 import com.example.bdu.model.ImageLinks
 import com.example.bdu.model.IndustryIdentifier
@@ -55,7 +55,24 @@ class TelahomeActivity : AppCompatActivity() {
         super.onResume()
         val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
         favoritesSet = prefs.getStringSet("favorites_list", null)?.toMutableSet() ?: mutableSetOf()
+        
+        // Limpeza total antes de recarregar para evitar "livros fantasma"
         displayedTitles.clear()
+        livrosCarregados.clear()
+        
+        // Reset visual imediato de containers que podem esconder livros excluídos
+        val allContainers = listOf(
+            R.id.item_livro_a, R.id.item_livro_b, R.id.item_livro_c, R.id.item_livro_d, R.id.item_livro_e,
+            R.id.item_livro_1, R.id.item_livro_2, R.id.item_livro_3, R.id.item_livro_4, R.id.item_livro_5,
+            R.id.item_livro_10, R.id.item_livro_20, R.id.item_livro_30, R.id.item_livro_40, R.id.item_livro_50
+        )
+        allContainers.forEach { id ->
+            findViewById<LinearLayout>(id)?.let { container ->
+                container.findViewById<TextView>(R.id.tituloLivro)?.text = "Carregando..."
+                container.findViewById<ImageView>(R.id.imgLivro)?.setImageDrawable(null)
+            }
+        }
+
         carregarLivrosHome()
     }
 
@@ -67,13 +84,13 @@ class TelahomeActivity : AppCompatActivity() {
                     val usuario = SupabaseConfig.client.from("Dados_Usuario")
                         .select { filter { eq("email", userEmail) } }.decodeSingle<Usuario>()
                     isAdm = usuario.adm
-                    
+
                     // Algoritmo: Identifica e salva o curso do usuário para recomendações específicas
                     RecommendationManager.setUserCourse(this@TelahomeActivity, usuario.curso)
-                    
+
                     atualizarVisibilidadeAdm()
                     configurarCliquesLivros()
-                    
+
                     // Recarrega os livros agora que o curso foi identificado
                     carregarLivrosHome()
                 } catch (e: Exception) {
@@ -117,23 +134,45 @@ class TelahomeActivity : AppCompatActivity() {
                             val title = it.volumeInfo.title ?: ""
                             val normalizedTitle = title.lowercase().trim()
                             
+                            val isExcluded = com.example.bdu.adm.BookCatalogManager.isBookExcluded(this@TelahomeActivity, title)
+
                             it.volumeInfo.imageLinks?.thumbnail != null &&
-                            title.isNotBlank() &&
-                            !it.volumeInfo.authors.isNullOrEmpty() &&
-                            !displayedTitles.contains(normalizedTitle) && // Não repetir
-                            !favoritesSet.any { fav -> fav.lowercase().trim() == normalizedTitle } // Não estar nos favoritos
+                                    title.isNotBlank() &&
+                                    !it.volumeInfo.authors.isNullOrEmpty() &&
+                                    !displayedTitles.contains(normalizedTitle) &&
+                                    !isExcluded &&
+                                    !favoritesSet.any { fav -> fav.lowercase().trim() == normalizedTitle }
                         }
 
                         if (livro != null) {
                             val finalTitle = livro.volumeInfo.title ?: ""
                             displayedTitles.add(finalTitle.lowercase().trim())
-                            
-                            livrosCarregados[idInclude] = livro.volumeInfo
-                            txtTitulo.text = finalTitle
-                            txtAutor.text =
-                                livro.volumeInfo.authors?.getOrNull(0) ?: "Autor desconhecido"
 
-                            val imagem = livro.volumeInfo.imageLinks
+                            // Tenta carregar uma versão editada do livro se existir
+                            val override = com.example.bdu.adm.BookCatalogManager.getBookOverride(this@TelahomeActivity, finalTitle)
+                            
+                            val infoToShow = if (override != null) {
+                                VolumeInfo(
+                                    title = override.title,
+                                    authors = listOf(override.author ?: ""),
+                                    description = override.synopsis,
+                                    categories = listOf(override.genre ?: ""),
+                                    publishedDate = override.date,
+                                    pageCount = override.pages?.toIntOrNull(),
+                                    publisher = override.publisher,
+                                    language = override.language,
+                                    industryIdentifiers = listOf(IndustryIdentifier("ISBN", override.isbn)),
+                                    imageLinks = ImageLinks(override.image)
+                                )
+                            } else {
+                                livro.volumeInfo
+                            }
+
+                            livrosCarregados[idInclude] = infoToShow
+                            txtTitulo.text = infoToShow.title
+                            txtAutor.text = infoToShow.authors?.getOrNull(0) ?: "Autor desconhecido"
+
+                            val imagem = infoToShow.imageLinks
                                 ?.thumbnail
                                 ?.replace("http://", "https://")
 
@@ -154,7 +193,7 @@ class TelahomeActivity : AppCompatActivity() {
                     } catch (e: HttpException) {
                         if (e.code() == 429) {
                             txtTitulo.text = "Cota Excedida"
-                            sucesso = true 
+                            sucesso = true
                         } else {
                             tentativa++
                             if (tentativa >= 3) txtTitulo.text = "Erro API"
@@ -178,10 +217,19 @@ class TelahomeActivity : AppCompatActivity() {
     }
 
     private fun carregarLivrosHome() {
+        val allAddedBooks = com.example.bdu.adm.BookCatalogManager.getAddedBooks(this)
+        
+        // Filtra livros adicionados que não foram excluídos pelo ADM
+        val validAddedBooks = allAddedBooks.filter { 
+            !com.example.bdu.adm.BookCatalogManager.isBookExcluded(this, it.title)
+        }.toMutableList()
+
         // --- Seção: Lista de Desejos (Favoritos Reais) ---
         val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
         val listFavoritos = favoritesSet.toList()
         val idsFavoritos = listOf(R.id.item_livro_a, R.id.item_livro_b, R.id.item_livro_c, R.id.item_livro_d, R.id.item_livro_e)
+
+        var addedIndex = 0
 
         idsFavoritos.forEachIndexed { index, id ->
             val container = findViewById<LinearLayout>(id)
@@ -189,36 +237,97 @@ class TelahomeActivity : AppCompatActivity() {
                 val title = listFavoritos[index]
                 val author = prefs.getString("author_$title", "Autor desconhecido")
                 val image = prefs.getString("image_$title", null)
+
+                // Verifica se existe uma versão editada pelo ADM para este favorito
+                val override = com.example.bdu.adm.BookCatalogManager.getBookOverride(this@TelahomeActivity, title)
                 
-                displayedTitles.add(title.lowercase().trim()) // Marcamos como já exibido
+                val finalTitle = override?.title ?: title
+                val finalAuthor = override?.author ?: author
+                val finalImage = override?.image ?: image
+
+                displayedTitles.add(finalTitle.lowercase().trim())
                 container?.visibility = View.VISIBLE
                 val img = container?.findViewById<ImageView>(R.id.imgLivro)
                 val txtTitulo = container?.findViewById<TextView>(R.id.tituloLivro)
                 val txtAutor = container?.findViewById<TextView>(R.id.autorLivro)
 
-                txtTitulo?.text = title
-                txtAutor?.text = author
-                img?.load(image) {
+                txtTitulo?.text = finalTitle
+                txtAutor?.text = finalAuthor
+                img?.load(finalImage) {
                     crossfade(true)
                     placeholder(R.drawable.ic_launcher_background)
                     error(R.drawable.ic_launcher_background)
                 }
 
-                // Guardar no mapa para o clique funcionar
-                livrosCarregados[id] = VolumeInfo(
-                    title = title,
-                    authors = listOf(author ?: "Desconhecido"),
-                    description = prefs.getString("synopsis_$title", null),
-                    categories = listOf(prefs.getString("genre_$title", "") ?: ""),
-                    publishedDate = prefs.getString("publication_$title", null),
-                    pageCount = prefs.getString("pages_$title", null)?.toIntOrNull(),
-                    publisher = prefs.getString("publisher_$title", null),
-                    industryIdentifiers = listOf(IndustryIdentifier("ISBN", prefs.getString("isbn_$title", null))),
-                    imageLinks = ImageLinks(image)
-                )
+                livrosCarregados[id] = if (override != null) {
+                    VolumeInfo(
+                        title = override.title,
+                        authors = listOf(override.author ?: ""),
+                        description = override.synopsis,
+                        categories = listOf(override.genre ?: ""),
+                        publishedDate = override.date,
+                        pageCount = override.pages?.toIntOrNull(),
+                        publisher = override.publisher,
+                        language = override.language,
+                        industryIdentifiers = listOf(IndustryIdentifier("ISBN", override.isbn)),
+                        imageLinks = ImageLinks(override.image)
+                    )
+                } else {
+                    VolumeInfo(
+                        title = title,
+                        authors = listOf(author ?: "Desconhecido"),
+                        description = prefs.getString("synopsis_$title", null),
+                        categories = listOf(prefs.getString("genre_$title", "") ?: ""),
+                        publishedDate = prefs.getString("publication_$title", null),
+                        pageCount = prefs.getString("pages_$title", null)?.toIntOrNull(),
+                        publisher = prefs.getString("publisher_$title", null),
+                        language = "pt",
+                        industryIdentifiers = listOf(IndustryIdentifier("ISBN", prefs.getString("isbn_$title", null))),
+                        imageLinks = ImageLinks(image)
+                    )
+                }
             } else {
-                // Se não houver livro para este slot, deixa em branco (invisível)
-                container?.visibility = View.INVISIBLE
+                // Se sobrarem espaços nos slots da primeira fileira, coloca os livros adicionados pelo ADM
+                var foundBook = false
+                while (addedIndex < validAddedBooks.size && !foundBook) {
+                    val book = validAddedBooks[addedIndex]
+                    val normalizedTitle = book.title.lowercase().trim()
+                    
+                    if (!displayedTitles.contains(normalizedTitle)) {
+                        displayedTitles.add(normalizedTitle)
+                        container?.visibility = View.VISIBLE
+                        val img = container?.findViewById<ImageView>(R.id.imgLivro)
+                        val txtTitulo = container?.findViewById<TextView>(R.id.tituloLivro)
+                        val txtAutor = container?.findViewById<TextView>(R.id.autorLivro)
+
+                        txtTitulo?.text = book.title
+                        txtAutor?.text = book.author
+                        img?.load(book.image) {
+                            crossfade(true)
+                            placeholder(R.drawable.ic_launcher_background)
+                            error(R.drawable.ic_launcher_background)
+                        }
+
+                        livrosCarregados[id] = VolumeInfo(
+                            title = book.title,
+                            authors = listOf(book.author ?: ""),
+                            description = book.synopsis,
+                            categories = listOf(book.genre ?: ""),
+                            publishedDate = book.date,
+                            pageCount = book.pages?.toIntOrNull(),
+                            publisher = book.publisher,
+                            language = book.language,
+                            industryIdentifiers = listOf(IndustryIdentifier("ISBN", book.isbn)),
+                            imageLinks = ImageLinks(book.image)
+                        )
+                        foundBook = true
+                    }
+                    addedIndex++
+                }
+                
+                if (!foundBook) {
+                    container?.visibility = View.INVISIBLE
+                }
             }
         }
 
@@ -264,7 +373,7 @@ class TelahomeActivity : AppCompatActivity() {
                 intent.putExtra("BOOK_PAGES", info.pageCount?.toString())
                 intent.putExtra("BOOK_SYNOPSIS", info.description)
                 intent.putExtra("BOOK_IMAGE", info.imageLinks?.thumbnail?.replace("http://", "https://"))
-                
+
                 // Algoritmo: Aprende quando o usuário clica num livro
                 info.title?.let { RecommendationManager.addInterest(this, it) }
                 info.categories?.firstOrNull()?.let { RecommendationManager.addInterest(this, it) }
@@ -318,6 +427,10 @@ class TelahomeActivity : AppCompatActivity() {
         }
         findViewById<ImageButton?>(R.id.btn_nav_perfil)?.setOnClickListener {
             startActivity(Intent(this, MeuPerfilActivity::class.java))
+        }
+
+        findViewById<View?>(R.id.fab_chatbot)?.setOnClickListener {
+            startActivity(Intent(this, LivrosChatbotActivity::class.java))
         }
 
         findViewById<View?>(R.id.btnAdicionarLivro)?.setOnClickListener {

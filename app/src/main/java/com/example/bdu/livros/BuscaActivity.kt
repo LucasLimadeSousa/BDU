@@ -2,9 +2,12 @@ package com.example.bdu.livros
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SearchView
 import android.widget.TextView
@@ -60,11 +63,11 @@ class BuscaActivity : AppCompatActivity() {
             intent.putExtra("BOOK_SYNOPSIS", info.description)
             intent.putExtra("BOOK_IMAGE", info.imageLinks?.thumbnail?.replace("http://", "https://"))
             intent.putExtra("IS_ESGOTADO", false)
-            
+
             // Algoritmo: Aprende com o livro que o usuário escolheu ver
             info.title?.let { RecommendationManager.addInterest(this, it) }
             info.categories?.firstOrNull()?.let { RecommendationManager.addInterest(this, it) }
-            
+
             startActivity(intent)
         }
         recyclerViewSugestoes.layoutManager = LinearLayoutManager(this)
@@ -104,41 +107,21 @@ class BuscaActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-        findViewById<ImageButton>(R.id.btn_nav_fila)?.setOnClickListener {
-            startActivity(Intent(this, ListadeEsperaActivity::class.java))
-        }
-
-        findViewById<ImageButton>(R.id.btn_nav_meuslivros)?.setOnClickListener {
-            startActivity(Intent(this, MeusLivrosActivity::class.java))
-        }
-
-        findViewById<ImageButton>(R.id.btn_nav_home)?.setOnClickListener {
-            startActivity(Intent(this, TelahomeActivity::class.java))
-        }
-
-        findViewById<ImageButton>(R.id.btn_nav_desejos)?.setOnClickListener {
-            startActivity(Intent(this, ListaDesejosActivity::class.java))
-        }
-
-        findViewById<ImageButton>(R.id.btn_nav_perfil)?.setOnClickListener {
-            startActivity(Intent(this, MeuPerfilActivity::class.java))
-        }
     }
 
     private fun buscarComFiltros() {
         val searchViewBusca = findViewById<SearchView>(R.id.searchViewBusca)
         val queryText = searchViewBusca.query.toString()
-        
+
         val spinnerGenero = findViewById<android.widget.Spinner>(R.id.spinnerGenero)
-        val editTextData = findViewById<android.widget.EditText>(R.id.editTextData)
+        val editTextData = findViewById<EditText>(R.id.editTextData)
         val spinnerCurso = findViewById<android.widget.Spinner>(R.id.spinnerCursoBusca)
-        
+
         val genero = spinnerGenero?.selectedItem?.toString() ?: ""
         val ano = editTextData?.text?.toString() ?: ""
         val curso = spinnerCurso?.selectedItem?.toString() ?: ""
 
-        if (queryText.isBlank() && (genero == "Todos os Gêneros" || genero == "") && ano.isBlank() && (curso == "Todos os Cursos" || curso == "")) {
+        if (queryText.isBlank() && (genero == "Nenhum" || genero == "") && ano.isBlank() && (curso == "Nenhum" || curso == "")) {
             recyclerViewSugestoes.visibility = View.GONE
             return
         }
@@ -146,41 +129,95 @@ class BuscaActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 var apiQuery = ""
-                
+
                 if (queryText.isNotBlank()) {
                     apiQuery += "intitle:\"$queryText\""
                 }
-                
-                if (genero != "Todos os Gêneros" && genero.isNotBlank()) {
+
+                if (genero != "Nenhum" && genero.isNotBlank()) {
                     if (apiQuery.isNotBlank()) apiQuery += "+"
                     apiQuery += "subject:\"$genero\""
                     RecommendationManager.addInterest(this@BuscaActivity, genero)
                 }
 
-                if (curso != "Todos os Cursos" && curso.isNotBlank()) {
+                if (curso !=     "Nenhum" && curso.isNotBlank()) {
                     if (apiQuery.isNotBlank()) apiQuery += "+"
                     apiQuery += "\"$curso\""
                     RecommendationManager.addInterest(this@BuscaActivity, curso)
                 }
 
                 if (ano.isNotBlank()) {
-                    if (apiQuery.isBlank()) apiQuery = "publishedDate:$ano"
-                    else apiQuery += "+inpublisher:$ano"
+                    if (apiQuery.isNotBlank()) apiQuery += "+"
+                    apiQuery += "$ano"
                 }
-                
+
                 if (apiQuery.isBlank()) apiQuery = "livros"
 
                 val response = withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.searchBooks(apiQuery, RetrofitInstance.API_KEY)
+                    RetrofitInstance.api.searchBooks(apiQuery, RetrofitInstance.API_KEY, 40)
                 }
 
                 val originalResults = response.items ?: emptyList()
-                
-                val filteredResults = originalResults.filter { book ->
+                val addedBooks = com.example.bdu.adm.BookCatalogManager.getAddedBooks(this@BuscaActivity)
+
+                // Converte livros adicionados pelo ADM para o formato BookItem
+                val convertedAdded = addedBooks.map {
+                    com.example.bdu.model.BookItem(
+                        com.example.bdu.model.VolumeInfo(
+                            title = it.title,
+                            authors = listOf(it.author ?: ""),
+                            description = it.synopsis,
+                            categories = listOf(it.genre ?: ""),
+                            publishedDate = it.date,
+                            pageCount = it.pages?.toIntOrNull(),
+                            publisher = it.publisher,
+                            language = it.language,
+                            industryIdentifiers = listOf(com.example.bdu.model.IndustryIdentifier("ISBN", it.isbn)),
+                            imageLinks = com.example.bdu.model.ImageLinks(it.image)
+                        )
+                    )
+                }
+
+                // Junta os resultados da API com os livros adicionados manualmente
+                val allResults = convertedAdded + originalResults
+
+                val filteredResults = allResults.map { book ->
+                    // Para cada resultado, verifica se existe uma versão editada localmente
                     val title = book.volumeInfo.title ?: ""
-                    val matchesText = queryText.isBlank() || title.contains(queryText, ignoreCase = true)
-                    val matchesYear = ano.isBlank() || (book.volumeInfo.publishedDate?.contains(ano) == true)
-                    matchesText && matchesYear
+                    val override = com.example.bdu.adm.BookCatalogManager.getBookOverride(this@BuscaActivity, title)
+                    
+                    if (override != null) {
+                        com.example.bdu.model.BookItem(
+                            com.example.bdu.model.VolumeInfo(
+                                title = override.title,
+                                authors = listOf(override.author ?: ""),
+                                description = override.synopsis,
+                                categories = listOf(override.genre ?: ""),
+                                publishedDate = override.date,
+                                pageCount = override.pages?.toIntOrNull(),
+                                publisher = override.publisher,
+                                language = override.language,
+                                industryIdentifiers = listOf(com.example.bdu.model.IndustryIdentifier("ISBN", override.isbn)),
+                                imageLinks = com.example.bdu.model.ImageLinks(override.image)
+                            )
+                        )
+                    } else {
+                        book
+                    }
+                }.filter { book ->
+                    val title = book.volumeInfo.title ?: ""
+                    // Busca por texto mais flexível (contém as palavras)
+                    val matchesText = queryText.isBlank() || queryText.split(" ").all { word ->
+                        title.contains(word, ignoreCase = true)
+                    }
+
+                    // Filtro de ano rigoroso
+                    val bookDate = book.volumeInfo.publishedDate ?: ""
+                    val matchesYear = ano.isBlank() || bookDate.contains(ano)
+
+                    val isExcluded = com.example.bdu.adm.BookCatalogManager.isBookExcluded(this@BuscaActivity, title)
+                    
+                    matchesText && matchesYear && !isExcluded
                 }
 
                 withContext(Dispatchers.Main) {
@@ -188,7 +225,10 @@ class BuscaActivity : AppCompatActivity() {
                         adapter.setLivros(filteredResults)
                         recyclerViewSugestoes.visibility = View.VISIBLE
                     } else {
-                        if (originalResults.isNotEmpty() && queryText.length <= 2) {
+                        // Se o usuário especificou um ano e não houve match, não mostramos nada aleatório
+                        if (ano.isNotBlank()) {
+                            recyclerViewSugestoes.visibility = View.GONE
+                        } else if (originalResults.isNotEmpty() && queryText.length <= 2) {
                             adapter.setLivros(originalResults.take(5))
                             recyclerViewSugestoes.visibility = View.VISIBLE
                         } else {

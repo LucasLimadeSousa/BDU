@@ -1,6 +1,6 @@
 package com.example.bdu.usuario
 
-import Usuario
+import com.example.bdu.model.Usuario
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.icu.util.Calendar
@@ -20,6 +20,7 @@ import com.example.bdu.R
 import com.example.bdu.network.SupabaseConfig
 import com.google.android.material.imageview.ShapeableImageView
 import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
 import io.github.jan.supabase.storage.storage
@@ -121,16 +122,17 @@ class InformacoesPessoaisActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     val bytes = withContext(Dispatchers.IO) {
-                        // Adicionamos um timestamp para ignorar o cache do servidor
-                        val urlComCacheBust = "${usuario.foto!!}?v=${System.currentTimeMillis()}"
-                        SupabaseConfig.client.storage.from(NOME_DO_BUCKET).downloadPublic(urlComCacheBust)
+                        // Removemos o cache bust do path, pois downloadPublic espera o nome exato do arquivo
+                        SupabaseConfig.client.storage.from(NOME_DO_BUCKET).downloadPublic(usuario.foto!!)
                     }
                     val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                     if (bitmap != null) {
                         ivProfile.setImageBitmap(bitmap)
                         ivProfile.imageTintList = null
                     }
-                } catch (e: Exception) { e.printStackTrace() }
+                } catch (e: Exception) { 
+                    e.printStackTrace() 
+                }
             }
         }
     }
@@ -140,38 +142,66 @@ class InformacoesPessoaisActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 withContext(Dispatchers.IO) {
+                    // 1. Upload para o Storage
                     SupabaseConfig.client.storage.from(NOME_DO_BUCKET).upload(
                         path = nomeDoArquivo,
                         data = bytes
                     ) { upsert = true }
 
-                    SupabaseConfig.client.postgrest["Dados_Usuario"].update(
-                        update = { set("foto", nomeDoArquivo) }
-                    ) { filter { eq("email", email) } }
+                    // 2. Atualização na tabela do Banco de Dados usando sintaxe compatível
+                    SupabaseConfig.client.from("Dados_Usuario").update(
+                        {
+                            set("foto", nomeDoArquivo)
+                        }
+                    ) {
+                        filter {
+                            eq("email", email)
+                        }
+                    }
                 }
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@InformacoesPessoaisActivity, "Foto de perfil atualizada!", Toast.LENGTH_SHORT).show()
                 }
-            } catch (e: Exception) { e.printStackTrace() }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@InformacoesPessoaisActivity, "Erro ao salvar foto: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
     private fun removerFoto() {
         val email = emailUsuarioLogado ?: return
+        val nomeDoArquivo = "$email.jpg"
+        
         ivProfile.setImageResource(R.drawable.ic_person)
         ivProfile.imageTintList = android.content.res.ColorStateList.valueOf(getColor(R.color.unifor_blue))
         lifecycleScope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    SupabaseConfig.client.postgrest["Dados_Usuario"].update(
-                        update = { set("foto", null as String?) }
-                    ) { filter { eq("email", email) } }
+                    SupabaseConfig.client.from("Dados_Usuario").update(
+                        {
+                            set("foto", null as String?)
+                        }
+                    ) {
+                        filter {
+                            eq("email", email)
+                        }
+                    }
                     try {
-                        SupabaseConfig.client.storage.from(NOME_DO_BUCKET).delete("$email.jpg")
+                        SupabaseConfig.client.storage.from(NOME_DO_BUCKET).delete(nomeDoArquivo)
                     } catch (e: Exception) { }
                 }
-                Toast.makeText(this@InformacoesPessoaisActivity, "Foto removida!", Toast.LENGTH_SHORT).show()
-            } catch (e: Exception) { e.printStackTrace() }
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@InformacoesPessoaisActivity, "Foto removida!", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@InformacoesPessoaisActivity, "Erro ao remover foto.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

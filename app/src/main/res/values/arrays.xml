@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="generos_livros">
+        <item>Nenhum</item>
         <item>Ficção</item>
         <item>Não-Ficção</item>
         <item>Romance</item>
@@ -13,6 +14,7 @@
     </string-array>
 
     <string-array name="cursos_unifor">
+        <item>Nenhum</item>
         <item>Arquitetura e Urbanismo</item>
         <item>Cinema e Audiovisual</item>
         <item>Design de Moda</item>

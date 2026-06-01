@@ -42,11 +42,11 @@
                     <!-- Ícone de Login -->
                     <ImageView
                         android:id="@+id/imageView"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="16dp"
-                        app:srcCompat="@drawable/ic_person"
+                        android:background="@mipmap/unifor_bdu_foreground"
                         app:tint="@color/unifor_blue" />
 
                     <TextView
@@ -92,17 +92,26 @@
                         android:textStyle="bold"
                         android:textAllCaps="true"
                         android:layout_marginBottom="8dp"/>
-                    <EditText
-                        android:id="@+id/editTextSenha"
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/card_border"
-                        android:hint="@string/label_senha"
-                        android:inputType="textPassword"
-                        android:paddingHorizontal="16dp"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="#888888">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextSenha"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/card_border"
+                            android:hint="@string/label_senha"
+                            android:inputType="textPassword"
+                            android:paddingHorizontal="16dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
                         android:id="@+id/textViewEsqueciSenha"

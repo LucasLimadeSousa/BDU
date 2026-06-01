@@ -80,14 +80,16 @@
                         android:textStyle="bold"
                         android:textAllCaps="true"/>
 
-                    <Spinner
-                        android:id="@+id/spinnerProblemType"
+                    <TextView
+                        android:id="@+id/tvProblemType"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_spinner"
+                        android:background="@drawable/card_border"
+                        android:gravity="center_vertical"
                         android:paddingHorizontal="12dp"
-                        android:spinnerMode="dropdown" />
+                        android:textSize="15sp"
+                        android:textColor="#333333" />
 
 
 
@@ -135,6 +137,15 @@
                         android:background="@drawable/card_border">
 
                         <ImageView
+                            android:id="@+id/ivCapturedImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            android:contentDescription="@null" />
+
+                        <ImageView
+                            android:id="@+id/ivPlaceholderIcon"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"

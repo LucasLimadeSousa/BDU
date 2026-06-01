@@ -306,7 +306,22 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- Floating Action Button for Chatbot -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_chatbot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@string/chatbot"
+        android:src="@android:drawable/stat_notify_chat"
+        app:backgroundTint="@color/unifor_blue"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="#FFFFFF" />
+
     <!-- Bottom Navigation -->
+
     <androidx.cardview.widget.CardView
         android:id="@+id/bottomNavCard"
         android:layout_width="match_parent"

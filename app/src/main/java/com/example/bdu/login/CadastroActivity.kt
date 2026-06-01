@@ -1,8 +1,10 @@
 package com.example.bdu.login
 
-import Usuario
+import com.example.bdu.model.Usuario
+import android.graphics.Bitmap
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.SpannableString
@@ -15,6 +17,7 @@ import android.text.style.StyleSpan
 import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -27,9 +30,12 @@ import com.example.bdu.suporte.TermosCondicoesActivity
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.storage.storage
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 
 class CadastroActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,11 +47,52 @@ class CadastroActivity : AppCompatActivity() {
         configurarMascaraTelefone()
         configurarMascaraData()
 
-        findViewById<TextView>(R.id.btnFinalizar).setOnClickListener {
+        val inputSenha = findViewById<EditText>(R.id.inputSenha)
+        val rule1Icon = findViewById<ImageView>(R.id.rule1Icon)
+        val rule2Icon = findViewById<ImageView>(R.id.rule2Icon)
+        val rule3Icon = findViewById<ImageView>(R.id.rule3Icon)
+        val rule1Text = findViewById<TextView>(R.id.rule1Text)
+        val rule2Text = findViewById<TextView>(R.id.rule2Text)
+        val rule3Text = findViewById<TextView>(R.id.rule3Text)
+
+        val colorOk = ContextCompat.getColor(this, android.R.color.holo_green_dark)
+        val colorDefault = ContextCompat.getColor(this, android.R.color.darker_gray)
+
+        inputSenha.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val senha = s.toString()
+
+                val isTamanhoOk = senha.length >= 8
+                val isMaiusculaOk = senha.any { it.isUpperCase() }
+                val isNumEspecialOk = senha.any { it.isDigit() } && senha.any { !it.isLetterOrDigit() }
+
+                updateRule(rule1Icon, rule1Text, isTamanhoOk, colorOk, colorDefault)
+                updateRule(rule2Icon, rule2Text, isMaiusculaOk, colorOk, colorDefault)
+                updateRule(rule3Icon, rule3Text, isNumEspecialOk, colorOk, colorDefault)
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        findViewById<View>(R.id.btnFinalizar).setOnClickListener {
             executarCadastro()
         }
 
         findViewById<ImageButton>(R.id.btn_backReturn).setOnClickListener { finish() }
+    }
+
+    private fun updateRule(icon: ImageView, text: TextView, isOk: Boolean, colorOk: Int, colorDefault: Int) {
+        val color = if (isOk) colorOk else colorDefault
+        text.setTextColor(color)
+
+        // Remove qualquer filtro de cor anterior para evitar efeitos indesejados
+        icon.clearColorFilter()
+
+        // Define o ícone: apenas o check ou o X, sem fundo.
+        // Se desejar um check mais limpo, verifique se seu projeto já possui um ic_check.
+        // Aqui estamos usando um recurso que geralmente desenha apenas a marca.
+        icon.setImageResource(if (isOk) android.R.drawable.presence_online else android.R.drawable.presence_busy)
+        icon.setColorFilter(color)
     }
 
     private fun senhaEValida(senha: String): Boolean{
@@ -75,15 +122,6 @@ class CadastroActivity : AppCompatActivity() {
             exibirAlerta("Campo Obrigatório", "Por favor, selecione seu curso.")
             return
         }
-
-        val dataLimpa = dataNascRaw.replace(Regex("[^0-9]"), "")
-        if (dataLimpa.length != 8){
-            exibirAlerta("Data Inválida", "Por favor, insira a data completa (ex: 02/12/2000)")
-            return
-        }
-
-        val dataNascParaBanco = "${dataLimpa.substring(4, 8)}-${dataLimpa.substring(2, 4)}-${dataLimpa.substring(0,2)}"
-
 
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || cpf.isEmpty() ||
             telefone.isEmpty() || curso.isEmpty() || cidade.isEmpty() || estado.isEmpty() || dataNascRaw.isEmpty())
@@ -115,10 +153,58 @@ class CadastroActivity : AppCompatActivity() {
 
         if(!aceitouTermos){
             exibirAlerta("Termos de Uso", "Você precisa aceitar os termos e condições para prosseguir.")
+            return
+        }
+
+        // Validação de CPF (11 dígitos numéricos)
+        val cpfLimpo = cpf.replace(Regex("[^\\d]"), "")
+        if (cpfLimpo.length != 11) {
+            Toast.makeText(this, "CPF incorreto. Digite os 11 números.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Validação de Telefone (11 dígitos numéricos - DDD + 9 + número)
+        val telefoneLimpo = telefone.replace(Regex("[^\\d]"), "")
+        if (telefoneLimpo.length != 11) {
+            Toast.makeText(this, "Número de telefone incorreto. Digite o DDD e os 9 dígitos.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Validação de Data de Nascimento
+        val dataFormatada = formatarDataParaBanco(dataNascRaw)
+        if (dataNascRaw.length < 10 || dataFormatada == dataNascRaw) {
+            Toast.makeText(this, "Data de nascimento incorreta. Digite novamente.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Validação extra de valores de data impossíveis
+        try {
+            val partes = dataNascRaw.split("/")
+            val dia = partes[0].toInt()
+            val mes = partes[1].toInt()
+            val ano = partes[2].toInt()
+            
+            if (dia !in 1..31 || mes !in 1..12 || ano > 2024 || ano < 1900) {
+                Toast.makeText(this, "Data de nascimento incorreta. Digite novamente.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            // Validação simples para meses com 30 dias e fevereiro
+            if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
+                Toast.makeText(this, "Data de nascimento incorreta. Digite novamente.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            if (mes == 2 && dia > 29) {
+                Toast.makeText(this, "Data de nascimento incorreta. Digite novamente.", Toast.LENGTH_SHORT).show()
+                return
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Data de nascimento incorreta. Digite novamente.", Toast.LENGTH_SHORT).show()
+            return
         }
 
         lifecycleScope.launch {
             try {
+                // 1. Verificar se e-mail já existe na tabela de dados
                 val emailExiste = SupabaseConfig.client.from("Dados_Usuario")
                     .select {
                         filter {
@@ -131,12 +217,13 @@ class CadastroActivity : AppCompatActivity() {
                     return@launch
                 }
 
-
-                val response = SupabaseConfig.client.auth.signUpWith(Email){
+                // 2. Realizar o Sign Up no Supabase Auth
+                SupabaseConfig.client.auth.signUpWith(Email){
                     this.email = email
                     this.password = senha
                 }
 
+                // 3. Inserir os dados complementares na tabela Dados_Usuario
                 val novoUsuario = Usuario(
                     nome = nome,
                     email = email,
@@ -146,10 +233,12 @@ class CadastroActivity : AppCompatActivity() {
                     curso = curso,
                     cidade = cidade,
                     estado = estado,
-                    data_nascimento = dataNascParaBanco,
-                    adm = false
+                    data_nascimento = formatarDataParaBanco(dataNascRaw),
+                    adm = false,
+                    foto = null
                 )
 
+                // Tenta inserir e aguarda o resultado
                 SupabaseConfig.client.from("Dados_Usuario").insert(novoUsuario)
 
                 Toast.makeText(this@CadastroActivity, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show()
@@ -157,7 +246,8 @@ class CadastroActivity : AppCompatActivity() {
                 finish()
 
             } catch (e: Exception){
-                exibirAlerta("Erro no cadastro", "Não foi possivel realizar o cadastro: ${e.message}")
+                e.printStackTrace()
+                exibirAlerta("Erro no cadastro", "Erro: ${e.localizedMessage}")
             }
         }
     }
@@ -197,6 +287,19 @@ class CadastroActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+    }
+
+    private fun formatarDataParaBanco(dataBr: String): String {
+        return try {
+            val partes = dataBr.split("/")
+            if (partes.size == 3) {
+                "${partes[2]}-${partes[1]}-${partes[0]}"
+            } else {
+                dataBr
+            }
+        } catch (e: Exception) {
+            dataBr
         }
     }
 
@@ -256,7 +359,7 @@ class CadastroActivity : AppCompatActivity() {
                 var formatted = ""
                 var i = 0
                 val mask = "(##) #####-####"
-                
+
                 for (m in mask.toCharArray()) {
                     if (m != '#' && str.length > i) {
                         formatted += m
@@ -296,7 +399,7 @@ class CadastroActivity : AppCompatActivity() {
                 var formatted = ""
                 var i = 0
                 val mask = "##/##/####"
-                
+
                 for (m in mask.toCharArray()) {
                     if (m != '#' && str.length > i) {
                         formatted += m

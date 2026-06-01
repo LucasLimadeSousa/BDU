@@ -10,6 +10,7 @@ interface BooksApi {
     suspend fun searchBooks(
         @Query("q") query: String,
         @Query("key") apiKey: String? = null,
+        @Query("maxResults") maxResults: Int = 20,
         @Query("hl") lang: String = "pt",
         @Query("lr") langRestrict: String = "lang_pt"
     ): BooksResponse

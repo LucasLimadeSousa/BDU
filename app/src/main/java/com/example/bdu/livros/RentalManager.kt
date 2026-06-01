@@ -23,9 +23,9 @@ object RentalManager {
         // Save to permanent history
         val history = getPersistentHistory(context).toMutableList()
         val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-        
+
         // Add new rental to the beginning of the list
-        history.add(0, RentalHistoryItem(title, date, (1..15).random(), author, imageUrl)) 
+        history.add(0, RentalHistoryItem(title, date, (1..15).random(), author, imageUrl))
         saveHistory(context, history)
     }
 
@@ -46,6 +46,10 @@ object RentalManager {
         // Para fins de demonstração, consideramos atraso se o livro foi alugado há mais de 10 dias no histórico
         val history = getPersistentHistory(context)
         return history.any { it.daysAgo > 10 }
+    }
+
+    fun isBookRented(title: String): Boolean {
+        return sessionRentedTitle == title
     }
 }
 

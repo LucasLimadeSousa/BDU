@@ -28,10 +28,22 @@ class ReportarProblema2Activity : AppCompatActivity() {
 
         val reportIntent = Intent(this, ReportarProblemaActivity::class.java)
 
-        itemDamage?.setOnClickListener { startActivity(reportIntent) }
-        itemContent?.setOnClickListener { startActivity(reportIntent) }
-        itemInfo?.setOnClickListener { startActivity(reportIntent) }
-        itemOther?.setOnClickListener { startActivity(reportIntent) }
+        itemDamage?.setOnClickListener { 
+            reportIntent.putExtra("TIPO_PROBLEMA", "Dano físico")
+            startActivity(reportIntent) 
+        }
+        itemContent?.setOnClickListener { 
+            reportIntent.putExtra("TIPO_PROBLEMA", "Conteúdo do livro")
+            startActivity(reportIntent) 
+        }
+        itemInfo?.setOnClickListener { 
+            reportIntent.putExtra("TIPO_PROBLEMA", "Informações incorretas")
+            startActivity(reportIntent) 
+        }
+        itemOther?.setOnClickListener { 
+            reportIntent.putExtra("TIPO_PROBLEMA", "Outro")
+            startActivity(reportIntent) 
+        }
 
         buttonBack?.setOnClickListener {
             val intent = Intent(this, MeusLivrosActivity::class.java)

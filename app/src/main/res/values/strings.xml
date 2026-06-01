@@ -169,4 +169,6 @@
     <string name="placeholder_posicao_espera">Posição na lista de espera: X DE X</string>
     <string name="placeholder_previsao_disponibilidade">Previsão de disponibilidade: DD/MM</string>
     <string name="placeholder_posicao_espera_1">Posição na lista de espera: 1 DE X</string>
+    <string name="chatbot">Chatbot</string>
+    <string name="hint_digite_mensagem">Digite sua mensagem...</string>
 </resources>

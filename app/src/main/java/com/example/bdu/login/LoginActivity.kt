@@ -20,7 +20,7 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
-import Usuario
+import com.example.bdu.model.Usuario
 import com.example.bdu.adm.AdicionarLivroAdmActivity
 
 class LoginActivity : AppCompatActivity() {

@@ -33,8 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavCard"
-        app:layout_constraintTop_toBottomOf="@id/header_bar">
+        android:clipToPadding="false"
+        android:paddingBottom="60dp"
+        app:layout_constraintTop_toBottomOf="@id/header_bar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,21 +80,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:orientation="vertical"
-                    android:padding="16dp"
-                    android:background="@color/white">
+                    android:padding="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="110dp"
                             android:layout_height="150dp"
                             app:cardCornerRadius="12dp"
                             app:cardElevation="2dp">
+
                             <ImageView
                                 android:id="@+id/ivBookCover"
                                 android:layout_width="match_parent"
@@ -113,8 +116,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="Autor: Nome do autor"
                                 android:textColor="#333333"
-                                android:textStyle="bold"
-                                android:textSize="14sp" />
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/tvBookGenre"
@@ -140,8 +143,8 @@
                                 android:layout_marginTop="4dp"
                                 android:text="Cópias: ?"
                                 android:textColor="@color/unifor_blue"
-                                android:textStyle="bold"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -150,12 +153,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Lista de Desejos"
                         android:backgroundTint="@color/unifor_blue"
+                        android:text="Lista de Desejos"
                         android:textColor="@color/white"
+                        app:cornerRadius="20dp"
                         app:icon="@drawable/ic_nav_heart"
-                        app:iconTint="@color/white"
-                        app:cornerRadius="20dp" />
+                        app:iconTint="@color/white" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -170,9 +173,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:orientation="vertical"
-                    android:padding="16dp"
-                    android:background="@color/white">
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -193,9 +196,9 @@
                         android:id="@+id/tvBookSynopsis"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:lineSpacingExtra="4dp"
                         android:text="Aqui vai o texto da sinopse. Na visão do administrador, você pode conferir o resumo completo da obra antes de realizar edições."
                         android:textColor="#333333"
-                        android:lineSpacingExtra="4dp"
                         android:textSize="14sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -211,13 +214,35 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:orientation="vertical"
-                    android:padding="16dp"
-                    android:background="@color/white">
+                    android:padding="16dp">
 
-                    <TextView android:id="@+id/tvBookIsbn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ISBN: (Código)" android:textColor="#666666" android:textSize="13sp" />
-                    <TextView android:id="@+id/tvBookPublisher" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Editora: (Nome da editora)" android:textColor="#666666" android:textSize="13sp" />
-                    <TextView android:id="@+id/tvBookPages" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Páginas: (Número)" android:textColor="#666666" android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/tvBookIsbn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ISBN: (Código)"
+                        android:textColor="#666666"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvBookPublisher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Editora: (Nome da editora)"
+                        android:textColor="#666666"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvBookPages"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Páginas: (Número)"
+                        android:textColor="#666666"
+                        android:textSize="13sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -225,19 +250,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginBottom="32dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAlugarLivro"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginBottom="8dp"
+                    android:backgroundTint="@color/unifor_blue"
                     android:text="ALUGAR LIVRO"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:backgroundTint="@color/unifor_blue"
                     app:cornerRadius="12dp" />
 
                 <LinearLayout
@@ -249,20 +274,20 @@
                         android:id="@+id/btnEditarLivro"
                         android:layout_width="0dp"
                         android:layout_height="56dp"
-                        android:layout_weight="1"
                         android:layout_marginEnd="8dp"
-                        android:text="EDITAR"
+                        android:layout_weight="1"
                         android:backgroundTint="@color/unifor_blue"
+                        android:text="EDITAR"
                         app:cornerRadius="12dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnExcluir"
                         android:layout_width="0dp"
                         android:layout_height="56dp"
-                        android:layout_weight="1"
                         android:layout_marginStart="8dp"
-                        android:text="EXCLUIR"
+                        android:layout_weight="1"
                         android:backgroundTint="#FF4444"
+                        android:text="EXCLUIR"
                         app:cornerRadius="12dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -271,83 +296,5 @@
     </ScrollView>
 
     <!-- Bottom Navigation -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/bottomNavCard"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="32dp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <LinearLayout
-            android:id="@+id/bottomNav"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-            <ImageButton
-                android:id="@+id/btn_nav_fila"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/fila"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_queue"
-                app:tint="#333333" />
-
-            <ImageButton
-                android:id="@+id/btn_nav_meuslivros"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/livro_usuario"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_book_user"
-                app:tint="#333333" />
-
-            <ImageButton
-                android:id="@+id/btn_nav_home"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/home"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_home"
-                app:tint="#333333" />
-
-            <ImageButton
-                android:id="@+id/btn_nav_desejos"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/favoritos"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_nav_heart"
-                app:tint="#333333" />
-
-            <ImageButton
-                android:id="@+id/btn_nav_perfil"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/perfil"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_person"
-                app:tint="#333333" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

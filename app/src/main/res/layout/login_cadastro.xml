@@ -69,13 +69,10 @@
                     android:padding="24dp"
                     android:background="@color/white">
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="24dp"
-                        app:srcCompat="@drawable/ic_person"
-                        app:tint="@color/unifor_blue" />
+                    <!-- Espaçamento removido da foto -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp" />
 
                     <!-- Informações Pessoais -->
                     <TextView
@@ -129,7 +126,7 @@
                         android:layout_height="50dp"
                         android:layout_marginBottom="24dp"
                         android:background="@drawable/card_border"
-                        android:hint="@string/hint_data_nascimento"
+                        android:hint="Data de Nascimento"
                         android:inputType="date"
                         android:paddingHorizontal="16dp"
                         android:textColor="#333333"
@@ -219,62 +216,124 @@
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/inputSenha"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:background="@drawable/card_border"
-                        android:hint="@string/label_senha"
-                        android:inputType="textPassword"
-                        android:paddingHorizontal="16dp"
-                        android:textColor="#333333"
-                        android:textSize="14sp" />
+                        app:endIconMode="password_toggle"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                    <EditText
-                        android:id="@+id/inputConfSenha"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputSenha"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/card_border"
+                            android:hint="@string/label_senha"
+                            android:inputType="textPassword"
+                            android:paddingHorizontal="16dp"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:background="@drawable/card_border"
-                        android:hint="@string/hint_confirmar_senha"
-                        android:inputType="textPassword"
-                        android:paddingHorizontal="16dp"
-                        android:textColor="#333333"
-                        android:textSize="14sp" />
+                        app:endIconMode="password_toggle"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputConfSenha"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/card_border"
+                            android:hint="@string/hint_confirmar_senha"
+                            android:inputType="textPassword"
+                            android:paddingHorizontal="16dp"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Requisitos de Senha -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Requisitos da senha:"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="12dp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginBottom="24dp">
-                        <TextView
-                            android:layout_width="wrap_content"
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/label_senha_deve_ter"
-                            android:textColor="#333333"
-                            android:textStyle="bold"
-                            android:textSize="13sp"
-                            android:layout_marginBottom="4dp" />
-                        <TextView
-                            android:layout_width="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+                            <ImageView
+                                android:id="@+id/rule1Icon"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                                app:tint="#888888" />
+                            <TextView
+                                android:id="@+id/rule1Text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Mínimo 8 caracteres"
+                                android:textColor="#666666"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/senha_req_1"
-                            android:textColor="#666666"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+                            <ImageView
+                                android:id="@+id/rule2Icon"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                                app:tint="#888888" />
+                            <TextView
+                                android:id="@+id/rule2Text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Uma letra maiúscula"
+                                android:textColor="#666666"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/senha_req_2"
-                            android:textColor="#666666"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/senha_req_3"
-                            android:textColor="#666666"
-                            android:textSize="12sp" />
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:id="@+id/rule3Icon"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                                app:tint="#888888" />
+                            <TextView
+                                android:id="@+id/rule3Text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Um número e um caractere especial"
+                                android:textColor="#666666"
+                                android:textSize="13sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <!-- Termos -->

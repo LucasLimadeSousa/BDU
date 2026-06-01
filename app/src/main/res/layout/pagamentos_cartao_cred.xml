@@ -96,17 +96,34 @@
                         android:textSize="15sp" />
 
                     <!-- Número do Cartão -->
-                    <EditText
-                        android:id="@+id/et_numero_cartao"
+                    <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@drawable/card_border"
-                        android:hint="Número no Cartão"
-                        android:inputType="number"
-                        android:paddingHorizontal="16dp"
-                        android:textColor="#333333"
-                        android:textSize="15sp" />
+                        android:layout_marginBottom="16dp">
+
+                        <EditText
+                            android:id="@+id/et_numero_cartao"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/card_border"
+                            android:hint="Número no Cartão"
+                            android:inputType="number"
+                            android:paddingHorizontal="16dp"
+                            android:paddingEnd="60dp"
+                            android:textColor="#333333"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_bandeira_cartao"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginEnd="12dp"
+                            android:textColor="@color/unifor_blue"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+                    </FrameLayout>
 
                     <!-- Data de Expiração Section -->
                     <TextView
@@ -155,17 +172,13 @@
                     </LinearLayout>
 
                     <!-- Parcelamento -->
-                    <EditText
-                        android:id="@+id/et_parcelamento"
+                    <Spinner
+                        android:id="@+id/spinner_parcelamento"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginBottom="16dp"
-                        android:background="@drawable/card_border"
-                        android:hint="Parcelamento (1x de R$00.00)"
-                        android:inputType="text"
-                        android:paddingHorizontal="16dp"
-                        android:textColor="#333333"
-                        android:textSize="15sp" />
+                        android:background="@drawable/bg_spinner"
+                        android:paddingHorizontal="12dp" />
 
                     <!-- CVV -->
                     <EditText

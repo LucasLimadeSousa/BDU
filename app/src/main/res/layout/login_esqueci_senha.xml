@@ -91,17 +91,25 @@
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/et_nova_senha"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:background="@drawable/card_border"
-                        android:hint="@string/nova_senha_hint"
-                        android:inputType="textPassword"
-                        android:paddingHorizontal="16dp"
-                        android:textColor="#000000"
-                        android:textSize="14sp" />
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="#888888">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_nova_senha"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/card_border"
+                            android:hint="@string/nova_senha_hint"
+                            android:inputType="textPassword"
+                            android:paddingHorizontal="16dp"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Confirmar Senha Field -->
                     <TextView
@@ -114,17 +122,25 @@
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/et_confirmar_senha"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="32dp"
-                        android:background="@drawable/card_border"
-                        android:hint="@string/confirmar_nova_senha_hint"
-                        android:inputType="textPassword"
-                        android:paddingHorizontal="16dp"
-                        android:textColor="#000000"
-                        android:textSize="14sp" />
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="#888888">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_confirmar_senha"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/card_border"
+                            android:hint="@string/confirmar_nova_senha_hint"
+                            android:inputType="textPassword"
+                            android:paddingHorizontal="16dp"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnConfirmar"

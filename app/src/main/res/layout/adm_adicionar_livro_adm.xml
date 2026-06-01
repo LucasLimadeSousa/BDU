@@ -98,11 +98,21 @@
                         android:id="@+id/etTitle"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
                         android:background="@drawable/card_border"
                         android:paddingHorizontal="16dp"
                         android:textColor="#333333"
                         android:textSize="14sp" />
+
+                    <!-- RecyclerView para Sugestões -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvTitleSuggestions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/bg_spinner"
+                        android:elevation="4dp"
+                        android:visibility="gone" />
 
                     <TextView
                         android:layout_width="wrap_content"

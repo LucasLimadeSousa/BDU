@@ -92,26 +92,39 @@ class PaginaDoLivroActivity : AppCompatActivity() {
         val bookSynopsis = intent.getStringExtra("BOOK_SYNOPSIS")
         val bookImage = intent.getStringExtra("BOOK_IMAGE")
         
-        tvBookTitle.text = bookTitle ?: "Título Indisponível"
-        tvBookAuthor.text = "Autor: ${bookAuthor ?: "Desconhecido"}"
-        tvBookGenre.text = "Gênero: ${bookGenre ?: "Não informado"}"
-        tvBookPublication.text = "Publicação: ${bookPublication ?: "N/A"}"
-        tvBookIsbn.text = "ISBN: ${bookIsbn ?: "N/A"}"
-        tvBookPublisher.text = "Editora: ${bookPublisher ?: "N/A"}"
-        tvBookPages.text = "Páginas: ${bookPages ?: "N/A"}"
-        tvBookSynopsis.text = bookSynopsis ?: "Sinopse não disponível."
+        // --- VERIFICAÇÃO DE OVERRIDE (DADOS EDITADOS PELO ADM) ---
+        val override = com.example.bdu.adm.BookCatalogManager.getBookOverride(this, bookTitle)
+        val finalTitle = override?.title ?: bookTitle
+        val finalAuthor = override?.author ?: bookAuthor
+        val finalGenre = override?.genre ?: bookGenre
+        val finalDate = override?.date ?: bookPublication
+        val finalIsbn = override?.isbn ?: bookIsbn
+        val finalPublisher = override?.publisher ?: bookPublisher
+        val finalPages = override?.pages ?: bookPages
+        val finalSynopsis = override?.synopsis ?: bookSynopsis
+        val finalImage = override?.image ?: bookImage
 
-        ivBookCover.load(bookImage) {
+        tvBookTitle.text = finalTitle ?: "Título Indisponível"
+        tvBookAuthor.text = "Autor: ${finalAuthor ?: "Desconhecido"}"
+        tvBookGenre.text = "Gênero: ${finalGenre ?: "Não informado"}"
+        tvBookPublication.text = "Publicação: ${finalDate ?: "N/A"}"
+        tvBookIsbn.text = "ISBN: ${finalIsbn ?: "N/A"}"
+        tvBookPublisher.text = "Editora: ${finalPublisher ?: "N/A"}"
+        tvBookPages.text = "Páginas: ${finalPages ?: "N/A"}"
+        tvBookSynopsis.text = finalSynopsis ?: "Sinopse não disponível."
+
+        ivBookCover.load(finalImage) {
             placeholder(R.drawable.ic_launcher_background)
             error(R.drawable.ic_launcher_background)
         }
+        // -------------------------------------------------------
 
         // --- LÓGICA DE PERSISTÊNCIA DO CORAÇÃO ---
         val btnWishlist = findViewById<MaterialButton>(R.id.btnWishlist)
         val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
         
         // Usamos o título do livro como chave para saber se ele está favoritado
-        val titleForPrefs = bookTitle ?: ""
+        val titleForPrefs = finalTitle ?: ""
         val bookKey = "fav_$titleForPrefs" 
         
         var isFavorito = if (titleForPrefs.isNotEmpty()) prefs.getBoolean(bookKey, false) else false
@@ -142,20 +155,20 @@ class PaginaDoLivroActivity : AppCompatActivity() {
                 
                 // Salva os dados do livro para mostrar na lista de desejos
                 favoritesSet.add(titleForPrefs)
-                editor.putString("author_$titleForPrefs", bookAuthor)
-                editor.putString("image_$titleForPrefs", bookImage)
-                editor.putString("genre_$titleForPrefs", bookGenre)
-                editor.putString("publication_$titleForPrefs", bookPublication)
-                editor.putString("isbn_$titleForPrefs", bookIsbn)
-                editor.putString("publisher_$titleForPrefs", bookPublisher)
-                editor.putString("pages_$titleForPrefs", bookPages)
-                editor.putString("synopsis_$titleForPrefs", bookSynopsis)
+                editor.putString("author_$titleForPrefs", finalAuthor)
+                editor.putString("image_$titleForPrefs", finalImage)
+                editor.putString("genre_$titleForPrefs", finalGenre)
+                editor.putString("publication_$titleForPrefs", finalDate)
+                editor.putString("isbn_$titleForPrefs", finalIsbn)
+                editor.putString("publisher_$titleForPrefs", finalPublisher)
+                editor.putString("pages_$titleForPrefs", finalPages)
+                editor.putString("synopsis_$titleForPrefs", finalSynopsis)
 
                 // Algoritmo: Adiciona interesse (se a privacidade de favoritos permitir)
                 if (!RecommendationManager.isFavoritesPrivate(this)) {
                     RecommendationManager.addInterest(this, titleForPrefs)
-                    bookGenre?.split(",")?.firstOrNull()?.let { RecommendationManager.addInterest(this, it.trim()) }
-                    bookAuthor?.let { RecommendationManager.addInterest(this, it) }
+                    finalGenre?.split(",")?.firstOrNull()?.let { RecommendationManager.addInterest(this, it.trim()) }
+                    finalAuthor?.let { RecommendationManager.addInterest(this, it) }
                 }
             } else {
                 btnWishlist.iconTint = ColorStateList.valueOf(Color.WHITE)
@@ -178,7 +191,7 @@ class PaginaDoLivroActivity : AppCompatActivity() {
         // ----------------------------------------
 
         btnAlugar?.setOnClickListener {
-            val bookTitle = tvBookTitle?.text?.toString() ?: "O Livro"
+            val bookTitleAluguel = tvBookTitle?.text?.toString() ?: "O Livro"
 
             if (isEsgotado) {
                 // LÓGICA PARA LIVRO ESGOTADO (FOTO 3)
@@ -188,9 +201,9 @@ class PaginaDoLivroActivity : AppCompatActivity() {
                 builder.setPositiveButton("Sim") { _, _ ->
                     // Adiciona à lista de espera real
                     val waitlistItem = WaitlistItem(
-                        title = bookTitle ?: "Livro",
-                        author = bookAuthor,
-                        image = bookImage,
+                        title = bookTitleAluguel ?: "Livro",
+                        author = finalAuthor,
+                        image = finalImage,
                         position = "${(2..10).random()} de ${(11..20).random()}",
                         date = "1${(0..9).random()}/05"
                     )
@@ -201,7 +214,7 @@ class PaginaDoLivroActivity : AppCompatActivity() {
                     // Segundo Pop Up com link clicável
                     val infoBuilder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
                     
-                    val message = "Livro na lista de espera.\nVisualize sua lista de reservas."
+                    val message = "Livro na lista de espera.\nVisualize sua lista de espera."
                     val spannableString = SpannableString(message)
                     
                     val clickableSpan = object : ClickableSpan() {
@@ -211,8 +224,8 @@ class PaginaDoLivroActivity : AppCompatActivity() {
                         }
                     }
 
-                    val linkStart = message.indexOf("Visualize sua lista de reservas.")
-                    val linkEnd = linkStart + "Visualize sua lista de reservas.".length
+                    val linkStart = message.indexOf("Visualize sua lista de espera.")
+                    val linkEnd = linkStart + "Visualize sua lista de espera.".length
                     
                     spannableString.setSpan(clickableSpan, linkStart, linkEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     spannableString.setSpan(ForegroundColorSpan(Color.BLUE), linkStart, linkEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -243,9 +256,6 @@ class PaginaDoLivroActivity : AppCompatActivity() {
                     it.setTextColor(Color.WHITE)
                 }
                 dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.let {
-                    val tvBookTitle = findViewById<TextView>(R.id.tvBookTitleMain)
-                    val ivBookCover = findViewById<ImageView>(R.id.ivBookCover)
-                    val tvBookSynopsis = findViewById<TextView>(R.id.tvBookSynopsis)
                     it.setBackgroundColor("#D32F2F".toColorInt())
                     it.setTextColor(Color.WHITE)
                 }
@@ -258,19 +268,19 @@ class PaginaDoLivroActivity : AppCompatActivity() {
                 }
 
                 val builder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
-                builder.setMessage("Você tem certeza que quer reservar o livro: $bookTitle ?")
+                builder.setMessage("Você tem certeza que quer reservar o livro: $bookTitleAluguel ?")
 
                 builder.setPositiveButton("Sim") { _, _ ->
                     // Salva o livro no gerenciador de sessão e no histórico permanente
-                    RentalManager.rentBook(this, bookTitle ?: "Livro sem título", bookImage, bookAuthor)
-                    
+                    RentalManager.rentBook(this, bookTitleAluguel ?: "Livro sem título", finalImage, finalAuthor)
+
                     // Algoritmo: Adiciona interesse ao alugar
-                    RecommendationManager.addInterest(this, bookTitle ?: "")
-                    bookAuthor?.let { RecommendationManager.addInterest(this, it) }
-                    bookGenre?.split(",")?.firstOrNull()?.let { RecommendationManager.addInterest(this, it.trim()) }
+                    RecommendationManager.addInterest(this, bookTitleAluguel ?: "")
+                    finalAuthor?.let { RecommendationManager.addInterest(this, it) }
+                    finalGenre?.split(",")?.firstOrNull()?.let { RecommendationManager.addInterest(this, it.trim()) }
 
                     // Mostra notificação
-                    showRentalNotification(bookTitle ?: "Livro")
+                    showRentalNotification(bookTitleAluguel ?: "Livro")
 
                     val infoBuilder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
                     infoBuilder.setMessage("O livro está reservado para você.\nBusque na Biblioteca Unifor em até 3 dias apresentando documento com foto.")

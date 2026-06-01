@@ -97,35 +97,57 @@ class TelaPaginaDoLivroAdmActivity : AppCompatActivity() {
         val bookSynopsis = intent.getStringExtra("BOOK_SYNOPSIS")
         val bookImage = intent.getStringExtra("BOOK_IMAGE")
 
-        // Preenchimento da Tela
-        tvBookTitle.text = bookTitle ?: "Título Indisponível"
-        tvBookAuthor.text = "Autor: ${bookAuthor ?: "Desconhecido"}"
-        tvBookGenre.text = "Gênero: ${bookGenre ?: "Não informado"}"
-        tvBookPublication.text = "Publicação: ${bookPublication ?: "N/A"}"
-        tvBookIsbn.text = "ISBN: ${bookIsbn ?: "N/A"}"
-        tvBookPublisher.text = "Editora: ${bookPublisher ?: "N/A"}"
-        tvBookPages.text = "Páginas: ${bookPages ?: "N/A"}"
-        tvBookSynopsis.text = bookSynopsis ?: "Sinopse não disponível."
+        // --- VERIFICAÇÃO DE OVERRIDE (DADOS EDITADOS) ---
+        val override = com.example.bdu.adm.BookCatalogManager.getBookOverride(this, bookTitle)
+        val finalTitle = override?.title ?: bookTitle
+        val finalAuthor = override?.author ?: bookAuthor
+        val finalGenre = override?.genre ?: bookGenre
+        val finalDate = override?.date ?: bookPublication
+        val finalIsbn = override?.isbn ?: bookIsbn
+        val finalPublisher = override?.publisher ?: bookPublisher
+        val finalPages = override?.pages ?: bookPages
+        val finalSynopsis = override?.synopsis ?: bookSynopsis
+        val finalImage = override?.image ?: bookImage
 
-        ivBookCover.load(bookImage) {
+        // Preenchimento da Tela
+        tvBookTitle.text = finalTitle ?: "Título Indisponível"
+        tvBookAuthor.text = "Autor: ${finalAuthor ?: "Desconhecido"}"
+        tvBookGenre.text = "Gênero: ${finalGenre ?: "Não informado"}"
+        tvBookPublication.text = "Publicação: ${finalDate ?: "N/A"}"
+        tvBookIsbn.text = "ISBN: ${finalIsbn ?: "N/A"}"
+        tvBookPublisher.text = "Editora: ${finalPublisher ?: "N/A"}"
+        tvBookPages.text = "Páginas: ${finalPages ?: "N/A"}"
+        tvBookSynopsis.text = finalSynopsis ?: "Sinopse não disponível."
+
+        ivBookCover.load(finalImage) {
             placeholder(R.drawable.ic_launcher_background)
             error(R.drawable.ic_launcher_background)
         }
 
         // Lógica dos Botões
         btnBack?.setOnClickListener {
-            val intent = Intent(this, TelahomeActivity::class.java)
-            startActivity(intent)
+            val intentHome = Intent(this, TelahomeActivity::class.java)
+            startActivity(intentHome)
             finish()
         }
 
         btnEditar?.setOnClickListener {
-            val intent = Intent(this, EditarLivroAdmActivity::class.java)
-            startActivity(intent)
+            val intentEdit = Intent(this, EditarLivroAdmActivity::class.java)
+            intentEdit.putExtra("BOOK_TITLE", finalTitle)
+            intentEdit.putExtra("ORIGINAL_BOOK_TITLE", override?.originalTitle ?: bookTitle)
+            intentEdit.putExtra("BOOK_AUTHOR", finalAuthor)
+            intentEdit.putExtra("BOOK_GENRE", finalGenre)
+            intentEdit.putExtra("BOOK_PUBLICATION", finalDate)
+            intentEdit.putExtra("BOOK_ISBN", finalIsbn)
+            intentEdit.putExtra("BOOK_PUBLISHER", finalPublisher)
+            intentEdit.putExtra("BOOK_PAGES", finalPages)
+            intentEdit.putExtra("BOOK_SYNOPSIS", finalSynopsis)
+            intentEdit.putExtra("BOOK_IMAGE", finalImage)
+            startActivity(intentEdit)
         }
 
         btnAlugar?.setOnClickListener {
-            val title = bookTitle ?: "O Livro"
+            val titleForAluguel = finalTitle ?: "O Livro"
 
             if (isEsgotado) {
                 val builder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
@@ -133,20 +155,20 @@ class TelaPaginaDoLivroAdmActivity : AppCompatActivity() {
 
                 builder.setPositiveButton("Sim") { _, _ ->
                     val waitlistItem = WaitlistItem(
-                        title = title,
-                        author = bookAuthor,
-                        image = bookImage,
+                        title = titleForAluguel,
+                        author = finalAuthor,
+                        image = finalImage,
                         position = "${(2..10).random()} de ${(11..20).random()}",
                         date = "1${(0..9).random()}/05"
                     )
                     WaitlistManager.addToWaitlist(this@TelaPaginaDoLivroAdmActivity, waitlistItem)
-                    
+
                     Toast.makeText(this@TelaPaginaDoLivroAdmActivity, "livro na lista de espera", Toast.LENGTH_LONG).show()
 
                     val infoBuilder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
                     val message = "Livro na lista de espera.\nVisualize sua lista de reservas."
                     val spannableString = SpannableString(message)
-                    
+
                     val clickableSpan = object : ClickableSpan() {
                         override fun onClick(widget: View) {
                             val intentList = Intent(this@TelaPaginaDoLivroAdmActivity, ListadeEsperaActivity::class.java)
@@ -156,7 +178,7 @@ class TelaPaginaDoLivroAdmActivity : AppCompatActivity() {
 
                     val linkStart = message.indexOf("Visualize sua lista de reservas.")
                     val linkEnd = linkStart + "Visualize sua lista de reservas.".length
-                    
+
                     spannableString.setSpan(clickableSpan, linkStart, linkEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     spannableString.setSpan(ForegroundColorSpan(Color.BLUE), linkStart, linkEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     spannableString.setSpan(UnderlineSpan(), linkStart, linkEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -165,10 +187,10 @@ class TelaPaginaDoLivroAdmActivity : AppCompatActivity() {
                     infoBuilder.setPositiveButton("Ok") { dialog, _ ->
                         dialog.dismiss()
                     }
-                    
+
                     val infoDialog = infoBuilder.create()
                     infoDialog.show()
-                    
+
                     infoDialog.findViewById<TextView>(android.R.id.message)?.movementMethod = LinkMovementMethod.getInstance()
                     infoDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(Color.BLACK)
                 }
@@ -196,13 +218,13 @@ class TelaPaginaDoLivroAdmActivity : AppCompatActivity() {
                 }
 
                 val builder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
-                builder.setMessage("Você tem certeza que quer reservar o livro: $title ?")
+                builder.setMessage("Você tem certeza que quer reservar o livro: $titleForAluguel ?")
 
                 builder.setPositiveButton("Sim") { _, _ ->
-                    RentalManager.rentBook(this, title, bookImage, bookAuthor)
-                    RecommendationManager.addInterest(this, title)
+                    RentalManager.rentBook(this, titleForAluguel, finalImage, finalAuthor)
+                    RecommendationManager.addInterest(this, titleForAluguel)
 
-                    showRentalNotification(title)
+                    showRentalNotification(titleForAluguel)
 
                     val infoBuilder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
                     infoBuilder.setMessage("O livro está reservado para você.\nBusque na Biblioteca Unifor em até 3 dias apresentando documento com foto.")
@@ -235,12 +257,32 @@ class TelaPaginaDoLivroAdmActivity : AppCompatActivity() {
         }
 
         btnExcluir?.setOnClickListener {
-            val titleForExcluir = bookTitle ?: "LIVRO"
+            val titleForExcluir = finalTitle ?: ""
+            // ... (rest of delete logic uses titleForExcluir)
 
+            if (titleForExcluir.isEmpty()) {
+                Toast.makeText(this, "Título inválido.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Regra 1: Verificar se o livro está alugado
+            if (RentalManager.isBookRented(titleForExcluir)) {
+                val builder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
+                builder.setTitle("Não é possível excluir")
+                builder.setMessage("O livro ($titleForExcluir) está atualmente alugado e não pode ser removido do catálogo até ser devolvido.")
+                builder.setPositiveButton("Entendi", null)
+                builder.show()
+                return@setOnClickListener
+            }
+
+            // Regra 2: Confirmar exclusão
             val builder = MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
-            builder.setMessage("Tem certeza que deseja excluir o livro ($titleForExcluir) do catálogo?")
+            builder.setMessage("Tem certeza que deseja excluir o livro ($titleForExcluir) do catálogo? Ele não aparecerá mais na Home ou na Busca.")
 
-            builder.setPositiveButton("Sim") { _, _ ->
+            builder.setPositiveButton("Sim, Excluir") { _, _ ->
+                // Salvar na lista de excluidos
+                BookCatalogManager.excludeBook(this, titleForExcluir)
+
                 Toast.makeText(this, "Livro removido com sucesso.", Toast.LENGTH_SHORT).show()
                 val intentHome = Intent(this, TelahomeActivity::class.java)
                 intentHome.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -256,19 +298,19 @@ class TelaPaginaDoLivroAdmActivity : AppCompatActivity() {
             dialog.show()
 
             dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.let {
-                it.setBackgroundColor("#2E7D32".toColorInt())
+                it.setBackgroundColor("#D32F2F".toColorInt()) // Vermelho para excluir
                 it.setTextColor(Color.WHITE)
             }
 
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.let {
-                it.setBackgroundColor("#D32F2F".toColorInt())
+                it.setBackgroundColor("#666666".toColorInt()) // Cinza para cancelar
                 it.setTextColor(Color.WHITE)
             }
         }
 
         // Favoritos
         val prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE)
-        val titleForPrefs = bookTitle ?: ""
+        val titleForPrefs = finalTitle ?: ""
         val bookKey = "fav_$titleForPrefs"
         var isFavorito = if (titleForPrefs.isNotEmpty()) prefs.getBoolean(bookKey, false) else false
 
@@ -295,14 +337,14 @@ class TelaPaginaDoLivroAdmActivity : AppCompatActivity() {
                 Toast.makeText(this, "Adicionado aos favoritos", Toast.LENGTH_SHORT).show()
 
                 favoritesSet.add(titleForPrefs)
-                editor.putString("author_$titleForPrefs", bookAuthor)
-                editor.putString("image_$titleForPrefs", bookImage)
-                editor.putString("genre_$titleForPrefs", bookGenre)
-                editor.putString("publication_$titleForPrefs", bookPublication)
-                editor.putString("isbn_$titleForPrefs", bookIsbn)
-                editor.putString("publisher_$titleForPrefs", bookPublisher)
-                editor.putString("pages_$titleForPrefs", bookPages)
-                editor.putString("synopsis_$titleForPrefs", bookSynopsis)
+                editor.putString("author_$titleForPrefs", finalAuthor)
+                editor.putString("image_$titleForPrefs", finalImage)
+                editor.putString("genre_$titleForPrefs", finalGenre)
+                editor.putString("publication_$titleForPrefs", finalDate)
+                editor.putString("isbn_$titleForPrefs", finalIsbn)
+                editor.putString("publisher_$titleForPrefs", finalPublisher)
+                editor.putString("pages_$titleForPrefs", finalPages)
+                editor.putString("synopsis_$titleForPrefs", finalSynopsis)
             } else {
                 btnWishlist.iconTint = ColorStateList.valueOf(Color.WHITE)
                 Toast.makeText(this, "Removido dos favoritos", Toast.LENGTH_SHORT).show()

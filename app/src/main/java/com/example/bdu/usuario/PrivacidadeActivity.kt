@@ -2,17 +2,16 @@ package com.example.bdu.usuario
 
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bdu.R
-
-import android.widget.TextView
-import android.widget.Toast
 import com.example.bdu.livros.RecommendationManager
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class PrivacidadeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,23 +26,47 @@ class PrivacidadeActivity : AppCompatActivity() {
         }
 
         val btnBack = findViewById<ImageButton>(R.id.btn_backReturn)
+
+        // Marketing
+        val switchMarketing = findViewById<SwitchMaterial>(R.id.switch_marketing)
+        val tvStatusMarketing = findViewById<TextView>(R.id.tv_status_marketing)
+
+        // Algoritmo
         val switchAlgoritmo = findViewById<SwitchMaterial>(R.id.switch_algoritmo)
         val tvStatusAlgoritmo = findViewById<TextView>(R.id.tv_status_algoritmo)
+
+        // Privar Favoritos
         val switchPrivarFavoritos = findViewById<SwitchMaterial>(R.id.switch_privar_favoritos)
         val tvStatusPrivarFavoritos = findViewById<TextView>(R.id.tv_status_privar_favoritos)
+
         val btnLimparGosto = findViewById<MaterialButton>(R.id.btn_limpar_gosto)
 
-        // Inicializar estado do Switch Algoritmo
-        val isEnabled = RecommendationManager.isAlgorithmEnabled(this)
-        switchAlgoritmo?.isChecked = isEnabled
-        tvStatusAlgoritmo?.text = if (isEnabled) "Ativado" else "Desativado"
+        // --- INICIALIZAR ESTADOS ---
 
-        // Inicializar estado do Switch Privar Favoritos
+        // Marketing
+        val isMarketingEnabled = NotificationPrefsManager.isMarketingEnabled(this)
+        switchMarketing?.isChecked = isMarketingEnabled
+        tvStatusMarketing?.text = if (isMarketingEnabled) "Ativado" else "Desativado"
+
+        // Algoritmo
+        val isAlgEnabled = RecommendationManager.isAlgorithmEnabled(this)
+        switchAlgoritmo?.isChecked = isAlgEnabled
+        tvStatusAlgoritmo?.text = if (isAlgEnabled) "Ativado" else "Desativado"
+
+        // Privar Favoritos
         val isFavPrivate = RecommendationManager.isFavoritesPrivate(this)
         switchPrivarFavoritos?.isChecked = isFavPrivate
         tvStatusPrivarFavoritos?.text = if (isFavPrivate) "Ativado" else "Desativado"
 
-        // Listener do Switch Algoritmo
+        // --- LISTENERS ---
+
+        switchMarketing?.setOnCheckedChangeListener { _, isChecked ->
+            NotificationPrefsManager.setMarketingEnabled(this, isChecked)
+            tvStatusMarketing?.text = if (isChecked) "Ativado" else "Desativado"
+            val msg = if (isChecked) "Notificações de marketing ativadas" else "Notificações de marketing desativadas"
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
+
         switchAlgoritmo?.setOnCheckedChangeListener { _, isChecked ->
             RecommendationManager.setAlgorithmEnabled(this, isChecked)
             tvStatusAlgoritmo?.text = if (isChecked) "Ativado" else "Desativado"
@@ -51,7 +74,6 @@ class PrivacidadeActivity : AppCompatActivity() {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
 
-        // Listener do Switch Privar Favoritos
         switchPrivarFavoritos?.setOnCheckedChangeListener { _, isChecked ->
             RecommendationManager.setFavoritesPrivate(this, isChecked)
             tvStatusPrivarFavoritos?.text = if (isChecked) "Ativado" else "Desativado"
@@ -59,16 +81,13 @@ class PrivacidadeActivity : AppCompatActivity() {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
 
-        // Botão Limpar Gosto
         btnLimparGosto?.setOnClickListener {
             RecommendationManager.clearInterests(this)
             Toast.makeText(this, "Gosto literário reiniciado!", Toast.LENGTH_SHORT).show()
         }
 
-        // Configuração do botão voltar padrão
         btnBack?.setOnClickListener {
             finish()
         }
     }
 }
-

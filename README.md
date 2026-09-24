@@ -74,6 +74,7 @@ Para executar corretamente, é necessário configurar o ambiente de desenvolvime
 
 Desenvolvido por:
 
+* Lucas Lima
 * João Travassos
 * Afrânio Mariano
 * Alef Alexandre
